@@ -1,0 +1,51 @@
+*{
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+}
+
+
+body{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   background-color: black;
+   padding-top: 5rem;
+   
+   
+}
+.card{
+   width: 400px;
+   height: auto;
+   background-color: aliceblue;
+   margin: 1rem;
+   border-radius: 0.5rem;
+  
+
+}
+h1{
+   color: aliceblue;
+   font-size: 1.7rem;
+   text-align: center;
+}
+
+.info-find{
+   padding: 1.5rem;
+   font-size: 1.2rem;
+}
+.info-result{
+   margin-top: 2rem;
+}
+input{
+   padding: 0.3rem;
+}
+.search-btn{
+   background-color: green;
+   color: white;
+   border: none;
+   border-radius: 0.3rem;
+   padding: 0.5rem;
+   cursor: pointer;
+   margin-top: 0.3rem;
+}

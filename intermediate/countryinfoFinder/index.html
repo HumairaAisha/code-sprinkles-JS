@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="infoFinder.css">
+   <title>Countries Explorer</title>
+</head>
+<body>
+<main class="container">
+   <h1>Countries Explorer</h1>
+   <div class="card">
+      <div class="info-find">
+      <label for="country">Country</label>
+
+      <input type="text" placeholder="Search country name" id="country-name">
+      <button type="search" id="search-name" class="search-btn">Search</button>
+      <div class="autocomplete"></div>
+      <div class="info-result" id="finder-result">
+         <img src="" alt="" class="flagimg" id="flag">
+         <p class="name" id="name"></p>
+         <p class="continent" id="continent"> </p>
+         <p class="capital" id="capital"></p>
+         <p class="population" id="population"></p>
+         <p class="currency" id="currency"></p>
+         <p class="languages" id="languages"></p>
+         <p id="errorMsg"></p>
+      </div>
+      </div>
+   </div>
+   
+</main>
+
+   <script src="infoFinder.js"></script>
+</body>
+</html>
