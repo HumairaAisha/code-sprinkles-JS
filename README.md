@@ -16,4 +16,5 @@ This repo will serve as my learning process through small, focused projects. It'
 - Conditional Logic
 - Loops and Iteration
 - Clean Layouts with HTML/CSS
+- How to Fetch API(Application Programming Interface)
 - Thinking before coding, planning how to solve each challenge
