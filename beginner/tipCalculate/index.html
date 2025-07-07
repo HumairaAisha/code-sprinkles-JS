@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="calculate.css">
+   <title>Tip Calculator</title>
+</head>
+<body>
+   <main class="container">
+   <h1>Smart Bill - Tip Calculator</h1>
+
+   <form action="" onsubmit="return false">
+      <label for="bill" class="billInfo">Bill Amount</label> <br>
+      <input type="text" placeholder="Enter Bill Amount" id="bill-amount">
+
+   <div class="sec-percent">
+   <p class="percentInfo">Percentage</p>
+   <select name="" id="tip-percent" class="percentTip">
+      <option selected disabled hidden>Select Percentage</option>
+      <option value="50">50%</option>
+      <option value="25">25%</option>
+      <option value="20">20%</option>
+      <option value="15">15%</option>
+      <option value="10">10%</option>
+      <option value="5">5%</option>
+   </select>
+   </div>
+   <div>
+      <label for="people-amount" class="peopleInfo">Number of People</label> <br>
+      <input type="text" placeholder="Number of People" id="people-amount">
+   </div>
+   <div class="total-output">
+   <div id="tip-output">Tip Amount:</div>
+   <div id="total-output">Total Amount:</div>
+   <div id="tip-amount-per-person">Tip per Person:</div>
+   <div id="total-amount-per-person">Total per Person:</div>
+   </div>
+
+   <div id="error-message"></div>
+<div class="btn">
+   <button id="calculate-bill" class="billCalculate">Calculate</button>
+   <button id="reset-bill" class="billReset">Reset</button>
+</div>
+
+   </form>
+   </main>
+   <script src="calculate.js"></script>
+</body>
+</html>

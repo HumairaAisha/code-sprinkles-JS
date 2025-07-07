@@ -85,15 +85,16 @@ function buttonSearch() {
    function showFirstCountry() {
       if (countryFinder.length === 0) {
          errorMsg.textContent = 'No countries loaded'
+         showCountry()
          return
-      }
+      } 
       //showCountry(countryFinder[0])
       //console.log(countryFinder[2]);
       
       
       //console.log(countryFinder[0].capital);
       
-   } 
+   }
 document.addEventListener('DOMContentLoaded', () => {
    country();
    buttonSearch();

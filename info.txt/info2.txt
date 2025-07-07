@@ -1,0 +1,61 @@
+countryName.addEventListener('input', function autocomplete() {
+   const countryInfo = countryName.value.trim.toLowerCase();
+  
+   if (countryInfo === '') {
+      if (autocomplete) {
+         autocomplete.textContent = ''
+         if (errorMsg) {
+            errorMsg.textContent= ''
+            showFirstCountry()
+            return;
+         }
+         const countrymatch = countryFinder.filter(countryName => countryName.toLowerCase().includes(countryName.toLowerCase()))
+         if(countrymatch.length === 0){
+            if (autocomplete) {
+               autocomplete.textContent = ''
+               if (errorMsg) {
+                  errorMsg.textContent = 'No Match Country'
+                  showFirstCountry()
+                  return;
+               }
+               if (autocomplete) {
+                  autocomplete.textContent = ''
+                  countrymatch.forEach(countryName => {
+                     const div = document.createElement ('div')
+                     div.className = 'suggest'  
+                     div.textContent = country.name.common
+                     div.addEventListener('input', () => {
+                        showCountry(country)
+                        if (countryName) {
+                           countryName.value = ''
+                           if (autocomplete) {
+                              autocomplete.textContent = '';
+                              if (errorMsg) {
+                                 errorMsg.textContent = 'No matching country'
+                              }
+                           }
+                           
+                        }
+                     });
+                     autocomplete.appendChild(div);
+                     function showCountry(country) {
+                        nameResult.textContent = countryFinder[0].name.common
+      continent.textContent = countryFinder[0].continents[0]  || 'Not Available'
+      capital.textContent = countryFinder[0].capital[0] || 'Not Available'
+      population.textContent = countryFinder[0].population || "Not Available"
+      currency.textContent = Object.values(countryFinder[0].currencies)[0].currencies || 'Not Available'
+      languages.textContent = Object.values(countryFinder[0].languages).join(', ') || 'Not Available'
+      flag.src = countryFinder[0].flags.png
+      flag.alt = "Flag of" + (countryFinder[0].name.common || "Not Available")
+
+      errorMsg.textContent = ''
+                     }
+
+                  });
+               }
+            }
+         }
+      }
+      
+   }
+})

@@ -1,0 +1,34 @@
+Key Features:
+
+Button Click: Triggers search only on click, unlike autocomplete’s real-time updates.
+Filtering: Use Array.find to locate the first matching country (e.g., name.common.toLowerCase().includes(input.toLowerCase())).
+Reuse Logic: showCountry reuses showFirstCountry logic for consistency.
+Error Handling: Handles empty input or no matches with clear messages.
+CSS (Suggested): Style .search-btn for visibility (e.g., padding: 8px; cursor: pointer;).
+Learning Filtering:
+
+Filtering here uses a single match (Array.find) for simplicity.
+For autocomplete later, you’ll use Array.filter to get multiple matches, building on this logic.
+EXTRACT Concept: Extract country.name.common for comparison, similar to extracting error.message in the catch block, ensuring safe access.
+nput Event: Captures real-time typing with input event.
+Filtering: Uses Array.filter to find all matches (e.g., “to” matches “Togo”, “Tonga”).
+Addressing Your Understanding
+Choosing autocomplete now is a smart move, as it teaches filtering, which applies to both features.
+
+Why Autocomplete:
+
+Builds real-time interaction using Array.filter.
+Reuses showFirstCountry logic.
+Prepares for a search button by mastering filtering.
+
+//"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBlbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NTEzNjc1ODYsImV4cCI6MTc1MTM2ODQ4Nn0.Miv2B5KaZIs30GJr6iak6WvQGaXpDzBSZ587QSzKKr4"
+await login()
+
+curl -X POST 'http://127.0.0.1:3000/login' -d '{
+    "email": "admin@email.com",
+    "password": "password"
+}' -H "content-type: application/json"
+
+
+
+Secure JWT Authentication 

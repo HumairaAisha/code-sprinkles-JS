@@ -2,7 +2,7 @@ const items = document.querySelector('#list')
 
 items.addEventListener('click', (event) => {
    if (event.target.tagName === 'LI') {
-      alert('Clicked ' + event.target.textContent)
+      alert(event.target.textContent + ' Clicked')
    }
 });
 
