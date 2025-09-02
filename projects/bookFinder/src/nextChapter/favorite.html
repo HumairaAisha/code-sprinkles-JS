@@ -2,20 +2,20 @@
 <html lang="en">
 <head>
    <meta charset="UTF-8">
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
    <link rel="stylesheet" href="../style.css">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Explore Books</title>
+   <title>Favorite - My Library</title>
 </head>
-<body class="">
+<body>
    <header class="sticky top-0 z-50 items-center">
       <nav class="flex items-center md:mb-6 bg-white">
             <h2 class="font-bold text-xl p-6 text-slate-700 cursor-pointer">NextChapter</h2>
 
             <ul class="hidden md:flex space-x-10 font-medium p-5">
             <li><a href="/projects/bookFinder/index.html" class="hover:bg-slate-700 rounded p-2 hover:text-white">Home</a></li>
-            <li><a href="explore.html" class="hover:bg-slate-700 rounded p-2 hover:text-white">Explore</a></li>
-            <li><a href="favorite.html" class="hover:bg-slate-700 rounded p-2 hover:text-white">Favorite</a></li>
+            <li><a href="src/nextChapter/explore.html" class="hover:bg-slate-700 rounded p-2 hover:text-white">Explore</a></li>
+            <li><a href="" class="hover:bg-slate-700 rounded p-2 hover:text-white">Favorite</a></li>
             <li><a href="" class="hover:bg-slate-700 rounded p-2 hover:text-white">About</a></li>
           </ul>
 
@@ -53,10 +53,10 @@
    </header>
 
    <main>
-      <div id="booksResult" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
-      <div id="error" class="hidden"></div>
+      <h1 class="font-bold md:text-2xl text-slate-700 px-4">My Favorite Books</h1>
+   <div id="favoriteList" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
    </main>
-   <script src="../jsFiles/navbar.js"></script>
-   <script src="../jsFiles/explore.js"></script>
+
+   <script src="../jsFiles/fav.js"></script>
 </body>
 </html>

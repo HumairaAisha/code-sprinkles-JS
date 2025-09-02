@@ -1,11 +1,3 @@
-//navbar mobile view
-const btn = document.getElementById('menu-btn');
-    const menu = document.getElementById('mobile-menu');
-
-    btn.addEventListener('click', () => {
-      menu.classList.toggle('hidden');
-    });
-
 
 const search = document.getElementById('search')
 const searchBtn = document.getElementById('btnSearch')
@@ -42,7 +34,8 @@ search.addEventListener('keydown', function handleKeyEnter(event) {
 
 //fetch books 
 async function fetchBooks(searchTerm) {
-   const url = apiBaseUrl + "?maxResults=10&q=" + searchTerm;
+  
+   const url = apiBaseUrl + "?maxResults=20&q=" + encodeURIComponent(searchTerm);
    try {
       const response = await fetch(url)
       const bookData = await response.json()
@@ -52,16 +45,24 @@ async function fetchBooks(searchTerm) {
          return
       }
 
-      let bookList = []
-      bookData.items.forEach((item) => {
-         const bookObject = {
+      
+     const bookList =  bookData.items.map((item) => ({
+         
              title:item.volumeInfo.title  || "Unknown Title",
              authors:item.volumeInfo.authors || ["Unknown Author"],
-             thumbnail:item.volumeInfo.imageLinks?.thumbnail || "",
-         }
-         bookList.push(bookObject)
+             thumbnail:item.volumeInfo.imageLinks?.thumbnail.replace('http://', 'https://') || 'path/to/fallback-image.jpg',
+             publishedDate:item.volumeInfo.publishedDate || "Unknown",
+             publisher:item.volumeInfo.publisher || "Unknown",
+             categories:item.volumeInfo.categories || ["Unknown"],
+             description:item.volumeInfo.description || "Unknown",
+             pageCount:item.volumeInfo.pageCount || "Unknown",
+             language:item.volumeInfo.language || "unknown",
+             
+
          
-      });
+        
+         
+      }));
          localStorage.setItem("searchResults", JSON.stringify(bookList))
          window.location.href = "src/nextChapter/explore.html"
 
