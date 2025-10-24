@@ -2,18 +2,20 @@ import { useState } from "react"
 import { ChevronDown, ChevronUp }  from 'lucide-react'
 
 
-function ProfileCard({name, role, status, skill, joined, FocusArea}) {
-  const [toggle, setToggle] = useState(true)
+function ProfileCard({name, role, track, skill, joined, FocusArea}) {
+
+  const [toggle, setToggle] = useState(false)
+  
   return (
     <div className="flex justify-between gap-4">
       <div>
      
       <h2 className="font-bold md:text-lg">{name}</h2>
-      <h4 className="font-semibold text-gray-600 ">{role}</h4>
-      <h4 className="text-sm text-gray-600">{status}</h4>
+      <h4 className="text-sm text-gray-600">{track}</h4>
+      <h4 className="font-semibold text-gray-600 text-sm">{role}</h4>
       </div>
       <div className="text-gray-600">
-        <button onClick={() => setToggle(!toggle)} className="hover:cursor-pointer flex p-1">
+        <button onClick={() => setToggle(!toggle)} className="hover:cursor-pointer flex">
           {toggle ? <ChevronUp /> : <ChevronDown />}
         </button>
         {toggle && (
