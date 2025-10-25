@@ -1,13 +1,12 @@
+import NavItem from './NavItem';
 import { House, 
    LayoutDashboard, 
    BookOpenCheck, 
    Trophy, File, Settings, 
-   CircleUserRound} from 'lucide-react';
-import NavItem from './NavItem'
+   CircleUserRound, ChevronRight, ChevronLeft} from 'lucide-react';
 
 
-function SideBar() {
-   
+function SideBar({isOpen, setIsOpen}) {
 
    const menuItems = [
       {
@@ -30,8 +29,8 @@ function SideBar() {
          icon : File,
          path: '/resources'
       },
+      
    ]
-
    const menuItemsBottom = [
        {
          title: 'Settings',
@@ -48,25 +47,35 @@ function SideBar() {
    
   return (
     <div>
-      <div className='w-48 h-full fixed top-0 left-0 bg-[#0F172A] text-white'>
-         <h1 className='font-bold md:text-2xl p-2 border-b-* border-b border-b-[#F3F4F6]'>SandBox</h1>
-      <nav className='flex-1 p-2'>
+      <div className={`${isOpen ? "w-48" : "w-16"} h-full fixed top-0 left-0 z-20 bg-[#0F172A] text-white transition duration-150 ease-in-out`}>
+         <div>
+            {isOpen && <h1 className='font-bold md:text-2xl p-2 border-b-* border-b border-b-[#F3F4F6]'>SandBox</h1>}
+         </div>
+       <div className='flex items-start'>
+           <button onClick={() => setIsOpen(!isOpen)} className='text-white mt-2 hover:cursor-pointer hover:bg-[#F3F4F6] hover:rounded-2xl hover:text-[#0F172A]'>
+            {isOpen ? <ChevronLeft /> : <ChevronRight  />}
+         </button>
+       </div>
+         
+         
+       <nav className='flex-1 p-2'>
          
          <div className='mt-2'>
             {menuItems.map ((item, index) => (
-         <NavItem key={index} icon={item.icon} title={item.title} path={item.path} />
+         <NavItem key={index} icon={item.icon} title={item.title} path={item.path} showTitle={isOpen} />
          ))}
          </div>
 
-         <div className='mt-52'>
+         <div className='mt-40'>
             {menuItemsBottom.map ((item, index) => (
-         <NavItem key={index} icon={item.icon} title={item.title} path={item.path} />
+               /* showTitle props so that when isOpen show title + icon */
+         <NavItem key={index} icon={item.icon} title={item.title} path={item.path} showTitle={isOpen}/>
          ))}
          </div>
       </nav>
-
       </div>
     </div>
+      
   )
 }
 
