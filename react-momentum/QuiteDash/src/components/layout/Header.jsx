@@ -3,7 +3,7 @@ import { FaUser } from "react-icons/fa"
 import { useLocation } from 'react-router-dom';
 
 
-function Header() {
+function Header({isOpen}) {
   const location = useLocation()
 
   const pageTitle = {"/dashboard": "Dashboard", "/learn": "Learning Tracker", "/milestone": "Milestone", "/resources": "Resources", "/settings": "Settings", "/profile": "Profile"}
@@ -11,7 +11,7 @@ function Header() {
   const title = pageTitle[pathname] || "SandBox"
  
   return (
-    <header className='w-[calc(100%-12rem)] h-12 fixed top-0 z-30 flex-2 border-b-* border-b border-b-[#0F172A] bg-[#F3F4F6]'>
+    <header className={`${isOpen ? "w-[calc(100%-12rem)]" : "w-[calc(100%-4rem)]"} h-12 fixed top-0 z-30 flex-2 border-b-* border-b border-b-[#0F172A] bg-[#F3F4F6]`}>
       <div className="">
      <div className='flex justify-between p-2'>
       <h1 className='font-bold md:text-2xl text-[#0F172A]'>{title}</h1>
