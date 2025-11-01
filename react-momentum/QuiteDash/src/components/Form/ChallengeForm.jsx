@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-function ChallengeForm() {
+function ChallengeForm({onAddChallenge}) {
    const formData = {
       date: '',
       issueTitle: '',
@@ -22,8 +22,10 @@ function ChallengeForm() {
       if (!date || !issueTitle || !categoryType || !issueSummary || !rootCause || !solution) {
          setError('All fiel are required')
          return
-      } setError('')
-      alert('New Challenge Fixed, Growth Documented!')
+
+      } onAddChallenge(formInput)
+      setError('')
+      alert('New Challenge Fixed Growth Documented!')
       setFormInput(formData)
    }
    const categories = ["Logic Issue ","UI Bug","State/Effect", "Component/Props","Layout/Styling", "Form Handling",
@@ -37,15 +39,15 @@ function ChallengeForm() {
          <h3 className="font-bold text-xl text-center py-2">Document What You Fixed</h3>
          <p className="text-center pb-4 italic text-sm">Because every fix carries a story of patience, persistence, and growth.</p>
          <div className="flex gap-1.5 py-2">
-            <label htmlFor="date" className="font-semibold">Date</label>
+            <label htmlFor="date" name="date" className="font-semibold">Date</label>
             <input type="date" name="date" required value={formInput.date} onChange={handleChange} className="border border-gray-400 bg-gray-200 text-sm rounded"/>
          </div>
          <div className="flex flex-col gap-1.5 py-2">
-            <label htmlFor="issueTitle" className="font-semibold">Issue Title</label>
+            <label htmlFor="issueTitle" name="issueTitle" className="font-semibold">Issue Title</label>
             <input type="text" name="issueTitle" required value={formInput.issueTitle} onChange={handleChange} className="p-1 border border-gray-400 bg-gray-200 text-sm rounded" />
          </div>
          <div className="flex flex-col gap-1.5 py-2">
-            <label htmlFor="category" className="font-semibold">Category</label>
+            <label htmlFor="category" name="categoryType" className="font-semibold">Category</label>
             <select name="categoryType" required value={formInput.categoryType} onChange={handleChange} className="py-1 border border-gray-400 bg-gray-200 text-sm rounded">
                <option value="">Select Category</option>
                {categories.map((category) => (
@@ -56,15 +58,15 @@ function ChallengeForm() {
             </select>
          </div>
          <div className="flex flex-col gap-1.5 py-2">
-            <label htmlFor="issueSummary" className="font-semibold">Issue Summary</label>
+            <label htmlFor="issueSummary" name="issueSummary" className="font-semibold">Issue Summary</label>
             <textarea type="text" name="issueSummary" required value={formInput.issueSummary} onChange={handleChange} className="px-2 py-1.5 h-[100px] border border-gray-400 bg-gray-200 text-sm rounded"/>
          </div>
          <div className="flex flex-col gap-1.5 py-2">
-            <label htmlFor="rootCause" className="font-semibold">Root Cause</label>
+            <label htmlFor="rootCause" name="rootCause"  className="font-semibold">Root Cause</label>
             <textarea type="text" name="rootCause" required value={formInput.rootCause} onChange={handleChange} className="px-2 py-1.5 h-[100px] border border-gray-400 bg-gray-200 text-sm rounded"/>
          </div>
          <div className="flex flex-col gap-1.5 py-2">
-            <label htmlFor="solution" className="font-semibold">Solution</label>
+            <label htmlFor="solution" name="solution"  className="font-semibold">Solution</label>
             <textarea type="text" name="solution" value={formInput.solution} onChange={handleChange} className="px-2 py-1.5 h-[100px] border border-gray-400 bg-gray-200 text-sm rounded"/>
          </div>
          <div className="flex justify-end">
