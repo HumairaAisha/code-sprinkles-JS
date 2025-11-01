@@ -1,10 +1,22 @@
 import { useState } from "react"
 import Modal from "../components/Form/Modal"
 import ChallengeForm from "../components/Form/ChallengeForm"
+import useLocalStorage from "../components/data/useLocalStorage"
 function Challenges() {
   const [modalOpen, setModalOpen] = useState(false)
   const openForm = () => setModalOpen(true)
   const closeForm = () => setModalOpen(false)
+
+  
+
+  const [challengeRecords, setchallengeRecords] = useLocalStorage('challengeRecords', [])
+
+  const handleChallenge = (newChallengeRecord) => {
+
+      const updateChallengeRecord = [...challengeRecords, {...newChallengeRecord, id:Date.now()}]
+
+      setchallengeRecords(updateChallengeRecord)
+  }
 
   return (
     <div className="h-screen bg-[#F3F4F6] p-4">
@@ -20,10 +32,39 @@ function Challenges() {
       >Note It</button>
       {modalOpen && (
         <Modal onClose={closeForm}>
-          <ChallengeForm />
+          <ChallengeForm onAddChallenge = {handleChallenge}/>
         </Modal>
       )}
       </div>
+      </div>
+      <div>
+        {challengeRecords.length > 0 ? (
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Issue Title</th>
+                <th>Category</th>
+                <th>Issue Summary</th>
+                <th>Root Cause</th>
+                <th>Solution</th>
+              </tr>
+            </thead>
+            <tbody>
+              {challengeRecords.map((challenge) => (
+                <tr>
+                  <td>{challenge.date}</td>
+                  <td>{challenge.issueTitle}</td>
+                  <td>{challenge.categoryType}</td>
+                  <td>{challenge.issueSummary}</td>
+                  <td>{challenge.rotCause}</td>
+                  <td>{challenge.solution}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+        <p className="text-center text-gray-600 py-4 italic">No challenge records yet. Click “Note It” to add one.</p>)}
       </div>
     </div>
   )
