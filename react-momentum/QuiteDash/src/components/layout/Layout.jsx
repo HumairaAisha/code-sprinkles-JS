@@ -8,9 +8,9 @@ function Layout() {
   return (
     <div className="flex bg-[#F3F4F6]">
       <SideBar isOpen={isOpen} setIsOpen={setIsOpen}
-       className="w-48" />
+       className="w-52" />
 
-      <div className={`${isOpen ? 'ml-48' : 'ml-16'} flex-1`}>
+      <div className={`${isOpen ? 'ml-52' : 'ml-16'} flex-1`}>
         <Header isOpen={isOpen}/>
       <div className="flex-1 mt-12 bg-[#F3F4F6]">
         <Outlet />
