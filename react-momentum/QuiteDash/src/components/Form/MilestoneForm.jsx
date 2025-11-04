@@ -10,12 +10,22 @@ function MilestoneForm() {
 
    }
    const [inputValue, setInputValue] = useState(formData)
+   const [error, setError] = useState('')
+
    const handleChange = (event) => {
       setInputValue({...inputValue, [event.target.name] : event.target.value})
    }
 
    const handleSubmit = (event) => {
       event.preventDefault()
+      const {date, achievement, supriseMoments,stillStruggle, proudProgress} = inputValue
+      if (!date || !achievement || !supriseMoments || !supriseMoments || !stillStruggle || !proudProgress) {
+         setError('All input fields are required!')
+         return
+      } setError('')
+         alert("You're doing great! \n You Just Documented a Moment of Growth")
+         setInputValue(formData)
+      
    }
   return (
     <div>
@@ -50,6 +60,9 @@ function MilestoneForm() {
                <button className="bg-[#0F172A] text-white font-semibold px-2 py-1.5 my-2 rounded hover:cursor-pointer">Record It</button>
             </div>
          </form>
+         {error && (
+            <p className="text-sm text-red-600">{error}</p>
+         )}
       </div>
     </div>
   )
