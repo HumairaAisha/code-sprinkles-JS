@@ -1,29 +1,49 @@
 
+import { useEffect, useState } from "react"
 import Card from "../components/Card"
 import StatsCard from "../components/StatsCard"
-function Dashboard() {
+import StatsData from "../components/data/stats"
+import DashboardHeader from "./DashboardHeader"
+import statData from "../components/data/stats"
 
-const statsCard = [
-   {id: 1, title:"Weeks Completed", value: 1, notes: "Progress across the 16-week roadmap"},
-   {id: 2, title:"Hours spent Coding", value: 6, notes: "Increments daily"},
-   {id: 3, title:"New Concept Learned", value: 1, notes: "Reflect on weekly learning"},
-   {id: 4, title:"Challenges Solved", value: 1, notes: "Exercises, bugs resolved"},
-   {id: 5, title:"Blog post written", value: 0, notes: "Increments as blog is published"},
-   {id: 6, title:"Confidence Level", value: 0, notes: "Self-reflection metric (1–10 scale)"},
+  function Dashboard() {
+  const [stats, setStats] = useState(statData)
+  
+    useEffect(() => {
+      const updatesStatsFromStorage = () => {
+        const learningTrack = JSON.parse(localStorage.getItem("learnRecords"))
+        const challenges = JSON.parse(localStorage.getItem("challengeRecords")) || [];
+        
 
-]   
+        const hoursSpent = learningTrack.reduce((sum, item) => sum + (Number(item.hours) || 0), 0)
+        const newConcept = learningTrack.length
+        const challengesSolved = challenges.length;
+
+        setStats((prev) => prev.map((stat) => {
+          if (stat.title === "Hours Spent Coding") return {...stat, value:hoursSpent}
+          if (stat.title === "New Concept Learned") return {...stat, value:newConcept}
+          if (stat.title === "Challenges Solved") return {...stat, value:challengesSolved}
+          return stat
+        })
+      )
+      }
+      updatesStatsFromStorage()
+      window.addEventListener("statsUpdated", updatesStatsFromStorage);
+      return () => window.removeEventListener("statsUpdated", updatesStatsFromStorage)
+    },[])
+
    
   return (
-    <div className="p-4 w-full h-screen bg-[#F3F4F6]">
-       <Card />
+    <div className="px-8 py-6 w-full h-screen bg-[#F3F4F6] ">
+     
+      {/*  <Card /> */}
+        <DashboardHeader />
  
-      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-y-6 gap-x-4">
-            {statsCard.map((stats) => (
-         <div className="w-44 h-36 rounded  bg-gray-50 shadow hover:shadow-[#0F172A] hover:cursor-pointer" key={stats.id}>
-            <StatsCard title={stats.title} notes={stats.notes} value={stats.value} 
-            
-            />
-         </div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3  gap-y-6 gap-x-4">
+         {stats.map((stat) => (
+            <div key={stat.id} className=" rounded-lg bg-gray-50 shadow hover:shadow-[#0F172A] hover:cursor-pointer">
+               <StatsCard id={stat.id} title={stat.title} value={stat.value} notes={stat.notes} auto={stat.auto}/>
+            </div>
          ))}
       </div>
     
