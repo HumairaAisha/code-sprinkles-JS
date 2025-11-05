@@ -20,7 +20,7 @@ function ChallengeForm({onAddChallenge}) {
       event.preventDefault();
       const {date, issueTitle, categoryType, issueSummary, rootCause, solution} = formInput
       if (!date || !issueTitle || !categoryType || !issueSummary || !rootCause || !solution) {
-         setError('All fiel are required')
+         setError('All field are required')
          return
 
       } onAddChallenge(formInput)
