@@ -11,31 +11,28 @@ function MyForm({onAddRecord,closeForm}) {
       featureBuilt: '',
    }
    const [formValue, setFormValue] = useState(formData)
-   const [error, setError] = useState ('')
+   //const [error, setError] = useState ('')
 
-   const categories = ["TailwindCss","Components", "React Rendering", "Props", "API", "Axios", "React State Management", "Data and List", "CRUD", "React Mounting", "React Route & Navigation", "Protected Routes", "Chart & Data Visualization", "React Testing"]
+   const categories = ["TailwindCss","Components", "React Rendering", "Props", "API", "Axios", "React State Management", "Data and List", "CRUD", "React Mounting", "React Route & Navigation", "Protected Routes", "Chart & Data Visualization", "React Testing", "Other"]
 
    const handleChange = (event) => {
       setFormValue({...formValue, [event.target.name] : event.target.value})
+      toast.dismiss()
    }
    const handleSubmit= (event) => {
       event.preventDefault();
       const {date, hours, topic, category, description} = formValue
       if (!date || !hours || !topic|| !category || !description) {
-         setError('All fields are required')
-         
+         toast.error('All fields are required!')
+         //setError('All fields are required')
          return
          //pass data to parent form then child
       } onAddRecord(formValue)
       
-      setError('')
-      toast.success('New Learning Progress Log!' ,{
-         style: {
-            background: "#0F172A",
-            color: '#fff'
-         }
-      })
-      setTimeout(() => {closeForm()}, 200);
+      //setError('')
+     
+      toast.success('New Learning Progress Log!')
+      setTimeout(() => {closeForm()}, 800);
       setFormValue(formData)
       
    }
@@ -77,21 +74,21 @@ function MyForm({onAddRecord,closeForm}) {
           </div>
            <div className="flex flex-col gap-1.5 py-2">
             <label htmlFor="description" className="font-semibold">Concept Note</label>
-            <textarea type="text" name="description"  value={formValue.description} rows={3} onChange={handleChange}  className="px-2 h-[100px] border border-gray-400 bg-gray-200 text-sm rounded">
+            <textarea type="text" name="description"  value={formValue.description} rows={3} onChange={handleChange}  className="px-2 py-1.5 h-[100px] border border-gray-400 bg-gray-200 text-sm rounded">
             </textarea>
            </div>
            <div className="flex flex-col ">
             <label htmlFor="featureBuilt" className="font-semibold">Feature Built</label>
-            <textarea type='text' name="featureBuilt" value={formValue.featureBuilt} onChange={handleChange} className="px-2 h-[100px] border border-gray-400 bg-gray-200 text-sm rounded"></textarea>
+            <textarea type='text' name="featureBuilt" value={formValue.featureBuilt} onChange={handleChange} className="px-2 py-1.5 h-[100px] border border-gray-400 bg-gray-200 text-sm rounded"></textarea>
            </div>
             <div className="flex justify-end">
                 <button type="submit" className="bg-[#0F172A] text-white font-semibold px-2 py-1.5 my-2 rounded hover:cursor-pointer">+Learn</button>
             </div>
           
          </form>
-         {error && (
+        {/*  {error && (
             <p className="text-sm text-red-700 -py-4">{error}</p>
-         )}
+         )} */}
       </div>
     </div>
   )
