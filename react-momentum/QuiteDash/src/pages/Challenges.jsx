@@ -16,6 +16,13 @@ function Challenges() {
       const updateChallengeRecord = [...challengeRecords, {...newChallengeRecord, id:Date.now()}]
 
       setchallengeRecords(updateChallengeRecord)
+      localStorage.setItem("challengeRecords", JSON.stringify(updateChallengeRecord));
+
+       setTimeout(() => {
+      console.log("StatsUpdated event");
+      window.dispatchEvent(new Event("statsUpdated"));
+    }, 200);
+
   }
 
   return (
@@ -32,33 +39,33 @@ function Challenges() {
       >Note It</button>
       {modalOpen && (
         <Modal onClose={closeForm}>
-          <ChallengeForm onAddChallenge = {handleChallenge}/>
+          <ChallengeForm onAddChallenge = {handleChallenge} closeForm={closeForm}/>
         </Modal>
       )}
       </div>
       </div>
-      <div>
+      <div className="overflow-x-auto mt-6 p-2 rounded-2xl">
         {challengeRecords.length > 0 ? (
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Issue Title</th>
-                <th>Category</th>
-                <th>Issue Summary</th>
-                <th>Root Cause</th>
-                <th>Solution</th>
+          <table className="min-w-full border border-[#0F172A] border-collapse text-[#0F172A]">
+            <thead className="bg-[#E2E8F0] rounded-2xl">
+              <tr className="border-b border-[#0F172A]">
+                <th className="border border-[#0F172A] p-1">Date</th>
+                <th className="border border-[#0F172A] p-1">Issue Title</th>
+                <th className="border border-[#0F172A] p-1">Category</th>
+                <th className="border border-[#0F172A] p-1">Issue Summary</th>
+                <th className="border border-[#0F172A] p-1">Root Cause</th>
+                <th className="border border-[#0F172A] p-1">Solution</th>
               </tr>
             </thead>
             <tbody>
               {challengeRecords.map((challenge) => (
-                <tr>
-                  <td>{challenge.date}</td>
-                  <td>{challenge.issueTitle}</td>
-                  <td>{challenge.categoryType}</td>
-                  <td>{challenge.issueSummary}</td>
-                  <td>{challenge.rotCause}</td>
-                  <td>{challenge.solution}</td>
+                <tr key={challenge.id} className="border border-[#0F172A]">
+                  <td className="border border-[#0F172A] p-2">{challenge.date}</td>
+                  <td className="border border-[#0F172A] p-2">{challenge.issueTitle}</td>
+                  <td className="border border-[#0F172A] p-2">{challenge.categoryType}</td>
+                  <td className="border border-[#0F172A] p-2 break-words">{challenge.issueSummary}</td>
+                  <td className="border border-[#0F172A] p-2 break-words">{challenge.rootCause}</td>
+                  <td className="border border-[#0F172A] p-2 break-words">{challenge.solution}</td>
                 </tr>
               ))}
             </tbody>
