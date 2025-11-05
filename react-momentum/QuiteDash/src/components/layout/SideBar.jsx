@@ -3,7 +3,8 @@ import { House,
    LayoutDashboard, 
    BookOpenCheck, 
    Trophy, File, Settings, 
-   CircleUserRound, ChevronRight, ChevronLeft} from 'lucide-react';
+   CircleUserRound, ChevronRight, ChevronLeft, CircleCheckBig, Wrench
+   } from 'lucide-react';
 
 
 function SideBar({isOpen, setIsOpen}) {
@@ -18,6 +19,11 @@ function SideBar({isOpen, setIsOpen}) {
          title: 'Learning Tracker',
          icon : BookOpenCheck,
          path: '/learn'
+      },
+      {
+         title:'Challenge Journal',
+         icon: Wrench,
+         path:'/challenge'
       },
       {
          title: 'Milestone',
@@ -47,7 +53,7 @@ function SideBar({isOpen, setIsOpen}) {
    
   return (
     <div>
-      <div className={`${isOpen ? "w-48" : "w-16"} h-full fixed top-0 left-0 z-20 bg-[#0F172A] text-white transition duration-150 ease-in-out`}>
+      <div className={`${isOpen ? "w-52" : "w-16"} h-full fixed top-0 left-0 z-20 bg-[#0F172A] text-white transition duration-150 ease-in-out`}>
          <div>
             {isOpen && <h1 className='font-bold md:text-2xl p-2 border-b-* border-b border-b-[#F3F4F6]'>SandBox</h1>}
          </div>
@@ -66,7 +72,7 @@ function SideBar({isOpen, setIsOpen}) {
          ))}
          </div>
 
-         <div className='mt-40'>
+         <div className='mt-32'>
             {menuItemsBottom.map ((item, index) => (
                /* showTitle props so that when isOpen show title + icon */
          <NavItem key={index} icon={item.icon} title={item.title} path={item.path} showTitle={isOpen}/>
