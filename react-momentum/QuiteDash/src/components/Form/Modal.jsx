@@ -1,12 +1,11 @@
-
 import {X} from  'lucide-react'
 
 function Modal({children, onClose}) {
   return (
-    <div className='fixed inset-0 flex justify-center items-center z-20 py-4 text-[#0F172A]'>
-      <div className='w-[400px] shadow-lg bg-white p-4'>
+    <div className='pt-6 fixed inset-0 flex justify-center items-center z-30 text-[#0F172A]'>
+      <div className=' w-[500px] max-h-[90vh] overflow-y-auto shadow-lg bg-white'>
          
-   <button onClick={onClose} className='hover:cursor-pointer'>
+   <button onClick={onClose} className='hover:cursor-pointer '>
       <X />
    </button>
    {children}
