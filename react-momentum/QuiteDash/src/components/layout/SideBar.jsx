@@ -3,7 +3,7 @@ import { House,
    LayoutDashboard, 
    BookOpenCheck, 
    Trophy, File, Settings, 
-   CircleUserRound, ChevronRight, ChevronLeft, CircleCheckBig, Wrench
+   CircleUserRound, ChevronRight, ChevronLeft, CircleCheckBig, Wrench, FolderOpen
    } from 'lucide-react';
 
 
@@ -31,10 +31,15 @@ function SideBar({isOpen, setIsOpen}) {
          path: '/milestone'
       },
       {
+         title: 'Project Hub',
+         icon: FolderOpen,
+         path: '/projectHub'
+      },
+      /* {
          title: 'Resources',
          icon : File,
          path: '/resources'
-      },
+      }, */
       
    ]
    const menuItemsBottom = [
