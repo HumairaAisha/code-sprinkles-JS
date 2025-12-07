@@ -2,13 +2,16 @@ import { useState } from "react"
 import MyForm from "../components/Form/MyForm"
 import Modal from "../components/Form/Modal"
 import useLocalStorage from "../components/data/useLocalStorage"
-import PrimaryButton from "../UI/PrimaryButton"
+import PrimaryButton from "../components/UI/PrimaryButton"
+import Heading from "../components/UI/Heading"
+
+import LearnForm from "../components/Form/LearnForm"
 
 function LearnTrack() {
   const [openModal, setOpenModal] = useState()
 
-  const openForm = () => setOpenModal(true)
-  const closeForm = () => setOpenModal(false)
+  const openLearningTrackerForm = () => setOpenModal(true)
+  const closeLearningTrackerForm = () => setOpenModal(false)
 
   const [records, setRecords] = useLocalStorage("learnRecords",[])
   const handleNewRecords = (newRecord) => {
@@ -17,10 +20,7 @@ function LearnTrack() {
     setRecords(updatedRecords);
     localStorage.setItem("learnRecords", JSON.stringify(updatedRecords));
     
-    setTimeout(() => {
-      console.log("StatsUpdated event");
-      window.dispatchEvent(new Event("statsUpdated"));
-    }, 200);
+    
 
     
     
@@ -33,22 +33,25 @@ function LearnTrack() {
 
 
   return (
-    <div className="h-full bg-[#F3F4F6] p-4">
+    <div className="h-srceen bg-[#F3F4F6] p-4">
       <div>
-        <div className="bg-[#0F172A] rounded-lg text-white p-1.5 m-2">
-          <h3 className="font-semibold text-xl px-2 py-1">Your Learning Footprints</h3>
-          <p className="text-sm my-1 px-2">Log learning progress, track hours spent, and see your growth over time, with ideas that shape your journey. <br />
-            Every new entry builds a record of your learning story.</p>
-          <div className="flex justify-end px-4 items-center -my-2 mb-1">
-           <PrimaryButton onClick={openForm}/>
+        <div className="bg-[#0A1A29] rounded-lg text-white p-1.5 m-2">
+          <Heading
+        title={"Your Learning Footprints"}
+        text={"Log learning progress, track hours spent, and see your growth over time, with ideas that shape your journey."}
+        tagline={"Every new entry builds a record of your learning story."}
+         />
+           <PrimaryButton onClick={openLearningTrackerForm}/>
              {openModal && (
-              <Modal onClose={closeForm}>
-                <MyForm onAddRecord={handleNewRecords} closeForm={closeForm}/> 
+              <Modal onClose={closeLearningTrackerForm}>
+                <LearnForm key="challenge-form"
+                onAddRecord={handleNewRecords} closeForm={closeLearningTrackerForm}/> 
               </Modal>
              )}
-          </div>
-       
         </div>
+        
+       
+        
         
         
         <div className="overflow-x-auto mt-6 px-2 py-2 rounded-2xl">
@@ -60,8 +63,10 @@ function LearnTrack() {
                 <th className="border border-[#0F172A] p-2">Hours</th>
                 <th className="border border-[#0F172A] p-2">What I Learned</th>
                 <th className="border border-[#0F172A] p-2">Category</th>
-                <th className="border border-[#0F172A] p-2">Description</th>
-                <th className="border border-[#0F172A] p-2">Feature Built</th>
+                <th className="border border-[#0F172A] p-2">Technology</th>
+                <th className="border border-[#0F172A] p-2">Concept</th>
+                <th className="border border-[#0F172A] p-2">Concept Note</th>
+                {/* <th className="border border-[#0F172A] p-2">Feature Built</th> */}
                 <th className="border border-[#0F172A] p-2">Action</th>
                 
               </tr>
@@ -72,9 +77,12 @@ function LearnTrack() {
                    <td className="border border-[#0F172A] p-2">{record.date}</td>
                    <td className="border border-[#0F172A] p-2 text-center">{record.hours}</td>
                    <td className="border border-[#0F172A] p-2 break-words max-w-[150px]">{record.topic}</td>
-                   <td className="border border-[#0F172A] p-2">{record.category}</td>
+                   <td className="border border-[#0F172A] p-2 break-words max-w-[150px]">{record.category}</td>
+                   <td className="border border-[#0F172A] p-2 break-words max-w-[200px]">{record.tech}</td>
+                   <td className="border border-[#0F172A] p-2 break-words max-w-[200px]">{record.concept}</td>
                    <td className="border border-[#0F172A] p-2 break-words max-w-[200px]">{record.description}</td>
-                   <td className="border border-[#0F172A] p-2 break-words max-w-[200px]">{record.featureBuilt}</td>
+                   
+                   {/* <td className="border border-[#0F172A] p-2 break-words max-w-[200px]">{record.featureBuilt}</td> */}
                    <td className="border border-[#0F172A] p-2">
                     <button className="bg-[#0F172A] text-white rounded p-2 hover:cursor-pointer hover:bg-[#F3F4F6] hover:text-[#0F172A]">View</button>
                   </td>
@@ -90,6 +98,7 @@ function LearnTrack() {
           </p>)}
          
         </div>
+        
       </div>
      </div>
   )
