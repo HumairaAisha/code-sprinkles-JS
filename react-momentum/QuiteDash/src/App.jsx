@@ -11,11 +11,14 @@ import Settings from "./pages/Settings";
 import Challenges from "./pages/Challenges";
 import ProjectHub from "./pages/ProjectHub";
 
+
+
 function App() {
 
   return (
     <>
     
+   
     <Routes>
       <Route path="/" element={<Navigate to="/dashboard" replace />} />
       <Route element={<Layout />}>
@@ -30,6 +33,8 @@ function App() {
       
       </Route>
     </Routes>
+    
+
     <Toaster position="top-center" reverseOrder={false}
     toastOptions={{
       success: {
