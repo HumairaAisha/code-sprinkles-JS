@@ -1,0 +1,180 @@
+
+ {
+  "Frontend": {
+    "HTML": [
+      "Elements",
+      "Attributes",
+      "Semantic Tags",
+      "Forms & Tables",
+      "Media",
+      "Accessibility & SEO Basics"
+    ],
+    "CSS": [
+      "Selectors & Specificity",
+      "Box Model",
+      "Flexbox & Grid",
+      "Positioning & Z-index",
+      "Transitions & Animations",
+      "Pseudo-classes & Pseudo-elements",
+      "Variables & Custom Properties",
+      "Responsive Design",
+      "CSS Architecture (BEM / Utility-first)"
+    ],
+    "Tailwind CSS": [
+      "Utility Classes",
+      "Custom Theme & Colors",
+      "Dark Mode",
+      "Responsive Design",
+      "Reusable Components",
+      "Animations & Plugins"
+    ],
+    "JavaScript": [
+      "Variables & Data Types",
+      "Operators",
+      "Control Flow (if, switch, loops)",
+      "Functions (declaration, expression, arrow)",
+      "Arrays & Objects",
+      "Array Methods (map, filter, reduce, etc.)",
+      "DOM Manipulation & Event Handling",
+      "Scope, Hoisting, Closures",
+      "Truthy / Falsy Values",
+      "JSON",
+      "Async JS (Promises, async/await, fetch)",
+      "Modules & ES6+ Features"
+    ],
+    "TypeScript (Frontend)": [
+      "Type Annotations",
+      "Interfaces, Types, Enums",
+      "Union & Intersection Types",
+      "Generics",
+      "Modules",
+      "React + TS Integration",
+      "API Types & Response Handling"
+    ],
+    "React": [
+      "Components (Function / Arrow)",
+      "Reusable Components",
+      "Props",
+      "Conditional Rendering",
+      "Lists & Keys",
+      "useEffect, useState, useContext",
+      "Lifting State Up",
+      "State Management",
+      "Forms & Validation",
+      "Data Handling",
+      "Custom Hooks",
+      "Context API",
+      "Routing (React Router)",
+      "Protected Routes",
+      "Chart & Data Visualization",
+      "API Integration (fetch / axios)",
+      "React Testing"
+    ],
+    "Next.js": [
+      "File-based Routing",
+      "SSR & SSG",
+      "API Routes",
+      "Dynamic Routes",
+      "getServerSideProps / getStaticProps",
+      "Middleware & Authentication",
+      "Environment Variables"
+    ],
+    "Vite / Build Tools": [
+      "Project Setup",
+      "Hot Reloading",
+      "Aliases",
+      "Bundling & Optimization"
+    ],
+    "API & Data Handling": [
+      "REST API Basics",
+      "HTTP Methods",
+      "Fetch / Axios",
+      "Error Handling",
+      "Loading States",
+      "LocalStorage / SessionStorage",
+      "Context for Data Syncing"
+    ],
+    "UI / UX Concepts": [
+      "Design Systems",
+      "Color Theory & Spacing",
+      "Accessibility",
+      "Responsive Layouts",
+      "Component Reusability",
+      "Microinteractions"
+    ]
+  },
+  "Backend": {
+    "Node.js": [
+      "Modules & Imports",
+      "NPM Packages",
+      "HTTP Server",
+      "Async Operations",
+      "Environment Variables"
+    ],
+    "Express.js": [
+      "Routing",
+      "Middleware",
+      "Request & Response",
+      "Controllers",
+      "Error Handling",
+      "REST API Structure"
+    ],
+    "Fastify": [
+      "Routes & Schemas",
+      "Request Validation",
+      "Hooks & Plugins",
+      "Error Handling",
+      "Decorators",
+      "Performance Optimization"
+    ],
+    "Prisma": [
+      "Schema Definition (Models, Enums, Relations)",
+      "Migrations & Seeding",
+      "CRUD Operations",
+      "Query Filtering & Pagination",
+      "Integrating with Fastify / Express"
+    ],
+    "Authentication (JWT + bcrypt)": [
+      "Token Creation & Verification",
+      "Middleware & Protected Routes",
+      "Role-based Access"
+    ],
+    "Databases (PostgreSQL / MySQL / MongoDB)": [
+      "CRUD Operations",
+      "Relationships / Joins",
+      "Indexing",
+      "Transactions",
+      "Query Optimization"
+    ],
+    "TypeScript (Backend)": [
+      "Types & Interfaces",
+      "Generics",
+      "Modules",
+      "Working with Express / Fastify"
+    ],
+    "Python": [
+      "Syntax & Data Types",
+      "Functions, Loops, Conditional Statements",
+      "Object-Oriented Programming",
+      "File Handling",
+      "Virtual Environments & Packages",
+      "Frameworks (Flask / Django / FastAPI)",
+      "API Building & Database Integration"
+    ]
+  },
+  "GitHub": {
+    "Git": [
+      "init / clone / add / commit / push / pull",
+      "Branching, Merging, Rebase",
+      "Stash, Log, Diff, Tags"
+    ],
+    "GitHub": [
+      "Repositories & Forks",
+      "Pull Requests & Issues",
+      "Collaboration",
+      "GitHub Actions",
+      "Branch Protection",
+      "README & Documentation"
+    ]
+  }
+}
