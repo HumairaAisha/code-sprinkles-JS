@@ -58,12 +58,12 @@ function SideBar({isOpen, setIsOpen}) {
    
   return (
     <div>
-      <div className={`${isOpen ? "w-52" : "w-16"} h-full fixed top-0 left-0 z-20 bg-[#0F172A] text-white transition duration-150 ease-in-out`}>
+      <div className={`${isOpen ? "w-52" : "w-16"} h-full fixed top-0 left-0 z-20 bg-[#0A1A29] text-white transition duration-150 ease-in-out`}>
          <div>
-            {isOpen && <h1 className='font-bold md:text-2xl p-2 border-b-* border-b border-b-[#F3F4F6]'>SandBox</h1>}
+            {isOpen && <h1 className='font-bold md:text-2xl border-b-* border-b border-b-[#F3F4F6] p-2'>SandBox</h1>}
          </div>
        <div className='flex items-start'>
-           <button onClick={() => setIsOpen(!isOpen)} className='text-white mt-2 hover:cursor-pointer hover:bg-[#F3F4F6] hover:rounded-2xl hover:text-[#0F172A]'>
+           <button onClick={() => setIsOpen(!isOpen)} className='text-white  hover:cursor-pointer hover:bg-[#F3F4F6] hover:rounded-2xl hover:text-[#0F172A]'>
             {isOpen ? <ChevronLeft /> : <ChevronRight  />}
          </button>
        </div>
