@@ -1,13 +1,24 @@
-import { useState } from "react"
-import Modal from "../components/Form/Modal"
-import ChallengeForm from "../components/Form/ChallengeForm"
-import useLocalStorage from "../components/data/useLocalStorage"
-function Challenges() {
-  const [modalOpen, setModalOpen] = useState(false)
-  const openForm = () => setModalOpen(true)
-  const closeForm = () => setModalOpen(false)
+import { useContext, useState } from "react"
+import { DashboardStatsContext } from "../CustomHook/DashboardStatsContext"
 
-  
+
+import Modal from "../components/Form/Modal"
+import ChallengeJournalForm from "../components/Form/ChallengeJournalForm"
+import useLocalStorage from "../components/data/useLocalStorage"
+import PrimaryButton from "../components/UI/PrimaryButton"
+import Heading from "../components/UI/Heading"
+import ReusableCard from "../components/UI/ReusableCard"
+import DetailModal from "../components/UI/DetailModal"
+import ViewMoreButton from "../components/UI/ViewMoreButton"
+
+function Challenges() {
+  const {recalculateStats} = useContext(DashboardStatsContext)
+  const [modalOpen, setModalOpen] = useState(false)
+  const openChanllengeForm = () => setModalOpen(true)
+  const closeChallengeForm = () => setModalOpen(false)
+
+  const [selectedChallengeRecord, setSelectedChallengeRecord] = useState(null)
+  const [openDetailModal, setOpenDetailModal] = useState(false)
 
   const [challengeRecords, setchallengeRecords] = useLocalStorage('challengeRecords', [])
 
@@ -18,61 +29,69 @@ function Challenges() {
       setchallengeRecords(updateChallengeRecord)
       localStorage.setItem("challengeRecords", JSON.stringify(updateChallengeRecord));
 
-       setTimeout(() => {
-      console.log("StatsUpdated event");
-      window.dispatchEvent(new Event("statsUpdated"));
-    }, 200);
+      recalculateStats()
 
+  }
+  const handleViewMore = (challengeRecords) => {
+    setSelectedChallengeRecord(challengeRecords)
+    setOpenDetailModal(true)
+
+  }
+  const handleCloseDetailModal = () => {
+    setSelectedChallengeRecord(null)
+    setOpenDetailModal(false)
   }
 
   return (
-    <div className="h-screen bg-[#F3F4F6] p-4">
-      <div className="bg-[#0f1a32] rounded-lg text-white p-1.5 m-2">
-      <h3 className="font-semibold text-xl px-2 py-1">Your Challenge Footprints</h3>
-      <p className="text-sm my-1 px-2">Every challenge was a teacher revealing growth hidden in the details. <br />
-      Each fix tells more than a story of lessons learned; it speaks of patience, curiosity, and quiet breakthroughs
-      </p>
-      <div className="flex justify-end px-4 items-center -my-2 mb-1">
-      <button onClick={openForm}
-      
-      className="bg-white text-[#0F172A] px-1.5 py-1 rounded font-semibold hover:cursor-pointer"
-      >Note It</button>
+    <div className="h-full bg-[#F3F4F6] p-4">
+      <div className="bg-[#0A1A29] rounded-lg text-white p-1.5 m-2">
+      <Heading title={"Your Challenge Footprints"}
+      text={"Every challenge was a teacher revealing growth hidden in the details."}
+      tagline={"Each fix tells more than a story of lessons learned; it speaks of patience, curiosity, and quiet breakthroughs"}/>
+    
+     <PrimaryButton onClick={openChanllengeForm}/>
       {modalOpen && (
-        <Modal onClose={closeForm}>
-          <ChallengeForm onAddChallenge = {handleChallenge} closeForm={closeForm}/>
+        <Modal onClose={closeChallengeForm}>
+          <ChallengeJournalForm key="challenge-form"
+          onAddChallenge = {handleChallenge} closeForm={closeChallengeForm}/>
         </Modal>
       )}
+     
       </div>
-      </div>
-      <div className="overflow-x-auto mt-6 p-2 rounded-2xl">
+      <div className="mt-6 p-2 rounded-2xl">
         {challengeRecords.length > 0 ? (
-          <table className="min-w-full border border-[#0F172A] border-collapse text-[#0F172A]">
-            <thead className="bg-[#E2E8F0] rounded-2xl">
-              <tr className="border-b border-[#0F172A]">
-                <th className="border border-[#0F172A] p-1">Date</th>
-                <th className="border border-[#0F172A] p-1">Issue Title</th>
-                <th className="border border-[#0F172A] p-1">Category</th>
-                <th className="border border-[#0F172A] p-1">Issue Summary</th>
-                <th className="border border-[#0F172A] p-1">Root Cause</th>
-                <th className="border border-[#0F172A] p-1">Solution</th>
-              </tr>
-            </thead>
-            <tbody>
-              {challengeRecords.map((challenge) => (
-                <tr key={challenge.id} className="border border-[#0F172A]">
-                  <td className="border border-[#0F172A] p-2">{challenge.date}</td>
-                  <td className="border border-[#0F172A] p-2">{challenge.issueTitle}</td>
-                  <td className="border border-[#0F172A] p-2">{challenge.categoryType}</td>
-                  <td className="border border-[#0F172A] p-2 break-words">{challenge.issueSummary}</td>
-                  <td className="border border-[#0F172A] p-2 break-words">{challenge.rootCause}</td>
-                  <td className="border border-[#0F172A] p-2 break-words">{challenge.solution}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+         <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-y-6 gap-x-4 py-4 p-2">
+          {challengeRecords.map((challengeRecord) => (
+
+            <ReusableCard key={challengeRecord.id}>
+              <p className="font-semibold py-0.5">Date: <span className="font-normal">{challengeRecord.date}</span></p>
+              <p className="font-semibold py-0.5">Issue Title <span className="font-normal">{challengeRecord.issueTitle}</span></p>
+               <p className="font-semibold py-0.5">Challenge Type: <span className="font-normal">{challengeRecord.challenge}</span></p>
+              
+              <ViewMoreButton onClick={() => handleViewMore(challengeRecord)}/>
+            </ReusableCard>
+          ))}
+         </div>
         ) : (
         <p className="text-center text-gray-600 py-4 italic">No challenge records yet. Click “Note It” to add one.</p>)}
       </div>
+      {openDetailModal && selectedChallengeRecord && (
+        <DetailModal
+        data={selectedChallengeRecord}
+        onClose={handleCloseDetailModal}
+        fields={[
+          {key: "date", label: "Date"},
+          {key: "issueTitle", label: "Issue Title"},
+          {key: "challengeCategory", label: "Challenge Type"},
+          {key: "challengeTechnology", label: "Technolgy"},
+          {key: "challenge", label: "Challenge Type"},
+          {key: "issueSummary", label: "Issue Summary"},
+          {key: "rootCause", label: "Root Cause"},
+          {key: "solution", label: "Solution"},
+          
+        ]}
+        />
+      )}
     </div>
   )
 }
