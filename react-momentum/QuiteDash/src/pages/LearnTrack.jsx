@@ -1,30 +1,56 @@
-import { useState } from "react"
-import MyForm from "../components/Form/MyForm"
-import Modal from "../components/Form/Modal"
+
 import useLocalStorage from "../components/data/useLocalStorage"
+import { useContext, useState } from "react"
+import { DashboardStatsContext } from "../CustomHook/DashboardStatsContext"
+
+import Modal from "../components/Form/Modal"
+
 import PrimaryButton from "../components/UI/PrimaryButton"
 import Heading from "../components/UI/Heading"
+import ReusableCard from "../components/UI/ReusableCard"
+import DetailModal from "../components/UI/DetailModal"
+import ViewMoreButton from "../components/UI/ViewMoreButton"
 
 import LearnForm from "../components/Form/LearnForm"
 
 function LearnTrack() {
+  
   const [openModal, setOpenModal] = useState()
+  
+
+  const [selectedRecord, setSelectedRecord] = useState(null)
+  const [openDetailModal, setOpenDetailModal] = useState(false)
+
+  const handleViewMore = (record) => {
+  setSelectedRecord(record)
+  setOpenDetailModal(true)
+}
+
+const closeDetailModal = () => {
+  setSelectedRecord(null)
+  setOpenDetailModal(false)
+}
+
+  //const openLearningDetailsInfo = () => setOpenCard(true)
+  //const closeLearningDetailsInfo = () => setOpenCard(false)
 
   const openLearningTrackerForm = () => setOpenModal(true)
   const closeLearningTrackerForm = () => setOpenModal(false)
 
-  const [records, setRecords] = useLocalStorage("learnRecords",[])
-  const handleNewRecords = (newRecord) => {
+  const {recalculateStats} = useContext(DashboardStatsContext)
+
+   const [records, setRecords] = useLocalStorage("learnRecords",[])
+   
+   const handleNewRecords = (newRecord) => {
     
     const updatedRecords = [...records, {...newRecord, id:Date.now()}];
     setRecords(updatedRecords);
     localStorage.setItem("learnRecords", JSON.stringify(updatedRecords));
     
-    
-
-    
+    recalculateStats();
     
   }
+  
   
   /* const handleDelete = (id) => {
       removeRecord(id)
@@ -49,56 +75,39 @@ function LearnTrack() {
               </Modal>
              )}
         </div>
-        
-       
-        
-        
-        
-        <div className="overflow-x-auto mt-6 px-2 py-2 rounded-2xl">
+        <div className="mt-6 px-2 py-2 rounded-2xl">
          {records.length > 0 ? (
-          <table className="min-w-full border border-[#0F172A] border-collapse text-[#0F172A]">
-            <thead className="bg-[#E2E8F0]  rounded-2xl">
-              <tr className="border-b border-[#0F172A]">
-                <th className="border border-[#0F172A] p-2">Date</th>
-                <th className="border border-[#0F172A] p-2">Hours</th>
-                <th className="border border-[#0F172A] p-2">What I Learned</th>
-                <th className="border border-[#0F172A] p-2">Category</th>
-                <th className="border border-[#0F172A] p-2">Technology</th>
-                <th className="border border-[#0F172A] p-2">Concept</th>
-                <th className="border border-[#0F172A] p-2">Concept Note</th>
-                {/* <th className="border border-[#0F172A] p-2">Feature Built</th> */}
-                <th className="border border-[#0F172A] p-2">Action</th>
-                
-              </tr>
-                 </thead>
-              <tbody>
-                {records.map((record) => (
-                  <tr key={record.id} className="border border-[#0F172A]">
-                   <td className="border border-[#0F172A] p-2">{record.date}</td>
-                   <td className="border border-[#0F172A] p-2 text-center">{record.hours}</td>
-                   <td className="border border-[#0F172A] p-2 break-words max-w-[150px]">{record.topic}</td>
-                   <td className="border border-[#0F172A] p-2 break-words max-w-[150px]">{record.category}</td>
-                   <td className="border border-[#0F172A] p-2 break-words max-w-[200px]">{record.tech}</td>
-                   <td className="border border-[#0F172A] p-2 break-words max-w-[200px]">{record.concept}</td>
-                   <td className="border border-[#0F172A] p-2 break-words max-w-[200px]">{record.description}</td>
-                   
-                   {/* <td className="border border-[#0F172A] p-2 break-words max-w-[200px]">{record.featureBuilt}</td> */}
-                   <td className="border border-[#0F172A] p-2">
-                    <button className="bg-[#0F172A] text-white rounded p-2 hover:cursor-pointer hover:bg-[#F3F4F6] hover:text-[#0F172A]">View</button>
-                  </td>
-                    
-                  </tr>
-                  
-                ))}
-              </tbody>
-         
-          </table>
+          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-y-6 gap-x-4 py-4 p-2">
+            {records.map((record) => (
+
+              <ReusableCard key={record.id}>
+                <p className="font-semibold py-0.5">Date: <span className="font-normal">{record.date}</span></p>
+                <p className="font-semibold py-0.5">Hours Spent: <span className="font-normal">{record.hours} Hours</span></p>
+                <p className="font-semibold py-0.5">Concept: <span className="font-normal">{record.concept}</span></p>
+                <ViewMoreButton onClick={() => handleViewMore(record)}/>
+              </ReusableCard>
+            ))}
+          </div>
          ) : ( <p className="text-center text-gray-600 py-4 italic">
           No learning records yet. Click “Note It” to add one.
           </p>)}
          
         </div>
-        
+        {openDetailModal && selectedRecord && (
+          <DetailModal
+          data={selectedRecord}
+          onClose={closeDetailModal}
+          fields={[
+          { key: "date", label: "Date" },
+          { key: "hours", label: "Hours Spent" },
+          { key: "category", label: "Category" },
+          { key: "technology", label: "Technology" },
+          { key: "concept", label: "Concept" },
+          { key: "topic", label: "Concept Mastered" },
+          { key: "description", label: "Concept Description" },
+    ]}
+          />
+        )}
       </div>
      </div>
   )
