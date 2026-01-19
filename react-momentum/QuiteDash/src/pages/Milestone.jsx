@@ -18,6 +18,8 @@ function Milestone() {
   const [selectedMilestoneRecord, setSelectedMilestoneRecord] = useState(null)
   const [openDetailModal, setOpenDetailModal] = useState(false)
 
+  //console.log(milestoneRecords);
+  
   const handleviewMore = (milestoneRecords) => {
   setSelectedMilestoneRecord(milestoneRecords)
   setOpenDetailModal(true)
@@ -41,7 +43,9 @@ function Milestone() {
       window.dispatchEvent(new Event("statsUpdated"));
     }, 200); */
   }
-
+  //sorting by date
+  milestoneRecords.sort((a, b) => new Date(a.date) - new Date(b.date))
+  
 
   return (
     <div className="h-screen bg-[#F3F4F6] p-4">

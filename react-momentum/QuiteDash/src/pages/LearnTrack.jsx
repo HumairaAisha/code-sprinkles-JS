@@ -45,12 +45,14 @@ const closeDetailModal = () => {
     
     const updatedRecords = [...records, {...newRecord, id:Date.now()}];
     setRecords(updatedRecords);
+    
+
     localStorage.setItem("learnRecords", JSON.stringify(updatedRecords));
     
     recalculateStats();
     
   }
-  
+  records.sort((a, b) => new Date(a.date) - new Date(b.date))
   
   /* const handleDelete = (id) => {
       removeRecord(id)

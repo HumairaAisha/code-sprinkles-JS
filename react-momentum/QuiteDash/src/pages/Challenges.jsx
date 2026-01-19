@@ -32,6 +32,7 @@ function Challenges() {
       recalculateStats()
 
   }
+  challengeRecords.sort((a, b) => new Date(a.date) - new Date(b.date))
   const handleViewMore = (challengeRecords) => {
     setSelectedChallengeRecord(challengeRecords)
     setOpenDetailModal(true)
