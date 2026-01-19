@@ -5,6 +5,7 @@ import StatsCard from "../components/StatsCard"
 import DashboardHeader from "./DashboardHeader"
 //import statData from "../components/data/stats"
 import Chart from "../components/data/Chart"
+import ChartComponent from "../components/data/ChartComponent"
 import { useContext } from "react"
 import { DashboardStatsContext } from "../CustomHook/DashboardStatsContext"
 
@@ -80,7 +81,9 @@ if (!storedStats || storedStats.length !== statData.length || !titlesMatch) {
          ))}
       </div>
     <div className="py-6">
+      
       <Chart/>
+      
     </div>
     </div>
   )
