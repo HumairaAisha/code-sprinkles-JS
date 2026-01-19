@@ -22,6 +22,7 @@ function Chart() {
         pointBackgroundColor: "#0F172A",
         backgroundColor:"#0F172A",
         borderColor: "#0F172A",
+        borderWidth: 1,
         cubicInterpolationMode: 'monotone',
         tension: 0.4,
       }
@@ -33,22 +34,40 @@ function Chart() {
   plugins: {
     legend: {
       display: true,
-    }
+    },
   },
+  
   scales: {
-    
     x: {
-      ticks: {
-        autoSkip: false,
-       
+      title: {
+      display: true, 
+      text: 'Weeks', 
+      color: '#0F172A', 
+      font: { 
+      size: 20,
+      weight: 'bold'
       }
+},
+      ticks: {
+        autoSkip: true,
+      },
+      
     },
     y: {
+      title: {
+          display: true, 
+          text: 'Confidence Level (0-1)',
+          color: '#0F172A', 
+         font: { 
+        size: 15,
+        weight: 'bold'
+    }
+   },
       beginAtZero: true,
       ticks: {
         stepSize: 2,
-        
-      }
+      },
+      
     }
  
 }

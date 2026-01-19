@@ -10,7 +10,7 @@ function ChartComponent() {
    
    
   return (
-    <div className=''>
+    <div className='h-screen'>
       <ResponsiveContainer width="100%" height="50%" aspect={300 / 80}>
          <LineChart width={500} height={200} data={DataCharts}>
          <CartesianGrid  />
