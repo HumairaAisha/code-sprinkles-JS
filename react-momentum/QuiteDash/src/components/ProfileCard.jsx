@@ -31,3 +31,4 @@ function ProfileCard({name, role, track, skill, joined, FocusArea}) {
 }
 
 export default ProfileCard
+
