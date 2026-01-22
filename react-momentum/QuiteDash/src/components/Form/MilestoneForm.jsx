@@ -53,10 +53,12 @@ function MilestoneForm({onAddMilestone, closeForm}) {
             name={"proudProgress"}
             label={"Proud Moment"}
             />
-         <InputFieldNum
+         <InputFieldNum 
          name={"confidenceLevel"}
          label={"Confidence Level (1–10) "}
          type={"number"}
+         min={1}
+         max={10}
          />
          
       </MyForm>
