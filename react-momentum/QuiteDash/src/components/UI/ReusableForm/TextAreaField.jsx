@@ -1,12 +1,12 @@
 import { useFormContext } from "react-hook-form"
 
-function TextAreaField({name, label, type, requiredMessage, ...rest}) {
+function TextAreaField({name, label, type, required,requiredMessage, ...rest}) {
   const {register, formState:{errors}} = useFormContext()
   return (
     <div className="flex flex-col">
       <div className="flex flex-col gap-2 py-2">
       <label htmlFor={name} className="font-semibold">{label}</label>
-      <textarea {...register(name, {required : requiredMessage, minLength: {
+      <textarea {...register(name, required ? {required : requiredMessage || "This field is requird" , minLength: {
         value: 20,
         message: "Field required more 20 charcters information"
       },
@@ -14,7 +14,7 @@ function TextAreaField({name, label, type, requiredMessage, ...rest}) {
       value:500,
       message:"Content has reached maximum limit of 200 characters"
     }
-    })} type={type || "text"} 
+    }: {})} type={type || "text"} 
       
       {...rest} 
       className="px-2 py-1.5 h-[100px] border border-gray-400 bg-gray-200 text-sm rounded"

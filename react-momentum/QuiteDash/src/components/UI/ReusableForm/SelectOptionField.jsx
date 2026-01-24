@@ -1,13 +1,13 @@
 import { useFormContext } from "react-hook-form"
 
-function SelectOptionField({name, label, options = [], requiredMessage, ...rest}) {
+function SelectOptionField({name, label, options = [], requiredMessage, required, ...rest}) {
   const { register, formState: {errors} } = useFormContext();
   return (
     
       <div className="flex flex-col gap-2">
         <label htmlFor={name} className="font-semibold">{label}</label>
 
-        <select {...register(name, {required: requiredMessage || "Select Option"})}
+        <select {...register(name, required ? {required: requiredMessage || "Select Option"} : {})}
         {...rest}
         className="py-1 border border-gray-400 bg-gray-200 text-sm rounded"
         >

@@ -2,6 +2,7 @@ import { useForm, FormProvider } from "react-hook-form"
 import SecondaryButton from "../SecondaryButton"
 
 function MyForm({ children, onSubmit}) {
+   
    const  methods  = useForm()
 
    const { handleSubmit } = methods
