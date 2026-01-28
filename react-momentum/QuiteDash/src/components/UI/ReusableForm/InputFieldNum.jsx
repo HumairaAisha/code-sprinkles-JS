@@ -1,13 +1,30 @@
 import { useFormContext } from "react-hook-form"
 
-function InputFieldNum({name, label, type, requiredMessage, ...rest}) {
-   const {register, formState: {errors}} = useFormContext()
+function InputFieldNum({name, label, type, requiredMessage, min, max, ...rest}) {
+   const {register, formState: {errors}, setValue} = useFormContext()
+
+    const handleChange = (event) => {
+      let value = event.target.value
+
+    if (value === '') {
+        setValue('')
+        return
+      }
+      value = Number(value)
+    /* if (max !== undefined && value > max) value = max
+    if (min !== undefined && value < min) value = min
+    setValue(name, value) */ 
+      }
+    
+   
+   
   return (
     <div className="flex flex-col">
       <div className="flex gap-2 py-2">
           <label htmlFor={name} className="font-semibold">{label}</label>
       <input type={type}
-      {...register(name, {required : requiredMessage || "This field is required"})}
+      {...register(name, {required : requiredMessage || "This field is required", min, max})}
+      onChange={handleChange}
       {...rest}
       className="p-1 w-[120px] h-[30px] border border-gray-400 bg-gray-200 text-sm rounded"
       />
