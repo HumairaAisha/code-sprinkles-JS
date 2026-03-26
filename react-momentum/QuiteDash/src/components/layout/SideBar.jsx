@@ -3,9 +3,9 @@ import { House,
    LayoutDashboard, 
    BookOpenCheck, 
    Trophy, File, Settings, 
-   CircleUserRound, ChevronRight, ChevronLeft, CircleCheckBig, Wrench, FolderOpen
+   CircleUserRound, ChevronRight, ChevronLeft, CircleCheckBig, Wrench, FolderOpen, Files
    } from 'lucide-react';
-
+import Sandbox from "../../assets/Sandbox1.png"
 
 function SideBar({isOpen, setIsOpen}) {
 
@@ -16,9 +16,9 @@ function SideBar({isOpen, setIsOpen}) {
          path: '/dashboard'
       },
       {
-         title: 'Learning Tracker',
+         title: 'Progress Tracker',
          icon : BookOpenCheck,
-         path: '/learn'
+         path: '/progress'
       },
       {
          title:'Challenge Journal',
@@ -35,11 +35,17 @@ function SideBar({isOpen, setIsOpen}) {
          icon: FolderOpen,
          path: '/projectHub'
       },
+      {
+         title: "Project Journal",
+         icon: Files,
+         path: '/projectJournal'
+      }
       /* {
          title: 'Resources',
          icon : File,
          path: '/resources'
       }, */
+      
       
    ]
    const menuItemsBottom = [
@@ -53,6 +59,7 @@ function SideBar({isOpen, setIsOpen}) {
          icon : CircleUserRound,
          path: '/profile'
       },
+      
    ]
 
    

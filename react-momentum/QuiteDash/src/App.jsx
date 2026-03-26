@@ -6,10 +6,20 @@ import Dashboard from './pages/Dashboard'
 import LearnTrack from "./pages/LearnTrack";
 import Milestone from "./pages/Milestone";
 import Resources from "./pages/Resources";
-import Profile from "./pages/Profile";
+import Profile from "./pages/profile/Profile";
 import Settings from "./pages/Settings";
 import Challenges from "./pages/Challenges";
 import ProjectHub from "./pages/ProjectHub";
+import ProjectJournal from "./pages/ProjectJournal";
+import LandingPage from "./pages/LandingPage/LandingPage";
+import About from "./pages/LandingPage/Components/About";
+import Features from "./pages/LandingPage/Components/Features";
+import Works from "./pages/LandingPage/Components/Works";
+import Login from "./components/Auth/Login";
+import SignUp from "./components/Auth/SignUp";
+
+
+
 
 
 
@@ -20,14 +30,23 @@ function App() {
     
    
     <Routes>
-      <Route path="/" element={<Navigate to="/dashboard" replace />} />
+      <Route path="/" element={<LandingPage/>}/>
+      <Route path="/about" element={<About/>}/>
+      <Route path="/features" element={<Features/>}/>
+      <Route path="/works" element={<Works/>}/>
+      <Route path="/login" element={<Login/>}/>
+      <Route path="/signup" element={<SignUp/>}/> 
+
+     {/*  <Route path="/" element={<Navigate to="/" replace />} /> */}
+
       <Route element={<Layout />}>
       <Route path="/dashboard" element={<Dashboard/>}/>
-      <Route path="/learn"  element={<LearnTrack/>}/>
+      <Route path="/progress"  element={<LearnTrack/>}/>
       <Route path="/milestone"  element={<Milestone/>}/>
       <Route path="/challenge" element={<Challenges/>}/>
       <Route path="/resources"  element={<Resources/>}/>
-      <Route path="/projectHub" element={<ProjectHub/>}/>
+      <Route path="/projectHub" element={<ProjectHub/>} />
+      <Route path="/projectJournal" element={<ProjectJournal/>}/>
       <Route path="/profile"  element={<Profile/>}/>
       <Route path="/settings"  element={<Settings/>}/>
       

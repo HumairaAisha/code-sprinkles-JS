@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 function Header({isOpen}) {
   const location = useLocation()
 
-  const pageTitle = {"/dashboard": "Dashboard", "/learn": "Learning Tracker", "/challenge" : "Challenge Journal", "/milestone": "Milestone","/projectHub": "Project Hub", "/projectJournal": "Project Journal", "/resources": "Resources", "/settings": "Settings", "/profile": "Profile"}
+  const pageTitle = {"/dashboard": "Dashboard", "/progress": "Progress Tracker", "/challenge" : "Challenge Journal", "/milestone": "Milestone","/projectHub": "Project Hub", "/projectJournal": "Project Journal", "/resources": "Resources", "/settings": "Settings", "/profile": "Profile"}
   const {pathname} = location
   const title = pageTitle[pathname] || "SandBox"
  
