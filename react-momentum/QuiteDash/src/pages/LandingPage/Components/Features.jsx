@@ -6,9 +6,9 @@ function Features() {
     <>
    
     <section id="features" className="scroll-m-8">
-      <div className="min-h-screen p-6 justify-center bg-sandbox-navy">
+      <div className="min-h-screen px-4 py-10 justify-center bg-sandbox-navy">
         <BadgeLabel title={"CORE FEATURES"}/>
-      <div className="py-8 max-w-6xl mx-auto w-full text-center">
+      <div className="py-6 max-w-6xl mx-auto w-full text-center">
         <h3 className="font-medium text-2xl md:text-4xl my-2 text-sandbox-ghost">Turn Effort into Evidence</h3>
         <p className='text-sandbox-ghost'> From daily logs to the big picture—every data point tells your story.</p>
       </div>
