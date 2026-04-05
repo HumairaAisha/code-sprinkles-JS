@@ -1,6 +1,7 @@
 import HeroCard from "../../../components/UI/HeroCard";
 import SandboxDashboard from "../../../assets/Screenshot 2026-02-18 214609.png"
 import ReusableCard from '../../../components/UI/ReusableCard';
+import BadgeLabel from "../../../components/UI/BadgeLabel";
 
 
 
@@ -10,10 +11,11 @@ function HeroSection() {
  const navigate = useNavigate()
   return (
    /*  #141B24 */
-      <section id='home' className='sm:py-24 px-6 md:pt-32 bg-sandbox-navy'>
+      <section id='home' className='sm:py-24 px-6 md:pt-36 bg-sandbox-navy'>
         
-       <div className="flex flex-col items-center justify-center gap-8 md:gap-16 max-w-7xl mx-auto">
-         <div className="px-4 text-center">
+       <div className="flex flex-col items-center justify-center max-w-7xl mx-auto">
+        <BadgeLabel title={"our purpose"}/>
+         <div className="px-4 text-center py-8">
           <h1 className='font-medium text-3xl md:text-3xl lg:text-5xl text-[#F3F4F6] animate-fade-up tracking-tight leading-tight'>
             Make Every Effort Count.
           </h1>
@@ -30,7 +32,7 @@ function HeroSection() {
      </div>
      </div>
      <section className='py-4 md:pt-15 md:px-6'>
-      <h2 className='font-semibold text-2xl md:text-3xl my-10 md:my-4 text-sandbox-ghost'>What We Believe</h2>
+      <h2 className='font-semibold text-2xl md:text-4xl my-10 md:my-4 text-sandbox-ghost text-center'>What We Believe</h2>
       <div className="duration-500 hover:scale-[1.05]">
 
       </div>
