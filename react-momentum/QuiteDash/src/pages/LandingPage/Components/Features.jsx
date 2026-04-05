@@ -1,4 +1,4 @@
-
+import BadgeLabel from '../../../components/UI/BadgeLabel';
 import { Activity, CodeXml, Sparkle, ShieldCheck } from 'lucide-react';
 
 function Features() {
@@ -7,7 +7,8 @@ function Features() {
    
     <section id="features" className="scroll-m-8">
       <div className="min-h-screen p-6 justify-center bg-sandbox-navy">
-      <div className="py-8 max-w-6xl mx-auto w-full">
+        <BadgeLabel title={"CORE FEATURES"}/>
+      <div className="py-8 max-w-6xl mx-auto w-full text-center">
         <h3 className="font-medium text-2xl md:text-4xl my-2 text-sandbox-ghost">Turn Effort into Evidence</h3>
         <p className='text-sandbox-ghost'> From daily logs to the big picture—every data point tells your story.</p>
       </div>
