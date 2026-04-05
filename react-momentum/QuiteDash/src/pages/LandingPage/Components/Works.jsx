@@ -1,4 +1,5 @@
 import TimelineStep from "../../LandingPage/TimelineStep";
+import BadgeLabel from "../../../components/UI/BadgeLabel";
 
 function Works() {
 
@@ -29,7 +30,8 @@ function Works() {
    <>
     <section id="how-it-works" className="scroll-mt-4">
       <div className="min-h-screen py-20 px-4 bg-sandbox-navy">
-        <div className="flex flex-col items-center text-center mb-16">
+        <BadgeLabel title={"The Workflow"} />
+        <div className="flex flex-col items-center text-center py-8">
           <h1 className="md:text-4xl font-semibold mb-3 text-sandbox-ghost">
             Engineered for Evolution
           </h1>
@@ -37,7 +39,7 @@ function Works() {
             From the first line of code to the final breakthrough <br /> see how Sandbox maps your journey in real-time.
           </p>
         </div>
-        <div className=" rounded-2xl p-10 shadow-lg">
+        <div className="rounded-2xl p-10 shadow-lg">
           {steps.map((step, index) => (
             <TimelineStep
               key={index}
