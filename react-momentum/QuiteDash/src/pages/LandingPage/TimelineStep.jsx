@@ -5,10 +5,10 @@ const Icons = {
    PencilLine, Terminal, Lightbulb , Rocket
 }
 
-function TimelineStep ({title, description, iconName, isLast}) {
+function TimelineStep ({title, description, iconName, number, isLast}) {
    const [isVisible, setIsVisible] = useState (false)
    const stepRef = useRef(null)
-   const IconComponent = Icons[iconName]
+   const IconComponent = iconName ? Icons[iconName] : null
 
    useEffect(() => {
     const observer = new IntersectionObserver(
@@ -46,7 +46,12 @@ function TimelineStep ({title, description, iconName, isLast}) {
       <div className={`relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 transition-all duration-500 ${
         isVisible ? 'border-blue-500 bg-slate-900 text-blue-500' : 'border-slate-700 bg-slate-900 text-slate-500'
       }`}>
-        <IconComponent size={20} />
+        {IconComponent ? (
+          <IconComponent size={20} />
+        ) : number !== undefined ? (
+          <span>{number}</span>
+        ) : null}
+        
       </div>
 
       {/* The Text Content */}
@@ -56,7 +61,7 @@ function TimelineStep ({title, description, iconName, isLast}) {
         }`}>
           {title}
         </h3>
-        <p className="mt-2 text-slate-400 leading-relaxed max-w-2xl">
+        <p className="mt-2 text-slate-400 leading-relaxed max-w-3xl whitespace-pre-line">
           {description}
         </p>
       </div>
