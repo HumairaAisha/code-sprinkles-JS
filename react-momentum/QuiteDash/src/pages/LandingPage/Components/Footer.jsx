@@ -12,10 +12,10 @@ function Footer() {
    ]
   return (
     <div className="bg-sandbox-navy border-y border-sandbox-ghost/10 text-sandbox-ghost">
-       <div className="md:flex gap-10 justify-between py-10 px-8">
+       <div className="md:flex gap-10 justify-between py-20 px-8">
          <div className="">
             <h1 className="text-sandbox-ghost text-2xl font-bold py-4 hover:cursor-pointer">Sandbox</h1>
-            <h4 className="max-w-2xl mx-auto text-sandbox-ghost">Sandbox is a developer-centric system designed to bridge the gap between learning and mastery — turning your quiet daily effort into a visible progress, ensuring your evolution as a developer is never left undocumented, and providing the structure for a lasting engineering identity.</h4>
+            <h4 className="max-w-xl mx-auto text-sandbox-ghost">Sandbox is a developer-centric system designed to bridge the gap between learning and mastery — turning your quiet daily effort into a visible progress, ensuring your evolution as a developer is never left undocumented, and providing the structure for a lasting engineering identity.</h4>
          </div>
          <div className="">
             <ul className="space-y-2 text-sandbox-ghost "> 
@@ -61,7 +61,7 @@ function Footer() {
   <p className="text-sm text-sandbox-ghost/80 mt-1">
     Built for the journey behind the skills.
   </p>
-<div className="flex gap-8 py-10 text-sm text-sandbox-ghost/70">
+<div className="flex gap-8 py-6 text-sm text-sandbox-ghost/70">
       <p>&copy; 2026 Sandbox</p>
    <div className="flex gap-10">
   <a href="#">Privacy</a>

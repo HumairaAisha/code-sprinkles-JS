@@ -1,3 +1,8 @@
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'framer-motion';
+
+import { fadeIn, popIn, slideLeft, slideUp } from "../../../animations/motion"
+
 
 import ValueCard from '../../../components/UI/ValueCard';
 import TimelineStep from "../../LandingPage/TimelineStep";
@@ -50,13 +55,25 @@ function About() {
         
       <div className="max-w-4xl mx-auto px-6 flex flex-col justify-center">
         <BadgeLabel title={"The Cataylst"} />
-      <h2 className="text-4xl md:text-4xl font-bold mt-4 text-sandbox-ghost">
+      <motion.h2
+      variants={popIn}
+      initial="initial"
+      whileInView="whileInView"
+      transition={{duration: 0.5}}
+      viewport={{once: false, amount: 0.5}}
+      className="text-4xl md:text-4xl font-bold mt-4 text-sandbox-ghost">
         Our Origin
-      </h2>
+      </motion.h2>
       {/* <div className="h-1 w-15 bg-sandbox-ghost mt-2 rounded-full"></div> */}
       </div>
       
-      <div className="max-w-5xl mx-auto md:py-10 px-4 space-y-8 md:text-lg text-slate-400 leading-relaxed">
+      <motion.div
+      variants={fadeIn}
+      initial="initial"
+         whileInView="whileInView"
+         transition={{duration: 0.5}}
+         viewport={{once: false, amount: 0.5}}
+      className="max-w-5xl mx-auto md:py-10 px-4 space-y-8 md:text-lg text-slate-400 leading-relaxed">
             <p className="text-lg md:text-xl my-4">
               Sandbox began as a response to a fundamental gap: progress in software development is often invisible.
             </p>
@@ -67,15 +84,15 @@ function About() {
             <p>
               Sandbox was born to turn the <code className="text-sandbox-ghost">"black box"</code> of the development process into a transparent map of growth.
             </p>
-          </div>
+          </motion.div>
           </div>
         
       
-      <div className='py-12 px-6 flex justify-center gap-2'>
-      </div>
+     
       {/* Behind the Build */}
-      <section className='py-8 animate-float'>
-        {/*   <div className='flex items-start py-1 px-1.5 max-w-5xl mx-auto'>
+      <section className='py-4'>
+        <div className='py-12 px-6 flex justify-center gap-2'>
+          {/*   <div className='flex items-start py-1 px-1.5 max-w-5xl mx-auto'>
           <p className=' bg-sandbox-card border border-sandbox-ghost/50 rounded-full py-1 px-3 mb-2 text-sandbox-ghost font-semibold font-mono tracking-widest uppercase'>The Narrative</p>
         </div> */}
         <div className='max-w-5xl mx-auto bg-sandbox-card px-6 md:px-10 py-10 rounded-2xl shadow-sm'>
@@ -83,12 +100,30 @@ function About() {
           <div className='flex items-start gap-4 mb-8'>
             <div className="h-14 w-1 bg-sandbox-ghost/70 mt-2 rounded-full"></div>
           <div>
-            <h2 className='text-3xl md:text-4xl font-bold text-sandbox-ghost leading-tight'>Behind the Build</h2>
-            <p className='text-sm md:text-base text-sandbox-ghost/70 italic'> A Note from the Founder</p>
+            <motion.h2
+            variants={popIn}
+            initial="initial"
+         whileInView="whileInView"
+         transition={{duration: 0.5}}
+         viewport={{once: false, amount: 0.5}}
+            className='text-3xl md:text-4xl font-bold text-sandbox-ghost leading-tight'>Behind the Build</motion.h2>
+            <motion.p 
+            variants={slideLeft}
+            initial="initial"
+         whileInView="whileInView"
+         transition={{duration: 0.5}}
+         viewport={{once: false, amount: 0.5}}
+            className='text-sm md:text-base text-sandbox-ghost/70 italic'> A Note from the Founder</motion.p>
           </div>
           </div>
           {/* Contents */}
-          <div className='space-y-6 text-sandbox-ghost'>
+          <motion.div 
+          variants={fadeIn}
+          initial="initial"
+         whileInView="whileInView"
+         transition={{duration: 0.8}}
+         viewport={{once: false, amount: 0.2}}
+          className='space-y-6 text-sandbox-ghost'>
             <p className='text-lg md:text-xl font-medium max-w-4xl'>I didn’t build Sandbox to prove I could code; I built it because I needed a place to see who I was becoming.</p>
             <div className='space-y-3'>
               <p>I was learning quietly, consistently—solving bugs, logging hours, pushing through confusion—but none of it felt visible. And when growth isn’t visible, doubt gets louder.</p>
@@ -109,7 +144,7 @@ function About() {
               <p>It isn't another productivity tool. It’s a system for documenting the journey, not just the destination. A place where every bug solved and every concept mastered becomes a proof of who you are becoming.</p>
             </div>
             <div className='flex gap-2 items-start pt-2'>
-              <div className="h-18 md:h-6 w-1 bg-sandbox-ghost/80 mt-2 rounded-full"></div>
+              <div className="h-18 md:h-8 w-0.5 bg-sandbox-ghost/80 mt-2 rounded-full"></div>
             <p className='text-lg md:text-xl font-semibold italic leading-snug mt-2'>From the first line of code to the final deployment, it’s built from lived experience—not assumptions.</p>
             </div>
             <div className='space-y-2'>
@@ -119,11 +154,18 @@ function About() {
               <p className='font-medium'>But it deserves to be seen.</p>
             </div>
             <p className='italic font-semibold text-lg pt-2'>—Built by a developer, for the journey.</p>
-          </div>
-          <div className='flex flex-col items-end mt-10 text-sandbox-ghost/90'>
+          </motion.div>
+          <motion.div
+          variants={slideUp}
+         initial="initial"
+         whileInView="whileInView"
+         transition={{duration: 0.5}}
+         viewport={{once: false, amount: 0.2}}
+           className='flex flex-col items-end mt-10 text-sandbox-ghost/90'>
             <h4 className='font-semibold text-lg'>Aisha Muhyiddeen Ahmad</h4>
             <p className=''>Founder, Sandbox</p>
-          </div>
+          </motion.div>
+        </div>
         </div>
         </section> 
 
@@ -131,7 +173,13 @@ function About() {
     <section>
     <div className='min-h-screen md:py-15 px-4 bg-sandbox-navy'>
       <BadgeLabel title={"The Blueprint"}/>
-      <h2 className='text-2xl md:text-4xl font-semibold text-sandbox-ghost py-8 text-center'>Where Progress Became a System</h2>
+      <motion.h2
+      variants={popIn}
+      initial="initial"
+      whileInView="whileInView"
+      transition={{duration: 0.4}}
+      viewport={{once: false, amount: 0.5}}
+      className='text-2xl md:text-4xl font-semibold text-sandbox-ghost py-8 text-center'>Where Progress Became a System</motion.h2>
       <div className='md:py-8'>
         {buildSteps.map((build, index) => (
           <TimelineStep key={index} {...build} 
@@ -146,14 +194,26 @@ function About() {
       <div className='pt-4 pb-15 max-w-5xl mx-auto flex flex-col items-center justify-center'>
         <BadgeLabel title={"The Standard"}/>
          <div className='py-4 px-6 flex flex-col justify-center'>
-            <h2 className='text-4xl md:text-4xl font-bold  text-sandbox-ghost'>Our Core Values</h2>
+            <motion.h2
+            variants={popIn}
+         initial="initial"
+         whileInView="whileInView"
+         transition={{duration: 0.3}}
+         viewport={{once: false, amount: 0.1}}
+            className='text-4xl md:text-4xl font-bold  text-sandbox-ghost'>Our Core Values</motion.h2>
           {/* <div className="h-1 w-12 bg-sandbox-ghost mt-2 rounded-full"></div> */}
          </div>
-         <div className='grid grid-cols-1 md:grid-cols-2 gap-10 px-4 pt-20 hover-lift'>
+         <motion.div 
+         variants={popIn}
+         initial="initial"
+         whileInView="whileInView"
+         transition={{duration: 0.3}}
+         viewport={{once: false, amount: 0.1}}
+         className='grid grid-cols-1 md:grid-cols-2 gap-10 px-4 pt-8 md:pt-20 hover-lift'>
             {steps.map((step, index) => (
                <ValueCard key={index} {...step}/>
             ))}
-         </div>
+         </motion.div>
 
          
       </div>
