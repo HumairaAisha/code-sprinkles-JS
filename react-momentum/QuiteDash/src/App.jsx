@@ -31,9 +31,9 @@ function App() {
    
     <Routes>
       <Route path="/" element={<LandingPage/>}/>
-      <Route path="/about" element={<About/>}/>
+      {/* <Route path="/about" element={<About/>}/>
       <Route path="/features" element={<Features/>}/>
-      <Route path="/works" element={<Works/>}/>
+      <Route path="/works" element={<Works/>}/> */}
       <Route path="/login" element={<Login/>}/>
       <Route path="/signup" element={<SignUp/>}/> 
 
