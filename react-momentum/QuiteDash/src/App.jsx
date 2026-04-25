@@ -12,9 +12,6 @@ import Challenges from "./pages/Challenges";
 import ProjectHub from "./pages/ProjectHub";
 import ProjectJournal from "./pages/ProjectJournal";
 import LandingPage from "./pages/LandingPage/LandingPage";
-import About from "./pages/LandingPage/Components/About";
-import Features from "./pages/LandingPage/Components/Features";
-import Works from "./pages/LandingPage/Components/Works";
 import Login from "./components/Auth/Login";
 import SignUp from "./components/Auth/SignUp";
 
