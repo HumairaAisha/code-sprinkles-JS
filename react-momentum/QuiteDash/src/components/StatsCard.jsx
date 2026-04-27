@@ -37,7 +37,7 @@ function StatsCard({id, title, notes, value, auto}) {
   return (
     <div className="px-4">
       {/* <h2>{id}</h2> */}
-      <p className="font-bold pt-1.5 text-3xl text-[#0F172A]">{count}</p>
+      <p className="font-bold pt-1.5 text-3xl text-sandbox-navy">{count}</p>
       <h2 className="font-semibold text-gray-500">
         {title}
         </h2>
@@ -45,14 +45,14 @@ function StatsCard({id, title, notes, value, auto}) {
        
        <div className="flex gap-4 py-3">
         {auto ? (
-        <button disabled className="px-2 py-1 bg-gray-300 rounded-full text-[#1F2937] cursor-not-allowed text-xs">
+        <button disabled className="px-2 py-1 bg-gray-300 rounded-full text-sandbox-card cursor-not-allowed text-xs">
           Auto Update
         </button>
        ) : (
         <>
-        <button className="px-1.5 bg-[#1F2937] rounded-full text-white hover:cursor-pointer"
+        <button className="px-1.5 bg-sandbox-navy rounded-full text-white hover:cursor-pointer"
          onClick={increments}>+</button>
-        <button className="px-2 bg-[#1F2937] rounded-full text-white hover:cursor-pointer"
+        <button className="px-2 bg-sandbox-navy rounded-full text-white hover:cursor-pointer"
         onClick={decrement}>-</button>
         </>
        )}
