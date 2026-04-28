@@ -6,7 +6,7 @@ import PrimaryButton from "../components/UI/PrimaryButton"
 import ReusableCard from "../components/UI/ReusableCard"
 import Modal from "../components/Form/Modal"
 import useLocalStorage from "../components/data/useLocalStorage"
-import SandboxLogo from "..//assets/SandboxLogo.png"
+import SandboxLogo from "..//assets/Sandbox1.png"
 
 import ProjectForm from "../components/Form/ProjectForm"
 
@@ -25,19 +25,18 @@ function ProjectHub() {
     console.log("Updated project records:", updateProjectRecord)
     setProjectRecords(updateProjectRecord)
    
-    localStorage.setItem("projectRecord", JSON.stringify(updateProjectRecord))
     recalculateStats()
   }
 
 
   return (
-    <div className='h-screen bg-[#F3F4F6] p-4'>
-      <div className="bg-[#0A1A29] rounded-lg text-white p-1.5 m-2">
+    <div className='h-screen bg-sandbox-ghost p-4'>
+      <div className="bg-sandbox-navy rounded-lg text-sandbox-ghost p-2 m-2">
         <Heading title={"Your Project Footprints"}
         text={"Capture the ideas you’ve brought to life, the features you’ve shaped, and the experiments that pushed you grow"}
         tagline={"Each project captures decisions made, skills applied, and progress earned over time."}
         />
-        <PrimaryButton onClick={openProjectModal}/>
+        <PrimaryButton label={"+ Add"} onClick={openProjectModal}/>
            {openModal && (
             <Modal onClose={closeProjectModal}>
               <ProjectForm key="project-form"
@@ -80,7 +79,7 @@ function ProjectHub() {
 
           </div>
         ): (
-          <p className="text-center text-gray-600 py-4 italic">No projects records yet. Click “Note It” to add one.</p>
+          <p className="text-center text-gray-600 py-4 italic">No projects added yet. Click “Add” to note one.</p>
         )}
       </div>
     </div>
