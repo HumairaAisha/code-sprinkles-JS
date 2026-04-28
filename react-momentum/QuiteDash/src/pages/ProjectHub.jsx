@@ -51,8 +51,8 @@ function ProjectHub() {
           <ReusableCard key={projectRecord.id}>
             <div className="relative w-full h-48 overflow-hidden rounded">
               <img src={projectRecord.image || SandboxLogo} alt="Project Image"/>
-            <div className="absolute inset-0 top-0 opacity-0 hover:opacity-90 bg-[#0A1A29] transition-opacity duration-300 flex flex-col justify-center items-center rounded">
-            <span className="font-bold text-white text-xl">{projectRecord.projectName}</span>
+            <div className="absolute inset-0 top-0 opacity-0 hover:opacity-90 bg-sandbox-navy transition-opacity duration-300 flex flex-col justify-center items-center rounded">
+            <span className="font-bold text-sandbox-ghost text-xl">{projectRecord.projectName}</span>
              
             <div className="flex gap-4 py-4">
               <a href={projectRecord.demoUrl} 
@@ -60,14 +60,14 @@ function ProjectHub() {
             rel="noopener noreferrer"
             className="font-normal text-blue-500 hover:underline"
             > 
-            <button className="bg-[#F3F4F6] text-[#0A1A29] font-medium rounded py-2 px-1.5 cursor-pointer">View Demo</button>
+            <button className="bg-sandbox-ghost text-sandbox-navy font-medium rounded py-2 px-1.5 cursor-pointer">View Demo</button>
             </a>
              
             <a href={projectRecord.repoUrl} 
             target="_blank"
             rel="noopener noreferrer"
             className=""
-            > <button className="bg-[#F3F4F6] text-[#0A1A29] font-medium rounded py-2 px-1.5 cursor-pointer">View Repo</button> </a>
+            > <button className="bg-sandbox-ghost text-sandbox-navy font-medium rounded py-2 px-1.5 cursor-pointer">View Repo</button> </a>
             </div>
             </div>
             
