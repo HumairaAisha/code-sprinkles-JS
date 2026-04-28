@@ -7,7 +7,6 @@ import ReusableCard from "../components/UI/ReusableCard"
 import Modal from "../components/Form/Modal"
 import useLocalStorage from "../components/data/useLocalStorage"
 import SandboxLogo from "..//assets/Sandbox1.png"
-
 import ProjectForm from "../components/Form/ProjectForm"
 
 function ProjectHub() {
@@ -46,16 +45,16 @@ function ProjectHub() {
       </div>
       <div className="py-6">
         {projectRecords.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-y-6 gap-x-4 py-4 p-2"> 
+          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-y-6 gap-x-8 p-4"> 
           {projectRecords.map((projectRecord) => (
 
           <ReusableCard key={projectRecord.id}>
-            <div className="relative">
+            <div className="relative w-full h-48 overflow-hidden rounded">
               <img src={projectRecord.image || SandboxLogo} alt="Project Image"/>
             <div className="absolute inset-0 top-0 opacity-0 hover:opacity-90 bg-[#0A1A29] transition-opacity duration-300 flex flex-col justify-center items-center rounded">
             <span className="font-bold text-white text-xl">{projectRecord.projectName}</span>
              
-            <div className="flex gap-4 py-6">
+            <div className="flex gap-4 py-4">
               <a href={projectRecord.demoUrl} 
             target="_blank"
             rel="noopener noreferrer"
@@ -68,7 +67,7 @@ function ProjectHub() {
             target="_blank"
             rel="noopener noreferrer"
             className=""
-            > <button className="bg-[#F3F4F6] text-[#0A1A29] font-medium rounded py-2 px-1.5  cursor-pointer">View Repo</button> </a>
+            > <button className="bg-[#F3F4F6] text-[#0A1A29] font-medium rounded py-2 px-1.5 cursor-pointer">View Repo</button> </a>
             </div>
             </div>
             
