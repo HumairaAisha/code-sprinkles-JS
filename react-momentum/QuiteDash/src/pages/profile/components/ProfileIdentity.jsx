@@ -28,11 +28,15 @@ function ProfileIdentity() {
          <div className="flex gap-2 flex-wrap items-center">
          <p className="text-sm">Frontend Engineer</p>
          <span className="text-sandbox-navy/60">·</span>
-         <span className="text-xs bg-sandbox-navy/10 text-sandbox-navy px-2 py-0.5 rounded-full">
+         <span className="text-xs bg-sandbox-navy/10 text-sandbox-navy px-2 py-0.5 rounded-md">
            System Design
          </span>
+         <span className="text-sandbox-navy/60">·</span>
+         <span className="text-xs bg-sandbox-navy/10 text-sandbox-navy px-2 py-0.5 rounded-md">
+           Mid-Level
+         </span>
          </div>
-         <p className="text-sm">Joined  <span>September 2025</span></p>
+         
         </div>
          </div>
          </div>
@@ -41,7 +45,7 @@ function ProfileIdentity() {
          <button className="hidden md:flex justify-end text-sandbox-navy rounded font-semibold hover:cursor-pointer mb-2">Edit</button>
          <div className="flex justify-between py-1">
             <p className="text-sm">Total Projects</p>
-            <p className="text-sm">10</p>
+            <p className="text-sm">5</p>
          </div>
          <div className="flex gap-8 justify-between items-center">
             <p className="text-sm">View Project</p>
@@ -51,7 +55,7 @@ function ProfileIdentity() {
          </div>
       </div>
         </div>
-      <div className="py-4 md:py-2">
+      <div className="pt-8 md:py-2">
       
          <SocialLinks/>
          <p className="text-sm text-center text-gray-500">Joined  <span>September 2025</span></p>
