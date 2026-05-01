@@ -1,7 +1,7 @@
 import statData from "./data/stats"
 function MyJourney() {
   
-  const milestone = JSON.parse(localStorage.getItem("sandBox:milestoneRecord")) || []
+  const milestone = JSON.parse(localStorage.getItem("sandbox:milestoneRecord")) || []
 
   // Read the values StatsCard already saved
   const stats = statData.map((stat) => {
@@ -14,7 +14,7 @@ function MyJourney() {
 
   return (
     <div className="px-4 py-4 bg-sandbox-ghost">
-      <h2 className="font-semibold text-xl my-2">My Growth Story</h2>
+      <h2 className="font-semibold text-xl my-2">The Journey</h2>
 
       <div className="flex gap-3">
         {stats.filter(stat => stat.auto === true)
