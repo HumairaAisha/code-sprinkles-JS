@@ -18,7 +18,7 @@ function NavBar() {
    ]
   
   return (
-    <div className="flex justify-between py-3 px-6 fixed top-0 left-0 right-0 bg-sandbox-navy z-10">
+    <div className="flex justify-between py-4 px-6 fixed top-0 left-0 right-0 bg-sandbox-navy z-10">
      
       <button onClick={() => {navigate("/")}} className="font-semibold text-2xl hover:cursor-pointer text-sandbox-ghost">Sandbox</button>
      
@@ -30,13 +30,13 @@ function NavBar() {
       <HashLink 
       smooth 
       to={menu.link}
-      className="hover:cursor-pointer hover:bg-sandbox-card hover:text-sandbox-ghost/70 p-1.5 rounded-md">
+      className="hover:cursor-pointer hover:text-sandbox-ghost/70 p-1.5 rounded-md">
       {menu.title}
     </HashLink>
          </li>
       ))}
-      <button className="hover:cursor-pointer font-semibold text-sandbox-navy bg-sandbox-ghost py-1 px-2 rounded-md" onClick={() => {navigate("/login")}}>Login</button>
      </ul>
+     <button className="hidden md:flex hover:cursor-pointer font-semibold text-sandbox-navy bg-sandbox-ghost py-1 px-2 rounded-md" onClick={() => {navigate("/login")}}>Login</button>
      
      {/* mobile view */}
      <div className="md:hidden ">
