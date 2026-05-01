@@ -8,6 +8,7 @@ import PrimaryButton from "../../../components/UI/PrimaryButton"
 
 function ProfileIdentity() {
    const navigate = useNavigate()
+   const projectsCounts = JSON.parse(localStorage.getItem("sandbox:projectRecord")) || []
 
   return (
     
@@ -45,7 +46,7 @@ function ProfileIdentity() {
          <button className="hidden md:flex justify-end text-sandbox-navy rounded font-semibold hover:cursor-pointer mb-2">Edit</button>
          <div className="flex justify-between py-1">
             <p className="text-sm">Total Projects</p>
-            <p className="text-sm">5</p>
+            <p className="text-sm">{projectsCounts.length}</p>
          </div>
          <div className="flex gap-8 justify-between items-center">
             <p className="text-sm">View Project</p>

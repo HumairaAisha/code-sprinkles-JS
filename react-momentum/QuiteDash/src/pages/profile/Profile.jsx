@@ -12,7 +12,7 @@ function Profile() {
     <div className="min-h-screen w-full px-6 py-4">
      <div className="flex justify-end p-4">
       <button onClick={openSnapshotModal}
-      className="bg-sandbox-navy text-sandbox-ghost px-2 py-1 rounded hover:cursor-pointer">My Growth Story</button>
+      className="bg-sandbox-navy text-sandbox-ghost px-2 py-1 rounded hover:cursor-pointer">View My Journey</button>
       {openSnapshot && (
          <Modal onClose={closeSnapshotModal}>
         <MyJourney />
