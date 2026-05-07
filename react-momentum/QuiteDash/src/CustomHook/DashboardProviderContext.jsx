@@ -3,8 +3,6 @@ import statData from "../components/data/stats";
 import { DashboardStatsContext } from "./DashboardStatsContext";
 import useLocalStorage from "../components/data/useLocalStorage";
 
-
-
 export function DashboardStatsProvider({ children }) {
   const [learnRecords, setLearnRecords] = useLocalStorage("learnRecords", []);
   const [challengeRecords, setChallengeRecords] = useLocalStorage("challengeRecords", []);
@@ -26,12 +24,9 @@ export function DashboardStatsProvider({ children }) {
      setStats(updatedStats);
     }, [learnRecords, challengeRecords, projectRecords])
 
-
-  // auto-recalculate when any record changes
-
   return (
     <DashboardStatsContext.Provider value={{ stats, 
-      learnRecords, setLearnRecords,       // ← expose these
+      learnRecords, setLearnRecords,       
       challengeRecords, setChallengeRecords,
       projectRecords, setProjectRecords,
      }}>
