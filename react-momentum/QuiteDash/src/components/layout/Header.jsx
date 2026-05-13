@@ -1,9 +1,9 @@
-import { Settings,Bell } from 'lucide-react';
+import { Settings,Bell, Menu } from 'lucide-react';
 import { FaUser } from "react-icons/fa"
 import { useLocation } from 'react-router-dom';
 
 
-function Header({isOpen}) {
+function Header({isOpen, onMenuClick}) {
   const location = useLocation()
 
   const pageTitle = {"/dashboard": "Dashboard", "/progress": "Progress Tracker", "/challenge" : "Challenge Journal", "/milestone": "Milestone","/projectHub": "Project Hub", "/projectJournal": "Project Journal", "/resources": "Resources", "/settings": "Settings", "/profile": "Profile"}
@@ -11,23 +11,19 @@ function Header({isOpen}) {
   const title = pageTitle[pathname] || "SandBox"
  
   return (
-    <header className={`${isOpen ? "w-[calc(100%-13rem)]" : "w-[calc(100%-4rem)]"} h-12 fixed top-0 z-30 hidden md:flex-2 border-b-* border-b border-b-[#0F172A] bg-[#F3F4F6]`}>
-      <div className="">
-     <div className='hidden md:flex justify-between p-2'>
-      <h1 className='font-bold md:text-2xl text-sandbox-navy px-2'>{title}</h1>
-       <div className='flex gap-2'>
-        <div className='text-sandbox-navy pt-2'>
-          <Bell />
-        </div>
-        <div className='text-sandbox-navy pt-2'>
-          <Settings />
-        </div>
-        <div className='text-sandbox-ghost bg-sandbox-navy rounded-full p-2 text-lg'>
-          <FaUser />
-        </div>
+    <header className={`w-full ${isOpen ? "md:w-[calc(100%-13rem)]" : "md:w-[calc(100%-4rem)]"} h-12 fixed top-0 z-30 md:flex-2 border-b-* border-b border-b-[#0F172A] bg-[#F3F4F6]`}>
+      <div className="flex justify-between items-center p-2 h-full">
+     <div className='flex items-center gap-2'>
+      <button onClick={onMenuClick} className="md:hidden text-sandbox-navy hover:cursor-pointer">
+            <Menu />
+          </button>
+      <h1 className='font-bold text-lg md:text-xl text-sandbox-navy px-2'>{title}</h1>
+      </div>
+       <div className='hidden md:flex gap-2'>
+        <Bell/> <Settings/> <FaUser/>
       </div>
      </div>
-      </div>
+    
     </header>
   )
 }
