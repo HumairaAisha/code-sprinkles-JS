@@ -3,11 +3,17 @@ import { House,
    LayoutDashboard, 
    BookOpenCheck, 
    Trophy, File, Settings, 
-   CircleUserRound, ChevronRight, ChevronLeft, CircleCheckBig, Wrench, FolderOpen, Files
+   CircleUserRound, ChevronRight, ChevronLeft, CircleCheckBig, Wrench, FolderOpen, Files,
+   Menu, X 
    } from 'lucide-react';
 import Sandbox from "../../assets/Sandbox1.png"
 
-function SideBar({isOpen, setIsOpen}) {
+
+
+function SideBar({ isOpen, setIsOpen, mobileNavOpen, setMobileNavOpen }) {
+
+   /* const [nav, setNav] = useState(false)
+   const handleNavButton = () => setNav(!nav) */
 
    const menuItems = [
       {
@@ -65,12 +71,14 @@ function SideBar({isOpen, setIsOpen}) {
    
   return (
     <div>
-      <div className={`${isOpen ? "w-52" : "w-16"} h-full fixed top-0 left-0 z-20 bg-[#0A1A29] text-white transition duration-150 ease-in-out`}>
-         <div>
-            {isOpen && <h1 className='font-bold md:text-2xl border-b-* border-b border-b-[#F3F4F6] p-2'>SandBox</h1>}
-         </div>
-       <div className='flex items-start'>
-           <button onClick={() => setIsOpen(!isOpen)} className='text-white  hover:cursor-pointer hover:bg-[#F3F4F6] hover:rounded-2xl hover:text-[#0F172A]'>
+   <div className='hidden md:flex'>
+         <div className={`
+        hidden md:flex flex-col ${isOpen ? 'w-52' : 'w-16'} h-full fixed top-0 left-0 z-20 bg-sandbox-navy text-sandbox-ghost transition-all duration-150 ease-in-out`}>
+          <div className='flex justify-between p-2'>
+            {isOpen && <h1 className='font-bold md:text-2xl'>SandBox</h1>}
+         
+      
+           <button onClick={() => setIsOpen(!isOpen)} className='text-white  hover:cursor-pointer hover:bg-sandbox-ghost hover:rounded-2xl hover:text-sandbox-navy'>
             {isOpen ? <ChevronLeft /> : <ChevronRight  />}
          </button>
        </div>
@@ -92,6 +100,50 @@ function SideBar({isOpen, setIsOpen}) {
          </div>
       </nav>
       </div>
+   </div>
+
+   {/* Mobile menu slide in drawer */}
+   {mobileNavOpen && (
+      <div className='fixed inset-0 z-50 bg-black/50 md:hidden'
+      onClick={() => setMobileNavOpen(false)}>
+
+         <div className={`fixed top-0 left-0 z-40 h-full w-64 bg-sandbox-navy text-sandbox-ghost flex flex-col transition-transform duration-200 ease-in-out md:hidden
+        ${mobileNavOpen ? 'translate-x-0' : '-translate-x-full'}
+      `}>
+         {/* Header with page title and close button */}
+         <div className='flex items-center justify-between p-3 border-b border-sandbox-ghost/20'>
+            <h1 className='text-lg'>Sandbox</h1>
+            <button onClick={() => setMobileNavOpen(false)}>
+               <X className='hover:cursor-pointer'/>
+            </button>
+         </div>
+      <nav>
+         {menuItems.map((item, index) => (
+            <NavItem
+            key={index}
+            icon={item.icon}
+            title={item.title}
+            path={item.path}
+            showTitle={true}
+            onClick={() => setMobileNavOpen(false)}
+            />
+         ))}
+      </nav>
+         <div>
+            {menuItemsBottom.map((item, index) => (
+              <NavItem  key={index}
+              icon={item.icon}
+              title={item.title}
+              path={item.path}
+              showTitle={true}
+              onClick={() => setMobileNavOpen(false)}
+              />
+            ))}
+         </div>
+         </div>
+      </div>
+   )}
+   
     </div>
       
   )
