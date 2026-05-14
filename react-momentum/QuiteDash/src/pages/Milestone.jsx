@@ -48,7 +48,7 @@ function Milestone() {
   
 
   return (
-    <div className="h-screen bg-sandbox-ghost p-4">
+    <div className="min-h-screen bg-sandbox-ghost p-4">
       <div className="bg-sandbox-navy rounded-lg text-sandbox-ghost p-2 m-2">
        <Heading title={"Your Milestone Reflections"}
        text={"Pause, look back, and see how far you've come beyond the task and timelines."}
