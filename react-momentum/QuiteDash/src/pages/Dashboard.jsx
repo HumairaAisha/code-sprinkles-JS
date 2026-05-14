@@ -68,23 +68,19 @@ if (!storedStats || storedStats.length !== statData.length || !titlesMatch) {
 
    
   return (
-    <div className="px-8 py-6 w-full h-full bg-[#F3F4F6] ">
+    <div className="px-8 py-6 w-full min-h-screen bg-sandbox-ghost ">
      
       {/*  <Card /> */}
         <DashboardHeader />
  
-      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-y-6 gap-x-4 py-4">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-y-6 gap-x-4 py-4">
          {stats.map((stat) => (
-            <div key={stat.id} className="rounded-lg bg-gray-50 shadow hover:shadow-[#0F172A] hover:cursor-pointer">
+            <div key={stat.id} className="rounded-lg bg-gray-50 shadow hover:shadow-sandbox-card hover:cursor-pointer">
                <StatsCard id={stat.id} title={stat.title} value={stat.value} notes={stat.notes} auto={stat.auto}/>
             </div>
          ))}
       </div>
-    <div className="py-6">
-      
-      <Chart/>
-      
-    </div>
+    
     </div>
   )
 }
