@@ -87,9 +87,9 @@ function Education() {
                <div className="flex gap-2">
                 <div className="bg-[#3c4a69] w-0.5 h-12 my-1.5"></div>
                 <div className="flex justify-between gap-4">
-                  <div>
+                  <div className="flex flex-col">
               <p>{item.experience}</p>
-              <div className="flex justify-between py-1.5 gap-10">
+              <div className="flex justify-between py-1.5 gap-10 w-full">
               <p>{item.startYear} - {item.endYear}</p>
               <ActionsButton actions={[
                   {label: "Edit", type: "ghost", icon:Pencil, onClick: () => openEditForm(item)},
@@ -126,7 +126,7 @@ function Education() {
    <ConfirmModal
    isOpen={isconfirmOpen}
    title={"Delete Experience"}
-   message={`Are you sure you want to delete " ${itemToDelete?.experience}"?`}
+   message={`Are you sure you want to delete "${itemToDelete?.experience}"?`}
    confirmText={"Delete"}
    type="danger"
    onCancel={handleCancelDelete}
