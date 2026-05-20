@@ -11,6 +11,12 @@ function SkillGroup({label, items, variant, onAddSkill}) {
 
    const showInlineInput = () => setShowInput(true)
 
+   const handleChange = (e) => {
+      const value = e.target.value
+      const capitalize = value.charAt(0).toUpperCase() + value.slice(1)
+      setNewSkill(capitalize)
+   }
+
    const handleAdd = () => {
       
       const trimmed = newSkill.trim()
@@ -60,7 +66,7 @@ function SkillGroup({label, items, variant, onAddSkill}) {
         <div className="relative flex items-center w-fit">
           <input
          type="text"
-         onChange={(event) => setNewSkill(event.target.value)}
+         onChange={handleChange}
          placeholder="Add new skill"
          value={newSkill}
          className="text-xs px-3 py-1 border border-gray-300 rounded-full focus:outline-none focus:border-sandbox-navy min-w-[160px] pr-11"
