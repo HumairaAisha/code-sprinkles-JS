@@ -1,9 +1,9 @@
 import ActionsButton from "./ActionsButton"
 import { useState } from "react";
-import { Check } from 'lucide-react';
+import { Check, X} from 'lucide-react';
 
 
-function SkillGroup({label, items, variant, onAddSkill}) {
+function SkillGroup({label, items, variant, onAddSkill, onDeleteSkill}) {
    const [showInput, setShowInput] = useState(false)
    const [newSkill, setNewSkill] = useState("")// to add new
 
@@ -40,24 +40,30 @@ function SkillGroup({label, items, variant, onAddSkill}) {
    const isLimit = (items ?? []).length >= Max_Skill;
 
   return (
-    <div className="flex flex-col"> 
+    <div className="flex flex-col w-full"> 
      <div className="flex items-center justify-between">
        <div className="flex items-center gap-3 flex-wrap">
       <p className="text-sm text-gray-800 font-semibold">{label}</p>
-         <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-2 relative">
          {(items ?? []).map((item) => (
-            <span key={item} className={`text-xs px-2 py-0.5 rounded-full ${variant === "primary" ? "bg-sandbox-navy/10 text-sandbox-navy" : "bg-gray-200 text-gray-500"}`}>
+            <span key={item} className={`flex gap-1 text-xs px-2 py-0.5 rounded-full ${variant === "primary" ? "bg-sandbox-navy/10 text-sandbox-navy" : "bg-gray-200 text-gray-500"}`}>
                {item}
+               <button onClick={() => onDeleteSkill(item)} className="hover:cursor-pointer">
+                  <X size={14} />
+               </button>
             </span>
          ))}
       </div>
-    
-     
-      </div>
       
-      <ActionsButton actions={[
+     
+        
+      </div>
+      <div className="ml-auto">
+         <ActionsButton 
+      actions={[
       {label: "+", type:"ghost", onClick: showInlineInput, disabled:isLimit}
       ]}/>
+      </div>
      </div>
      {isLimit && (<p>Maximum of {Max_Skill} skills reached</p>)}
 
