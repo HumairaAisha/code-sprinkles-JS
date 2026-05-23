@@ -10,6 +10,7 @@ import ViewMoreButton from "../components/UI/ViewMoreButton"
 import LearnForm from "../components/Form/LearnForm"
 import Pagination from "../components/UI/Pagination"
 import toast from "react-hot-toast"
+import ConfirmModal from "../components/UI/ConfirmModal"
 
 function LearnTrack() {
   
@@ -44,6 +45,18 @@ const closeDetailModal = () => {
   const openEditLearningForm = (item) => {
     setIsEditing(item)
     setOpenModal(true)
+    closeDetailModal()
+  }
+
+  const openDeleteConfirmation = (item) => {
+    setconfirmOpen(true)
+    setItemToDelete(item)
+    closeDetailModal()
+  }
+
+  const handleCancelDelete = () => {
+    setItemToDelete(null)
+    setconfirmOpen(false)
   }
 
    const {learnRecords: records, setLearnRecords: setRecords} = useContext(DashboardStatsContext)
@@ -55,13 +68,19 @@ const closeDetailModal = () => {
   }
 
   const handleEdit = (updatedRecord) => {
-    setRecords((learn) => [...learn, {...updatedRecord, id: Date.now()}])
+    setRecords((learn) => learn.map((item) => (
+      item.id === isEditing?.id ? {...updatedRecord, id: item.id} : item)
+    )) 
     toast.success("Update Successful")
     closeLearningTrackerForm()
   }
 
   const handleConfrimDelete = () => {
-    setRecords((learn) => learn.filter((item) => item.id !== ))
+    setRecords((learn) => learn.filter((item) => item.id !== itemToDelete.id))
+    setItemToDelete(null)
+    setconfirmOpen(false)
+    toast.success("Delete Successful")
+
   }
   const sortedLearnTracker = [...records].sort((a, b) => new Date(a.date) - new Date(b.date))
   
@@ -89,7 +108,8 @@ const closeDetailModal = () => {
              {openModal && (
               <Modal onClose={closeLearningTrackerForm}>
                 <LearnForm key="learning-form"
-                onAddRecord={handleNewRecords} closeForm={closeLearningTrackerForm}/> 
+                onAddRecord={isEditing ? handleEdit : handleNewRecords} closeForm={closeLearningTrackerForm}
+                initialData = {isEditing} /> 
               </Modal>
              )}
         </div>
@@ -101,8 +121,10 @@ const closeDetailModal = () => {
               <ReusableCard key={record.id}>
                 <p className="font-semibold py-0.5">Date: <span className="font-normal">{record.date}</span></p>
                 <p className="font-semibold py-0.5">Hours Spent: <span className="font-normal">{record.hours} Hours</span></p>
-                <p className="font-semibold py-0.5">Concept: <span className="font-normal">{record.concept}</span></p>
+                <p className="font-semibold py-0.5">Concept Mastered: <span className="font-normal">{record.topic}</span></p>
                 <ViewMoreButton onClick={() => handleViewMore(record)}/>
+
+                  
               </ReusableCard>
             ))}
           </div>
@@ -115,22 +137,36 @@ const closeDetailModal = () => {
          onPageChange={setCurrentPage}
          />
         </div>
+        
         {openDetailModal && selectedRecord && (
-          <DetailModal
+          <DetailModal className="min-w-md"
           data={selectedRecord}
           onClose={closeDetailModal}
           fields={[
           { key: "date", label: "Date" },
           { key: "hours", label: "Hours Spent" },
+          {key: "topic", label: "Concept Mastered"},
           { key: "category", label: "Category" },
-          { key: "technology", label: "Technology" },
-          { key: "focus", label: "Focus Area" },
+          { key: "technology", label: "Focus Area" },
+          { key: "concept", label: "Concept" },
           { key: "outcome", label: "key outcome" },
-          { key: "notes", label: "Notes / Description" },
+          { key: "description", label: "Notes / Description" },
     ]}
+    onEdit={() => openEditLearningForm(selectedRecord)}
+    onDelete={() => openDeleteConfirmation(selectedRecord)}
           />
         )}
       </div>
+      <ConfirmModal
+                  isOpen={confirmOpen}
+                  title={`Delete "${itemToDelete?.concept}"`}
+                  message={`Are you sure you want to delete`}
+                  confirmText={"Delete"}
+                  cancelText={"Cancel"}
+                  type="danger"
+                  onConfirm={handleConfrimDelete}
+                  onCancel={handleCancelDelete}
+        />
      </div>
   )
 }
