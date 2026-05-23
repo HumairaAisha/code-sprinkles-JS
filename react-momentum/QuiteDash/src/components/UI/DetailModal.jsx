@@ -1,17 +1,25 @@
 import {X} from  'lucide-react'
-function DetailModal({data, fields, onClose}) {
+import ActionsButton from './ActionsButton'
+import { Pencil, Trash2 } from 'lucide-react';
+function DetailModal({data, fields, onClose, onEdit, onDelete, className}) {
+
+  const actions = [
+        {label: "Edit", type: "neutral",  onClick: onEdit},
+        {label: "Delete", type: "danger",  onClick: onDelete}
+        ]
+  const filtertedArray = actions.filter(action => action.onClick)
   return (
 
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-    <div className="bg-white rounded-lg max-w-xl shadow-lg overflow-y-auto">
-      <div className='flex justify-end p-2'>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+    <div className={`bg-white rounded-lg shadow-lg max-h-[90vh] overflow-y-auto  ${className || ''}`}>
+      <div className='flex justify-end'>
    <button onClick={onClose} className='hover:cursor-pointer '>
      <X/>
    </button>
       </div>
-      <h2 className='text-center font-semibold text-lg'>Details</h2>
+      <h2 className='text-center font-semibold text-xl py-2'>Details</h2>
     
-       <div className='p-2'>
+       <div className='p-4'>
     {fields.map((field) => (
       data[field.key] && (
         <div key={field.key}>
@@ -19,8 +27,14 @@ function DetailModal({data, fields, onClose}) {
     </div>
       )
       
-    ) )}
+    ))}
        </div>
+       {filtertedArray.length > 0 && 
+       <div className='flex items-center justify-center py-4'>
+         <ActionsButton actions={filtertedArray} />
+       </div>
+      
+      }
   
     </div>
   
