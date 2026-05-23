@@ -4,17 +4,18 @@ import MyForm from '../UI/ReusableForm/MyForm'
 import InputFieldNum from '../UI/ReusableForm/InputFieldNum'
 import TextAreaField from '../UI/ReusableForm/TextAreaField'
 import CategoryField from '../UI/ReusableForm/CategoryField'
+import SecondaryButton from '../UI/SecondaryButton'
 
 import toast from 'react-hot-toast'
 
 
-function LearnForm({onAddRecord, closeForm}) {
+function LearnForm({onAddRecord, closeForm, initialData}) {
 
    const handleSubmit = (data) => {
      
       onAddRecord(data)
 
-       toast.success('New Learning Progress Log!')
+       toast.success('New Progress Log!')
       setTimeout(() => {closeForm()}, 1000);
       
    } 
@@ -24,10 +25,12 @@ function LearnForm({onAddRecord, closeForm}) {
    
   return (
     <div>
-      <MyForm  onSubmit={handleSubmit}>
+      <MyForm  onSubmit={handleSubmit}
+      defaultValues={initialData || { learnRecords: "" }}
+      >
          <FormText
-         title={"Document What You Learned"}
-         text={"Because every step in learning tells a story"} />
+         title={"Document Your Progress"}
+         text={"Because every step forward tells a story"} />
          <div className='flex justify-between'>
       <InputFieldNum label={"Date"} name={"date"} type={"date"} requiredMessage={"select date"}/>
       <InputFieldNum label={"Hours Spent"} name={"hours"} type={"number"} requiredMessage={"input hours"} />
@@ -38,6 +41,7 @@ function LearnForm({onAddRecord, closeForm}) {
     
      <TextAreaField label={"Note"} name={"description"} requiredMessage ="concept note is required" 
      />
+     <SecondaryButton lable={initialData? "Update" : "Record It"} />
       </MyForm>
     </div>
   )
