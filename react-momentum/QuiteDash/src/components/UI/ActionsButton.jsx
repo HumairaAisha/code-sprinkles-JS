@@ -1,8 +1,10 @@
 
 const buttonStyles= {
   primary: "bg-sandbox-ghost text-sandbox-navy",
-  danger: "bg-red-600 text-sandbox-ghost",
-  secondary: "bg-sandbox-ghost text-sandbox-navy"
+  danger: "bg-red-700 text-sandbox-ghost hover:bg-red-800",
+  secondary: "bg-sandbox-ghost text-sandbox-navy",
+  neutral: "bg-green-700 text-sandbox-ghost hover:bg-green-800"
+
 }
 
 function ActionsButton({actions, className}) {
