@@ -7,10 +7,12 @@ import ReusableCard from "../components/UI/ReusableCard"
 import Modal from "../components/Form/Modal"
 import SandboxLogo from "..//assets/Sandbox1.png"
 import ProjectForm from "../components/Form/ProjectForm"
+import Pagination from "../components/UI/Pagination"
 
 function ProjectHub() {
   
   const [openModal, setOpenModal] = useState(false)
+  const [currentPage, setCurrentPage]  = useState(1)
 
   const openProjectModal = () => setOpenModal(true)
   const closeProjectModal = () => setOpenModal(false)
@@ -22,9 +24,13 @@ function ProjectHub() {
     const updateProjectRecord = [...newUpdatedProjectRecord, {...newProjectRecord, id:Date.now() }]
     console.log("Updated project records:", updateProjectRecord)
     setNewUpdatedProjectRecord(updateProjectRecord)
-   
-
   }
+
+  const projectsPerPage = 12
+  const lastIndex = currentPage * projectsPerPage
+  const firstIndex = lastIndex - projectsPerPage
+  const paginatedProjects = newUpdatedProjectRecord.slice(firstIndex, lastIndex)
+  const totalPages = Math.ceil(newUpdatedProjectRecord.length / projectsPerPage)
 
 
   return (
@@ -43,9 +49,9 @@ function ProjectHub() {
            )}
       </div>
       <div className="pt-6">
-        {newUpdatedProjectRecord.length > 0 ? (
+        {paginatedProjects.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-y-6 gap-x-8 p-4"> 
-          {newUpdatedProjectRecord.map((projectRecord) => (
+          {paginatedProjects.map((projectRecord) => (
 
           <ReusableCard key={projectRecord.id}>
             <div className="relative w-full h-48 overflow-hidden rounded">
@@ -79,6 +85,11 @@ function ProjectHub() {
         ): (
           <p className="text-center text-gray-600 py-4 italic">No projects added yet. Click “Add” to note one.</p>
         )}
+       {currentPage > 1 &&  <Pagination 
+        totalPages={totalPages}
+        currentPage={currentPage}
+        onPageChange={setCurrentPage}
+        />}
       </div>
     </div>
   )
