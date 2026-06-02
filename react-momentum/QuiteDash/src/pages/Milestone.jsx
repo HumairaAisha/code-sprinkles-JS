@@ -63,17 +63,24 @@ function Milestone() {
       </div>
       <div className="pt-4">
         {milestoneRecords.length > 0 ? (
-          <div className="grid sm:grid-cols-1 md:grid-cols-4 gap-y-6 gap-x-4 py-6 p-2">
+          <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-y-6 gap-x-4 py-6 p-2">
             {milestoneRecords.map((milestoneRecord) => (
              <ReusableCard key={milestoneRecord.id}>
-                <p className="font-semibold py-0.5">Milestone Achieved: 
+               <div className="flex flex-col justify-between h-36">
+                 <div>
+                  <p className="font-semibold py-0.5">Milestone Achieved: 
                 <span className="font-normal"> {milestoneRecord.milestoneTitle}</span>
                 </p>
-                <p className="font-semibold">How This Moment Felt:
-                  <span className="font-normal">{milestoneRecord.milestoneMood}</span>
+                <p className="font-semibold mt-1">How This Moment Felt:
+                <span className="text-xl"> {milestoneRecord.milestoneMood.split(" ")[0]}</span>
+                <span className="font-normal"> {milestoneRecord.milestoneMood.split(" ").slice(1).join(" ")}</span>
                 </p>
+                 </div>
                
-                <ViewMoreButton onClick={() => handleviewMore(milestoneRecord)}/>
+              <div className="pt-2">
+                  <ViewMoreButton onClick={() => handleviewMore(milestoneRecord)}/>
+              </div>
+               </div>
               </ReusableCard>
             ))}
           </div>
