@@ -5,31 +5,30 @@ import Heading from "../components/UI/Heading"
 import PrimaryButton from "../components/UI/PrimaryButton"
 import ReusableCard from "../components/UI/ReusableCard"
 import Modal from "../components/Form/Modal"
-import useLocalStorage from "../components/data/useLocalStorage"
 import SandboxLogo from "..//assets/Sandbox1.png"
 import ProjectForm from "../components/Form/ProjectForm"
 
 function ProjectHub() {
-  const {recalculateStats} = useContext(DashboardStatsContext)
+  
   const [openModal, setOpenModal] = useState(false)
 
   const openProjectModal = () => setOpenModal(true)
   const closeProjectModal = () => setOpenModal(false)
 
-  const [projectRecords, setProjectRecords] = useLocalStorage("projectRecord", [])
+  const {projectRecords: newUpdatedProjectRecord, setProjectRecords: setNewUpdatedProjectRecord} = useContext(DashboardStatsContext)
 
   const handleNewProject = (newProjectRecord) => {
 
-    const updateProjectRecord = [...projectRecords, {...newProjectRecord, id:Date.now() }]
+    const updateProjectRecord = [...newUpdatedProjectRecord, {...newProjectRecord, id:Date.now() }]
     console.log("Updated project records:", updateProjectRecord)
-    setProjectRecords(updateProjectRecord)
+    setNewUpdatedProjectRecord(updateProjectRecord)
    
-    recalculateStats()
+
   }
 
 
   return (
-    <div className='h-screen bg-sandbox-ghost p-4'>
+    <div className='min-h-screen bg-sandbox-ghost p-4'>
       <div className="bg-sandbox-navy rounded-lg text-sandbox-ghost p-2 m-2">
         <Heading title={"Your Project Footprints"}
         text={"Capture the ideas you’ve brought to life, the features you’ve shaped, and the experiments that pushed you grow"}
@@ -43,10 +42,10 @@ function ProjectHub() {
             </Modal>
            )}
       </div>
-      <div className="py-6">
-        {projectRecords.length > 0 ? (
+      <div className="pt-6">
+        {newUpdatedProjectRecord.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-y-6 gap-x-8 p-4"> 
-          {projectRecords.map((projectRecord) => (
+          {newUpdatedProjectRecord.map((projectRecord) => (
 
           <ReusableCard key={projectRecord.id}>
             <div className="relative w-full h-48 overflow-hidden rounded">
