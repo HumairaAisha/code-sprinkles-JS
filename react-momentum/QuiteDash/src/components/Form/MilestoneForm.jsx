@@ -1,66 +1,52 @@
 import MyForm from "../UI/ReusableForm/MyForm"
 import InputFieldNum from "../UI/ReusableForm/InputFieldNum"
 import TextAreaField from "../UI/ReusableForm/TextAreaField"
+import InputField from "../UI/ReusableForm/InputField"
 import FormText from "../UI/ReusableForm/FormText"
+import SelectOptionField from "../UI/ReusableForm/SelectOptionField"
+import SecondaryButton from "../UI/SecondaryButton"
 
-import toast from "react-hot-toast"
+function MilestoneForm({onAddMilestone, closeForm, initialData}) {
+   const milestoneMood = ["🎉 Excited", "😅 Relieved", "😎 Confident", "🤔 Reflective","😌 Calm" ,"🤯 Suprised", "💡 Inspired", "❤️ Accomplished", "🐛 Fustrated"].map(milestoneMoodType => ({
+      value: milestoneMoodType,
+      label: milestoneMoodType
+   }))
 
-function MilestoneForm({onAddMilestone, closeForm}) {
    const handleSubmit = (data) => {
       onAddMilestone(data)
-
-      toast.success("You're doing great! \n You Just Documented a Moment of Growth")
       setTimeout(() => {closeForm()}, 1000);
    }
   return (
     <div>
-      <MyForm onSubmit={handleSubmit}>
+      <MyForm onSubmit={handleSubmit}
+      defaultValues={initialData || {milestoneRecord: ""}}
+      >
          <FormText  
          title={"Marking the Moments That Matter"}
          text={"Because each milestone holds a lesson, a proof of how far you've come"}
          />
-         <div className="flex justify-between">
-            <InputFieldNum
-            name="date"
-            label={"Date"}
-            type={"date"}
-            requiredMessage={"select date"}
-            />
-
-            <InputFieldNum
-            name={"week"}
-            label={"Week"}
-            type={"number"}
-            />
-         </div>
-            <TextAreaField
-            name={"achievement"}
-            label={"What finally clicked this week?"}
-            />
-
-            <TextAreaField
-            name={"moments"}
-            label={"Surprising or Challenging Moment"}
-            />
-            
-            <TextAreaField
-            name={"struggleWith"}
-            label={"What I'm still working on"}
-            />
-
-            
-            <TextAreaField
-            name={"proudProgress"}
-            label={"Proud Moment"}
-            />
-         <InputFieldNum 
-         name={"confidenceLevel"}
-         label={"Confidence Level (1–10) "}
-         type={"number"}
-         min={1}
-         max={10}
+         <InputField
+         name={"milestoneTitle"}
+         label={"Title"}
+         placeholder={"First time API's clicked"}
+         required={true}
+        
          />
-         
+         <SelectOptionField
+         name={"milestoneMood"}
+         label={"How This Moment Felt"}
+         placeholder={"How did this moment feel?"}
+         options={milestoneMood}
+         required={true}
+         />
+         <TextAreaField
+         name={"milestoneDescription"}
+         label={"Description/Reflection"}
+         placeholder={"A quick note about this milestone — what you achieved or discovered"}
+         required={true}
+         />
+        
+         <SecondaryButton lable={initialData ? "Update" :"Record It"} />
       </MyForm>
     </div>
   )
