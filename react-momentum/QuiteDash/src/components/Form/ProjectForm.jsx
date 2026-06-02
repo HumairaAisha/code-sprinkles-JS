@@ -5,39 +5,43 @@ import InputFieldNum from "../UI/ReusableForm/InputFieldNum"
 import InputFieldUrl from "../UI/ReusableForm/InputFieldUrl"
 import TextAreaField from "../UI/ReusableForm/TextAreaField"
 import ImageInput from "../UI/ReusableForm/ImageInput"
-import toast from "react-hot-toast"
+import SecondaryButton from "../UI/SecondaryButton"
 
 
-function ProjectForm({onAddProject, closeForm}) {
+function ProjectForm({onAddProject, closeForm, initialProjectData}) {
 
    const handleSubmit = (data) => {  
     const file = data.imageFile?.[0]
-       console.log("Form submitted:", data)
-       if (!file) {
+      // console.log("Form submitted:", data)
+       if (!file || !(file instanceof File)) {
         onAddProject({
-          ...data, image: null,
+          ...data, image: initialProjectData?.image || null,
           
         })
+        closeForm()
         return
        }
        //convert to string 
        const reader =  new FileReader()
        reader.onloadend = () => {
-        const base64Image = reader.result
+        //const base64Image = reader.result
          onAddProject({
       ...data,
-      image: base64Image,
+      image: reader.result,
     })
+    
+      setTimeout(() => {closeForm()}, 1000);
        }
    
    reader.readAsDataURL(file)
 
-   toast.success("Awesome! \n Your has been successfully added.")
-      setTimeout(() => {closeForm()}, 1000);
+   
    }
   return (
     <div>
-      <MyForm onSubmit={handleSubmit}>
+      <MyForm onSubmit={handleSubmit}
+      defaultValues={initialProjectData || {projectRecord : ""}}
+      >
          <FormText
          title={"Documenting Work That Matters"}
          text={"Because every project tells a story of challenges overcome and lessons learned"}
@@ -62,7 +66,7 @@ function ProjectForm({onAddProject, closeForm}) {
          label={"GitHub Repo link"}
          type={"url"}
          />
-        
+        <SecondaryButton lable={initialProjectData ?  "Update":"Record It"} />
       </MyForm>
     </div>
   )
