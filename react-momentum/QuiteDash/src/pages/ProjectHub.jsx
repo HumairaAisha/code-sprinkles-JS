@@ -96,11 +96,11 @@ function ProjectHub() {
       </div>
       <div className="pt-6">
         {paginatedProjects.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-8 p-4"> 
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-8 p-4"> 
           {paginatedProjects.map((projectRecord) => (
 
           <ReusableCard key={projectRecord.id}>
-            <div className="relative w-full h-48 overflow-hidden rounded">
+            <div className="relative w-full h-42 overflow-hidden rounded">
               <img src={projectRecord.image || SandboxLogo} alt="Project Image"/>
             <div className="absolute inset-0 top-0 opacity-0 hover:opacity-90 bg-sandbox-navy transition-opacity duration-300 flex flex-col justify-center items-center rounded">
             <span className="font-bold text-sandbox-ghost text-xl">{projectRecord.projectName}</span>
@@ -142,7 +142,8 @@ function ProjectHub() {
         currentPage={currentPage}
         onPageChange={setCurrentPage}
         />}
-         <ConfirmModal 
+      </div>
+      <ConfirmModal 
               isOpen={isconfirmOpen}
               title={"Delete Project"}
               message={`Are you sure you want to delete "${itemToDelete?.projectName}?"`}
@@ -152,7 +153,6 @@ function ProjectHub() {
               onCancel={handleCancelDelete}
               
               />
-      </div>
     </div>
   )
 }
