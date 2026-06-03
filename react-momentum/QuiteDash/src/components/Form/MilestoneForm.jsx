@@ -42,7 +42,7 @@ function MilestoneForm({onAddMilestone, closeForm, initialData}) {
          <TextAreaField
          name={"milestoneDescription"}
          label={"Description/Reflection"}
-         placeholder={"A quick note about this milestone — what you achieved or discovered"}
+         placeholder={"Describe what you achieved and what you learned from it."}
          required={true}
          />
         
