@@ -1,7 +1,8 @@
 
 const buttonStyles= {
   primary: "bg-sandbox-ghost text-sandbox-navy",
-  danger: "bg-red-700 text-sandbox-ghost hover:bg-red-800",
+  danger: "text-red-700 hover:bg-red-50",
+  ghost: "text-gray-600 hover:text-sandbox-navy hover:bg-gray-100",
   secondary: "bg-sandbox-ghost text-sandbox-navy",
   neutral: "bg-green-700 text-sandbox-ghost hover:bg-green-800"
 
@@ -16,7 +17,7 @@ function ActionsButton({actions, className}) {
         onClick={action.onClick}
         disabled={action.disabled}
         title={action.label}
-        className={`px-1.5 py-1 rounded font-semibold hover:cursor-pointer transition colors ${buttonStyles[action.type] || buttonStyles.primary} ${action.disabled ? "opacity-50 cursor-not-allowed" : ""}`}
+        className={`p-1.5 rounded font-semibold hover:cursor-pointer transition colors ${buttonStyles[action.type] || buttonStyles.primary} ${action.disabled ? "opacity-50 cursor-not-allowed" : ""}`}
         >
           {action.icon && <action.icon size={16} />}
           {(!action.icon || action.showLabel) && action.label}
