@@ -10,12 +10,14 @@ import ProjectForm from "../components/Form/ProjectForm"
 import Pagination from "../components/UI/Pagination"
 import ActionsButton from "../components/UI/ActionsButton"
 import toast from "react-hot-toast"
-import { Pencil, Trash2 } from 'lucide-react';
+import { Pencil, Trash2, EllipsisVertical } from 'lucide-react';
 import ConfirmModal from "../components/UI/ConfirmModal"
+import { useNavigate } from "react-router-dom"
 
 
 function ProjectHub() {
-  
+  const navigate = useNavigate()
+
   const [openModal, setOpenModal] = useState(false)
   const [isEditing, setIsEditing] = useState(null)
   const [currentPage, setCurrentPage]  = useState(1)
@@ -35,12 +37,33 @@ function ProjectHub() {
   const {projectRecords: newUpdatedProjectRecord, setProjectRecords: setNewUpdatedProjectRecord} = useContext(DashboardStatsContext)
 
     const handleNewProject = (newProjectRecord) => {
+    const isDuplicate=  newUpdatedProjectRecord.some(
+    project => project.projectName.toLowerCase() === newProjectRecord.projectName.toLowerCase()
+  )
+  
+  if (isDuplicate) {
+    toast.error(`Project "${newProjectRecord.projectName}" already exists! Please use a different name.`)
+    return // Stop execution
+    
+  }
     const updateProjectRecord = [...newUpdatedProjectRecord, {...newProjectRecord, id:Date.now() }]
     //console.log("Updated project records:", updateProjectRecord)
     setNewUpdatedProjectRecord(updateProjectRecord)
     toast.success("Awesome! \n Your project has been successfully added.")
+    closeProjectModal()
   }
   const handleEditProject = (updateProject) => {
+    const isDuplicate = newUpdatedProjectRecord.some(
+
+    project => 
+      project.id !== isEditing?.id && 
+      project.projectName.toLowerCase() === updateProject.projectName.toLowerCase()
+  )
+  if (isDuplicate) {
+    toast.error(`Project "${updateProject.projectName}" already exists! Please use a different name.`)
+    return 
+  }
+
     setNewUpdatedProjectRecord((project) => project.map((item) => (
       item.id === isEditing?.id ? {...updateProject, id: item.id} : item)
     ))
@@ -126,7 +149,8 @@ function ProjectHub() {
               <div className="py-4">
                 <ActionsButton actions={[
                   {label: "Edit", type: "ghost",  icon: Pencil, onClick:() => openEditForm(projectRecord)},
-                  {label: "Delete", type: "danger", icon: Trash2, onClick: () => openConfirmationModal(projectRecord)}
+                  {label: "Delete", type: "danger", icon: Trash2, onClick: () => openConfirmationModal(projectRecord)},
+                  {label:"Project Journal", type: "neutral", onClick:() => navigate("/projectJournal", {state: {projectId: projectRecord.id}})}
                 ]}/>
               </div>
             </div>
