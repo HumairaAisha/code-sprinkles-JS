@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { useLocation } from "react-router-dom";
 import Heading from ".//../components/UI/Heading";
 import PrimaryButton from "../components/UI/PrimaryButton";
 import Modal from "../components/Form/Modal"
@@ -9,11 +9,14 @@ import ReusableCard from "../components/UI/ReusableCard";
 import ViewMoreButton from "../components/UI/ViewMoreButton";
 import DetailModal from "../components/UI/DetailModal";
 import SelectOptionField from "../components/UI/ReusableForm/SelectOptionField";
+import toast from "react-hot-toast";
 
 
 
 
 function ProjectJournal() {
+  const location = useLocation()
+  const selectedProjectId = location.state?.projectId
 
   const [openProjectJournal, setOpenProjectJournal] = useState(false)
   const openProjectJournalForm = () => setOpenProjectJournal(true)
@@ -27,11 +30,23 @@ function ProjectJournal() {
   const [projectJournalRecords, setProjectJournalRecords] = useLocalStorage("projectJournalRecords", [])
 
   const handleNewProjectJournal = (newProjectJournal) => {
-    const safeRecords = Array.isArray(projectJournalRecords) ? projectJournalRecords : []
-    const updatedProjectJournal = [...safeRecords, {...newProjectJournal, id:Date.now()}]
-    setProjectJournalRecords (updatedProjectJournal)
-   
+    const storedProjects = JSON.parse(localStorage.getItem('sandbox:projectRecord') || '[]');
+  
+    const matchedProject = storedProjects.find(project => 
+    String(project.id) === String(newProjectJournal.projectName)
+  )
 
+    if (!matchedProject) {
+    toast.error("Selected project not found. Please try again.");
+    return;
+  }
+    const safeRecords = Array.isArray(projectJournalRecords) ? projectJournalRecords : []
+    const journalEntry = {
+      ...newProjectJournal, id: Date.now, projectId: Number(newProjectJournal.projectName),
+      projectName: matchedProject.projectName,
+    }
+    const updatedProjectJournal = [...safeRecords, journalEntry]
+    setProjectJournalRecords (updatedProjectJournal)
   }
 
   const handleViewMore = (journalRecord) => {
@@ -51,14 +66,16 @@ function ProjectJournal() {
     default:            return "bg-[#6B7280] text-black";
   }
 };
-  const filteredRecords =
+  const statusFiltered =
   selectedStatus === "allStatus" ? projectJournalRecords
     : projectJournalRecords.filter(
-      (record) => record.projectStatus === selectedStatus);
+      record => record.projectStatus === selectedStatus)
 
+      const filteredRecords = selectedProjectId  ? statusFiltered.filter(
+        record => record.projectId === selectedProjectId) :  statusFiltered
 
   return (
-    <div className='h-screen bg-sandbox-ghost p-4'>
+    <div className='min-h-screen bg-sandbox-ghost p-4'>
       <div className="bg-sandbox-navy rounded-lg text-sandbox-ghost p-2 m-2">
       <Heading
       title={"Behind the Build"}
@@ -92,14 +109,14 @@ function ProjectJournal() {
         />
         
       </div>
-      <div className="mt-6 px-2 py-2 rounded-2xl">
+      <div className="rounded-2xl">
         {projectJournalRecords.length === 0 ? (
           <p className="text-center text-gray-600 py-4 italic">No project journal documentated yet. Click “Note It” to add one.</p>
         ) : filteredRecords.length === 0 ? (
           <p className="text-center text-gray-600 py-4 italic">No projects found under status {selectedStatus}.</p>
         ) : (
           
-          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-y-6 gap-x-4 py-4 p-2">
+          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-y-6 gap-x-4 p-2">
             {filteredRecords.map((projectJournalRecord) => (
               
             <ReusableCard key={projectJournalRecord.id}>
