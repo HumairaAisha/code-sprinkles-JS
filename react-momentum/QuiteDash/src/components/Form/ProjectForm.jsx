@@ -8,7 +8,7 @@ import ImageInput from "../UI/ReusableForm/ImageInput"
 import SecondaryButton from "../UI/SecondaryButton"
 
 
-function ProjectForm({onAddProject, closeForm, initialProjectData}) {
+function ProjectForm({onAddProject, initialProjectData}) {
 
    const handleSubmit = (data) => {  
     const file = data.imageFile?.[0]
@@ -17,8 +17,7 @@ function ProjectForm({onAddProject, closeForm, initialProjectData}) {
         onAddProject({
           ...data, image: initialProjectData?.image || null,
           
-        })
-        closeForm()
+        }) 
         return
        }
        //convert to string 
@@ -30,7 +29,7 @@ function ProjectForm({onAddProject, closeForm, initialProjectData}) {
       image: reader.result,
     })
     
-      setTimeout(() => {closeForm()}, 1000);
+      setTimeout(() => {}, 1000);
        }
    
    reader.readAsDataURL(file)
