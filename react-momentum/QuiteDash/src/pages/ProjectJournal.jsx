@@ -10,8 +10,7 @@ import ViewMoreButton from "../components/UI/ViewMoreButton";
 import DetailModal from "../components/UI/DetailModal";
 import SelectOptionField from "../components/UI/ReusableForm/SelectOptionField";
 import toast from "react-hot-toast";
-
-
+import Pagination from "../components/UI/Pagination";
 
 
 function ProjectJournal() {
@@ -42,12 +41,23 @@ function ProjectJournal() {
   }
     const safeRecords = Array.isArray(projectJournalRecords) ? projectJournalRecords : []
     const journalEntry = {
-      ...newProjectJournal, id: Date.now, projectId: Number(newProjectJournal.projectName),
+      ...newProjectJournal, id: Date.now(), projectId: Number(newProjectJournal.projectName),
       projectName: matchedProject.projectName,
     }
     const updatedProjectJournal = [...safeRecords, journalEntry]
     setProjectJournalRecords (updatedProjectJournal)
   }
+
+    //to find project name 
+  const projectJournal = JSON.parse(localStorage.getItem('sandbox:projectRecord') || '[]')
+  const selectedJournalProject = projectJournal.find(project => String(project.id) === String(selectedProjectId))
+
+    const journalsPerPage = 12
+  const [currentPage, setCurrentPage] = useState(1)
+  const lastIndex = currentPage * journalsPerPage
+  const firstIndex = lastIndex - journalsPerPage
+  const paginatedProjectJournals = projectJournalRecords.slice(firstIndex , lastIndex)
+  const totalPages = Math.ceil(projectJournalRecords.length / journalsPerPage)
 
   const handleViewMore = (journalRecord) => {
     setSelectedJournal(journalRecord)
@@ -72,10 +82,10 @@ function ProjectJournal() {
       record => record.projectStatus === selectedStatus)
 
       const filteredRecords = selectedProjectId  ? statusFiltered.filter(
-        record => record.projectId === selectedProjectId) :  statusFiltered
+        record => String(record.projectId) === String (selectedProjectId)) :  statusFiltered
 
   return (
-    <div className='min-h-screen bg-sandbox-ghost p-4'>
+    <div className='min-h-screen bg-sandbox-ghost p-4 flex flex-col'>
       <div className="bg-sandbox-navy rounded-lg text-sandbox-ghost p-2 m-2">
       <Heading
       title={"Behind the Build"}
@@ -109,17 +119,23 @@ function ProjectJournal() {
         />
         
       </div>
-      <div className="rounded-2xl">
-        {projectJournalRecords.length === 0 ? (
+      <div className="rounded-2xl pt-2 flex-1 flex flex-col">
+        {paginatedProjectJournals.length === 0 ? (
           <p className="text-center text-gray-600 py-4 italic">No project journal documentated yet. Click “Note It” to add one.</p>
-        ) : filteredRecords.length === 0 ? (
+      ) :  
+        filteredRecords.length === 0 && selectedProjectId ? (
+          <p className="text-center text-gray-600 italic">No Journal for this project {selectedJournalProject?.projectName ||"this project"} yet</p>
+        ) : 
+        filteredRecords.length === 0 ? (
           <p className="text-center text-gray-600 py-4 italic">No projects found under status {selectedStatus}.</p>
-        ) : (
+        ) : 
+        (
           
           <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-y-6 gap-x-4 p-2">
             {filteredRecords.map((projectJournalRecord) => (
               
-            <ReusableCard key={projectJournalRecord.id}>
+            <div >
+              <ReusableCard key={projectJournalRecord.id}>
               <p className="font-semibold py-0.5">Start Date: <span className="font-normal">{projectJournalRecord.startDate}</span></p>
               <p className="font-semibold py-0.5">Project Name: <span className="font-normal">{projectJournalRecord.projectName}</span></p>
               <p className={`font-semibold py-0.5`}>Project Status: <span className={`text-sm px-2 py-0.5 rounded-full font-medium
@@ -129,9 +145,20 @@ function ProjectJournal() {
              
                <ViewMoreButton onClick={() => handleViewMore(projectJournalRecord)}/>
             </ReusableCard>
+            </div>
             ))}
+          
           </div>
         )}
+        {totalPages > 1 && (
+             <div className="mt-auto py-8">
+               <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+          />
+             </div>
+            )}
       </div>
       {openMoreDetail && selectedJournal && (
         <DetailModal data={selectedJournal}
