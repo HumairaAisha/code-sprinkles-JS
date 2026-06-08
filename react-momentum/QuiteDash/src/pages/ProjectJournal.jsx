@@ -52,12 +52,6 @@ function ProjectJournal() {
   const projectJournal = JSON.parse(localStorage.getItem('sandbox:projectRecord') || '[]')
   const selectedJournalProject = projectJournal.find(project => String(project.id) === String(selectedProjectId))
 
-    const journalsPerPage = 12
-  const [currentPage, setCurrentPage] = useState(1)
-  const lastIndex = currentPage * journalsPerPage
-  const firstIndex = lastIndex - journalsPerPage
-  const paginatedProjectJournals = projectJournalRecords.slice(firstIndex , lastIndex)
-  const totalPages = Math.ceil(projectJournalRecords.length / journalsPerPage)
 
   const handleViewMore = (journalRecord) => {
     setSelectedJournal(journalRecord)
@@ -84,6 +78,13 @@ function ProjectJournal() {
       const filteredRecords = selectedProjectId  ? statusFiltered.filter(
         record => String(record.projectId) === String (selectedProjectId)) :  statusFiltered
 
+  const journalsPerPage = 12
+  const [currentPage, setCurrentPage] = useState(1)
+  const lastIndex = currentPage * journalsPerPage
+  const firstIndex = lastIndex - journalsPerPage
+  const paginatedProjectJournals = filteredRecords.slice(firstIndex, lastIndex)
+  const totalPages = Math.ceil(filteredRecords.length / journalsPerPage)
+
   return (
     <div className='min-h-screen bg-sandbox-ghost p-4 flex flex-col'>
       <div className="bg-sandbox-navy rounded-lg text-sandbox-ghost p-2 m-2">
@@ -105,7 +106,10 @@ function ProjectJournal() {
           <SelectOptionField
           name={"statusFilter"}
           value={selectedStatus}
-          onChange={(event) => setSelectedStatus(event.target.value)}
+          onChange={(event) => {
+          setSelectedStatus(event.target.value)
+          setCurrentPage(1)
+        }}
         label={""}
         options={[
           {label: "All Status", value: "allStatus"},
@@ -120,7 +124,7 @@ function ProjectJournal() {
         
       </div>
       <div className="rounded-2xl pt-2 flex-1 flex flex-col">
-        {paginatedProjectJournals.length === 0 ? (
+        {projectJournalRecords.length === 0 ? (
           <p className="text-center text-gray-600 py-4 italic">No project journal documentated yet. Click “Note It” to add one.</p>
       ) :  
         filteredRecords.length === 0 && selectedProjectId ? (
@@ -132,7 +136,7 @@ function ProjectJournal() {
         (
           
           <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-y-6 gap-x-4 p-2">
-            {filteredRecords.map((projectJournalRecord) => (
+            {paginatedProjectJournals.map((projectJournalRecord) => (
               
             <div >
               <ReusableCard key={projectJournalRecord.id}>
@@ -150,15 +154,15 @@ function ProjectJournal() {
           
           </div>
         )}
-        {totalPages > 1 && (
-             <div className="mt-auto py-8">
-               <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={setCurrentPage}
-          />
-             </div>
-            )}
+        <div className="mt-auto py-8">
+          {totalPages > 1 && (
+            <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+            />
+          )}
+        </div>
       </div>
       {openMoreDetail && selectedJournal && (
         <DetailModal data={selectedJournal}
