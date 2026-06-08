@@ -18,8 +18,16 @@ function ProjectJournal() {
   const selectedProjectId = location.state?.projectId
 
   const [openProjectJournal, setOpenProjectJournal] = useState(false)
-  const openProjectJournalForm = () => setOpenProjectJournal(true)
-  const closeProjectJournalForm = () => setOpenProjectJournal(false)
+  const [isEditing, setIsEditing] = useState(null)
+
+  const openProjectJournalForm = () => {
+    setOpenProjectJournal(true)
+    setIsEditing(null)
+  }
+  const closeProjectJournalForm = () => {
+    setOpenProjectJournal(false)
+    setIsEditing(null)
+  }
   const [selectedStatus, setSelectedStatus] = useState("allStatus")
 
   const [selectedJournal, setSelectedJournal] = useState(null)
@@ -61,6 +69,22 @@ function ProjectJournal() {
     setSelectedJournal(null)
     setOpenMoreDetail(false)
   }
+
+  const openEditJournal = (item) => {
+    setIsEditing(item)
+    setOpenProjectJournal(true)
+    handleJournalDetail()
+  }
+
+  const handleEditProjectJournal = (updatedJournal) => {
+    setProjectJournalRecords((journal) => journal.map((item) => (
+      item.id === isEditing?.id ? {...updatedJournal, id: item.id} : item
+    ))
+  )
+  toast.success("Project Journal Updated")
+  closeProjectJournalForm()
+
+  }
   const getStatusStyles = (status) => {
   switch (status) {
     case "Completed":   return "bg-[#009933] text-white";
@@ -97,7 +121,9 @@ function ProjectJournal() {
      />
      {openProjectJournal && (
       <Modal onClose={closeProjectJournalForm}>
-        <ProjectJournalForm onAddProjectRecord={handleNewProjectJournal} closeForm={closeProjectJournalForm}/>
+        <ProjectJournalForm onAddProjectRecord={isEditing ? handleEditProjectJournal : handleNewProjectJournal} closeForm={closeProjectJournalForm}
+        initialProjectJournalData = {isEditing}
+        />
       </Modal>
      )}
       </div>
@@ -165,7 +191,8 @@ function ProjectJournal() {
         </div>
       </div>
       {openMoreDetail && selectedJournal && (
-        <DetailModal data={selectedJournal}
+        <DetailModal className="min-w-sm"
+        data={selectedJournal}
         onClose={handleJournalDetail}
          fields={[
           { key: "startDate", label: "Start Date"},
@@ -175,6 +202,7 @@ function ProjectJournal() {
           { key: "projectDescription", label: "Project Description"},
         ]
       }
+      onEdit={() => openEditJournal(selectedJournalProject)}
         />
       )}
     </div>
