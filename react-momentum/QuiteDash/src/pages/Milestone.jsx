@@ -93,7 +93,7 @@ function Milestone() {
         )}
         
       </div>
-      <div className="pt-4">
+      <div className="pt-8">
         {paginatedMilestone.length > 0 ? (
           <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-y-6 gap-x-4 py-6 p-2">
             {paginatedMilestone.map((milestoneRecord) => (
@@ -120,13 +120,15 @@ function Milestone() {
           <p className="text-center text-gray-600 py-4 italic"> No milestone records yet. Click “Note It” to add one.</p>
           
         )}
-      {totalPages > 1 && (
+      <div className="mt-auto py-4">
+        {totalPages > 1 && (
           <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={setCurrentPage}
         />
       )}
+      </div>
       </div>
 
        {openDetailModal && selectedMilestoneRecord && (
