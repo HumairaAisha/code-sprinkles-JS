@@ -11,6 +11,7 @@ import DetailModal from "../components/UI/DetailModal";
 import SelectOptionField from "../components/UI/ReusableForm/SelectOptionField";
 import toast from "react-hot-toast";
 import Pagination from "../components/UI/Pagination";
+import ConfirmModal from "../components/UI/ConfirmModal";
 
 
 function ProjectJournal() {
@@ -19,6 +20,8 @@ function ProjectJournal() {
 
   const [openProjectJournal, setOpenProjectJournal] = useState(false)
   const [isEditing, setIsEditing] = useState(null)
+  const [itemToDelete, setItemToDelete] = useState(null)
+  const [isconfirmDeleteOpen, setIsConfirmDeleteOpen] = useState(false)
 
   const openProjectJournalForm = () => {
     setOpenProjectJournal(true)
@@ -37,26 +40,36 @@ function ProjectJournal() {
   const [projectJournalRecords, setProjectJournalRecords] = useLocalStorage("projectJournalRecords", [])
 
   const handleNewProjectJournal = (newProjectJournal) => {
-    const storedProjects = JSON.parse(localStorage.getItem('sandbox:projectRecord') || '[]');
-  
-    const matchedProject = storedProjects.find(project => 
-    String(project.id) === String(newProjectJournal.projectName)
-  )
+    const safeRecords = Array.isArray(projectJournalRecords) ? projectJournalRecords : [];
 
+    // find project in localStorage 
+    const storedProjects = JSON.parse(localStorage.getItem('sandbox:projectRecord') || '[]');
+    const matchedProject = storedProjects.find(project => 
+   String(project.id) === String(newProjectJournal.projectId)
+  )
     if (!matchedProject) {
     toast.error("Selected project not found. Please try again.");
     return;
   }
-    const safeRecords = Array.isArray(projectJournalRecords) ? projectJournalRecords : []
+    const projectIsDuplicate = safeRecords.some(journal => 
+    String(journal.projectId) === String(newProjectJournal.projectId)
+  );
+  if (projectIsDuplicate) {
+    toast.error(`Journal for ${matchedProject.projectName} already exists!`);
+    return; 
+  }
+  
+  // create a new journal entry 
     const journalEntry = {
-      ...newProjectJournal, id: Date.now(), projectId: Number(newProjectJournal.projectName),
-      projectName: matchedProject.projectName,
+      ...newProjectJournal, id: Date.now(),  projectName: matchedProject.projectName,
     }
     const updatedProjectJournal = [...safeRecords, journalEntry]
     setProjectJournalRecords (updatedProjectJournal)
+    toast.success("Great \n you documented a project journal")
+    closeProjectJournalForm()
   }
 
-    //to find project name 
+    //// Find the actual project details
   const projectJournal = JSON.parse(localStorage.getItem('sandbox:projectRecord') || '[]')
   const selectedJournalProject = projectJournal.find(project => String(project.id) === String(selectedProjectId))
 
@@ -78,12 +91,28 @@ function ProjectJournal() {
 
   const handleEditProjectJournal = (updatedJournal) => {
     setProjectJournalRecords((journal) => journal.map((item) => (
-      item.id === isEditing?.id ? {...updatedJournal, id: item.id} : item
+      item.id === isEditing?.id ? {...updatedJournal, id: item.id, projectId: isEditing.projectId, projectName: isEditing.projectName} : item
     ))
   )
   toast.success("Project Journal Updated")
   closeProjectJournalForm()
+  }
+  const openConfirmModal = (item) => {
+    setItemToDelete(item)
+    setIsConfirmDeleteOpen(true)
+    setOpenMoreDetail(false)
+  }
+  const handleConfrimDelete = () => {
+    setProjectJournalRecords((item) => item.filter((item) => item.id !== itemToDelete.id))
+    setItemToDelete(null)
+    setIsConfirmDeleteOpen(false)
+    toast.success("Project Journal Delete Successfully")
+  }
 
+  const handleCancelDelete = () => {
+    setIsConfirmDeleteOpen(false)
+    setItemToDelete(null)
+    
   }
   const getStatusStyles = (status) => {
   switch (status) {
@@ -202,10 +231,22 @@ function ProjectJournal() {
           { key: "projectDescription", label: "Project Description"},
         ]
       }
-      onEdit={() => openEditJournal(selectedJournalProject)}
+      onEdit={() => openEditJournal(selectedJournal)}
+      onDelete={() => openConfirmModal(selectedJournal)}
         />
       )}
+
+      <ConfirmModal
+      isOpen={isconfirmDeleteOpen}
+      title={"Delete Project Journal"}
+      message={`Are you sure you want to delete the project journal for "${itemToDelete?.projectName}"`}
+      confirmText={"Delete"}
+      onConfirm={handleConfrimDelete}
+      onCancel={handleCancelDelete}
+      type="danger"
+      />
     </div>
+    
   )
 }
 
