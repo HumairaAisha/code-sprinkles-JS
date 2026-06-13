@@ -6,11 +6,15 @@ import InputFieldUrl from "../UI/ReusableForm/InputFieldUrl"
 import TextAreaField from "../UI/ReusableForm/TextAreaField"
 import ImageInput from "../UI/ReusableForm/ImageInput"
 import SecondaryButton from "../UI/SecondaryButton"
+import toast from "react-hot-toast"
 
 
 function ProjectForm({onAddProject, initialProjectData}) {
-
    const handleSubmit = (data) => {  
+    if (!data.demoUrl && !data.repoUrl) {
+      toast.error("please add at least a demo or a repo link")
+      return
+    }
     const file = data.imageFile?.[0]
       // console.log("Form submitted:", data)
        if (!file || !(file instanceof File)) {
@@ -65,6 +69,7 @@ function ProjectForm({onAddProject, initialProjectData}) {
          label={"GitHub Repo link"}
          type={"url"}
          />
+                <p className="text-xs">Add at least one link, a live demo, a repository, or both.</p>
         <SecondaryButton lable={initialProjectData ?  "Update":"Record It"} />
       </MyForm>
     </div>

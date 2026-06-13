@@ -42,12 +42,11 @@ function ProjectHub() {
   )
   
   if (isDuplicate) {
-    toast.error(`Project "${newProjectRecord.projectName}" already exists! Please use a different name.`)
-    return // Stop execution
+    toast.error(`Project "${newProjectRecord.projectName}"already exists! Please use a different name.`)
+    return
     
   }
     const updateProjectRecord = [...newUpdatedProjectRecord, {...newProjectRecord, id:Date.now() }]
-    //console.log("Updated project records:", updateProjectRecord)
     setNewUpdatedProjectRecord(updateProjectRecord)
     toast.success("Awesome! \n Your project has been successfully added.")
     closeProjectModal()
@@ -60,7 +59,7 @@ function ProjectHub() {
       project.projectName.toLowerCase() === updateProject.projectName.toLowerCase()
   )
   if (isDuplicate) {
-    toast.error(`Project "${updateProject.projectName}" already exists! Please use a different name.`)
+    toast.error(`Project "${updateProject.projectName}"already exists! Please use a different name.`)
     return 
   }
 
@@ -82,9 +81,14 @@ function ProjectHub() {
 
   const handleConfrimDelete = () => {
     setNewUpdatedProjectRecord((item) => item.filter((item) => item.id !== itemToDelete.id))
+    const matchedProject = JSON.parse(localStorage.getItem('sandbox:projectJournalRecords') || '[]')
+    console.log("itemToDelete.id:", itemToDelete.id, typeof itemToDelete.id)
+console.log("sample projectId:", matchedProject[0]?.projectId, typeof matchedProject[0]?.projectId)
+    const filteredProject = matchedProject.filter(record => String(record.projectId )!== String(itemToDelete.id))
+    localStorage.setItem('sandbox:projectJournalRecords', JSON.stringify(filteredProject))
     setItemToDelete(null)
     setIsConfirmOpen(false)
-    toast.success("Project Delete Successfull")
+    toast.success("Project Delete Successfully")
   }
   const handleCancelDelete = () => { 
     setItemToDelete(null)
@@ -126,28 +130,34 @@ function ProjectHub() {
             <div className="relative w-full h-42 overflow-hidden rounded">
               <img src={projectRecord.image || SandboxLogo} alt="Project Image"/>
             <div className="absolute inset-0 top-0 opacity-0 hover:opacity-90 bg-sandbox-navy transition-opacity duration-300 flex flex-col justify-center items-center rounded">
-            <span className="font-bold text-sandbox-ghost text-xl">{projectRecord.projectName}</span>
+            <span className="font-semibold text-sandbox-ghost text-xl">{projectRecord.projectName}</span>
             </div>
             
             </div>
             <div className="flex justify-between">
-              <div className="flex gap-4 py-4">
+            <div className="flex gap-4 py-6">
+            {projectRecord.demoUrl && (
               <a href={projectRecord.demoUrl} 
             target="_blank"
             rel="noopener noreferrer"
-            className="font-normal text-blue-500 hover:underline"
             > 
-            <button className="bg-sandbox-ghost text-sandbox-navy font-medium rounded py-0.5 px-1.5 cursor-pointer">Demo</button>
+            <button className="bg-sandbox-ghost text-sandbox-navy font-medium rounded py-0.5 px-1.5 cursor-pointer hover:bg-sandbox-card/20">Demo</button>
             </a>
-             
+            )}
+            {projectRecord.repoUrl && (
             <a href={projectRecord.repoUrl} 
             target="_blank"
-            rel="noopener noreferrer"
-            className=""
-            > <button className="bg-sandbox-ghost text-sandbox-navy font-medium rounded py-0.5 px-1.5 cursor-pointer">Repo</button> </a>
+            rel="noopener noreferrer"> 
+            <button className="bg-sandbox-ghost text-sandbox-navy font-medium rounded py-0.5 px-1.5 cursor-pointer hover:bg-sandbox-card/20">
+              Repo
+              </button> 
+              </a>
+            )}
             </div>
-              <div className="py-4">
-                <ActionsButton actions={[
+            
+              <div className="py-6">
+              <ActionsButton dropdown
+                actions={[
                   {label: "Edit", type: "ghost",  icon: Pencil, onClick:() => openEditForm(projectRecord)},
                   {label: "Delete", type: "danger", icon: Trash2, onClick: () => openConfirmationModal(projectRecord)},
                   {label:"Project Journal", type: "neutral", onClick:() => navigate("/projectJournal", {state: {projectId: projectRecord.id}})}
@@ -170,7 +180,7 @@ function ProjectHub() {
       <ConfirmModal 
               isOpen={isconfirmOpen}
               title={"Delete Project"}
-              message={`Are you sure you want to delete "${itemToDelete?.projectName}?"`}
+              message={`Are you sure you want to delete the project "${itemToDelete?.projectName}?"`}
               confirmText={"Delete"}
               type="danger"
               onConfirm={handleConfrimDelete}
