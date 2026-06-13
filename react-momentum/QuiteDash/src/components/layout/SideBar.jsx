@@ -7,11 +7,13 @@ import { House,
    Menu, X 
    } from 'lucide-react';
 import Sandbox from "../../assets/Sandbox1.png"
+import { useNavigate } from 'react-router-dom';
+import Logout from '../Auth/Logout';
 
 
 
 function SideBar({ isOpen, setIsOpen, mobileNavOpen, setMobileNavOpen }) {
-
+   const navigate = useNavigate()
    /* const [nav, setNav] = useState(false)
    const handleNavButton = () => setNav(!nav) */
 
@@ -75,7 +77,7 @@ function SideBar({ isOpen, setIsOpen, mobileNavOpen, setMobileNavOpen }) {
          <div className={`
         hidden md:flex flex-col ${isOpen ? 'w-52' : 'w-16'} h-full fixed top-0 left-0 z-20 bg-sandbox-navy text-sandbox-ghost transition-all duration-150 ease-in-out`}>
           <div className='flex justify-between p-2'>
-            {isOpen && <h1 className='font-bold md:text-2xl'>SandBox</h1>}
+            {isOpen && <h1 className='font-bold md:text-2xl cursor-pointer' onClick={() => navigate('/')}>SandBox</h1>}
          
       
            <button onClick={() => setIsOpen(!isOpen)} className='text-white  hover:cursor-pointer hover:bg-sandbox-ghost hover:rounded-2xl hover:text-sandbox-navy'>
@@ -98,7 +100,9 @@ function SideBar({ isOpen, setIsOpen, mobileNavOpen, setMobileNavOpen }) {
          <NavItem key={index} icon={item.icon} title={item.title} path={item.path} showTitle={isOpen}/>
          ))}
          </div>
+          <Logout showTitle={isOpen}/>
       </nav>
+     
       </div>
    </div>
 
@@ -112,7 +116,8 @@ function SideBar({ isOpen, setIsOpen, mobileNavOpen, setMobileNavOpen }) {
       `}>
          {/* Header with page title and close button */}
          <div className='flex items-center justify-between p-3 border-b border-sandbox-ghost/20'>
-            <h1 className='text-lg'>Sandbox</h1>
+         
+            <h1 className='text-lg' >Sandbox</h1>
             <button onClick={() => setMobileNavOpen(false)}>
                <X className='hover:cursor-pointer'/>
             </button>
@@ -140,6 +145,7 @@ function SideBar({ isOpen, setIsOpen, mobileNavOpen, setMobileNavOpen }) {
               />
             ))}
          </div>
+         <Logout showTitle={true}/>
          </div>
       </div>
    )}
