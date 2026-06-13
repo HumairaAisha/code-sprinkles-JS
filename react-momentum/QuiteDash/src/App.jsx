@@ -14,6 +14,7 @@ import ProjectJournal from "./pages/ProjectJournal";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import Login from "./components/Auth/Login";
 import SignUp from "./components/Auth/SignUp";
+import Onboarding from "./components/Onboarding";
 
 
 
@@ -27,12 +28,16 @@ function App() {
     
    
     <Routes>
+      <Route path="/app" element ={
+        localStorage.getItem("user")
+        ? <Navigate to="/dashboard" replace />
+        : <Navigate to="/onboarding" replace />
+      }/>
+
       <Route path="/" element={<LandingPage/>}/>
-      {/* <Route path="/about" element={<About/>}/>
-      <Route path="/features" element={<Features/>}/>
-      <Route path="/works" element={<Works/>}/> */}
       <Route path="/login" element={<Login/>}/>
       <Route path="/signup" element={<SignUp/>}/> 
+      <Route path="/onboarding" element={<Onboarding />}/>
 
      {/*  <Route path="/" element={<Navigate to="/" replace />} /> */}
 
