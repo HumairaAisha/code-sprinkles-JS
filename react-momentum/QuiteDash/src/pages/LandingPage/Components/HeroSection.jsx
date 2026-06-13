@@ -6,11 +6,13 @@ import HeroCard from "../../../components/UI/HeroCard";
 import SandboxDashboard from "../../../assets/Screenshot 2026-02-18 214609.png"
 import ReusableCard from '../../../components/UI/ReusableCard';
 import BadgeLabel from "../../../components/UI/BadgeLabel";
+import Sandbox from "../../../assets/Sandbox Glance.png"
 
 
 import { useNavigate } from 'react-router-dom';
 
 function HeroSection() {
+  const user = localStorage.getItem('sandbox:user')
  const navigate = useNavigate()
   return (
    /*  #141B24 */
@@ -46,14 +48,14 @@ function HeroSection() {
       initial = "initial"
       transition={{duration: 0.6}}
       whileInView="whileInView"
-          className="mt-4 max-w-2xl mx-auto text-sm md:text-lg text-gray-500 leading-relaxed animate-section-reveal">Sandbox is a personal space for developers to track progress, log challenges, and capture milestones — turning effort into visible growth.</motion.p>
+          className="mt-4 max-w-2xl mx-auto text-sm md:text-lg text-gray-500 leading-relaxed animate-section-reveal">Sandbox is a personal space for developers to track progress, log challenges, and capture milestones, turning effort into visible growth.</motion.p>
          
-            <button  className="bg-sandbox-ghost text-sandbox-navy px-6 py-2 rounded-2xl hover:cursor-pointer my-8" onClick={() => {navigate("/signup")}}>Get Started</button>
+            <button  className="md:hidden bg-sandbox-ghost text-sandbox-navy px-6 py-2 rounded-2xl hover:cursor-pointer my-8" onClick={() => {navigate(user ? "/dashboard" : "/onboarding")}}>{user ? "Continue" : "Get Started"}</button>
          
         </div>
         
      <div className="relative w-full max-w-5xl py-4">
-        <img src={SandboxDashboard} alt="Sandbox personal developer dashboard interface" className="relative rounded-md shadow-xl w-full object-cover"
+        <img src={Sandbox} alt="Sandbox personal developer dashboard interface" className="relative rounded-md shadow-xl w-full object-cover"
       />
      </div>
      </div>
