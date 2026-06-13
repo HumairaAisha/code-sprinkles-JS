@@ -15,10 +15,10 @@ export function DashboardStatsProvider({ children }) {
       const hoursSpent = learnRecords.reduce((sum, item) => sum + (Number(item.hours) || 0), 0);
 
     const updatedStats = statData.map((stat) => {
-      if (stat.title === "Hours Spent Coding") return { ...stat, value: hoursSpent };
-      if (stat.title === "New Concept Learned") return { ...stat, value: learnRecords.length };
-      if (stat.title === "Challenges Solved") return { ...stat, value: challengeRecords.length };
-      if (stat.title === "Projects") return { ...stat, value: projectRecords.length };
+      if (stat.id === 2) return { ...stat, value: hoursSpent };
+      if (stat.id === 3) return { ...stat, value: learnRecords.length };
+      if (stat.id === 4) return { ...stat, value: challengeRecords.length };
+      if (stat.id === 6) return { ...stat, value: projectRecords.length };
       return stat;
     });
      setStats(updatedStats);
