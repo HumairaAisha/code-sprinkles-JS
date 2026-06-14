@@ -17,19 +17,15 @@ import SignUp from "./components/Auth/SignUp";
 import Onboarding from "./components/Onboarding";
 
 
-
-
-
-
 function App() {
-
+  const hasLoggedIn = JSON.parse(localStorage.getItem("sandbox:hasLoggedIn"));
   return (
     <>
     
    
     <Routes>
       <Route path="/app" element ={
-        localStorage.getItem("user")
+        hasLoggedIn === "true"
         ? <Navigate to="/dashboard" replace />
         : <Navigate to="/onboarding" replace />
       }/>
