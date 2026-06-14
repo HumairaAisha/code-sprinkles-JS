@@ -2,15 +2,18 @@
 import InputField from "./UI/ReusableForm/InputField"
 import MyForm from "./UI/ReusableForm/MyForm"
 import { useNavigate } from "react-router-dom";
-
+import useLocalStorage from "./data/useLocalStorage";
 
 
 function Onboarding() {
-   
-
    const navigate = useNavigate()
+   const [user, setUser] = useLocalStorage('user', null)
+   const [hasLoggedIn, setHasLoggedIn] = useLocalStorage('hasLoggedIn', null)
+  
+   
    const handleSumbit = (data) => {
-      localStorage.setItem("user", JSON.stringify(data))
+      setUser(data)
+      setHasLoggedIn(true)
       navigate('/dashboard')
       
    }
