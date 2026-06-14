@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom"
 import { HashLink } from "react-router-hash-link"
 import { useState } from "react"
 import { Menu, X } from 'lucide-react';
+import useLocalStorage from "../../../components/data/useLocalStorage";
+
 function NavBar() {
 
   const navigate = useNavigate()
   const [nav, setNav] = useState(false)
   const handleClick = () => setNav(!nav)
-
+  const [hasLoggedIn, setHasLoggedIn] = useLocalStorage("hasLoggedIn", null)
   
    const navItems = [
       {title: "Home", link: "/#home"},
@@ -36,7 +38,9 @@ function NavBar() {
          </li>
       ))}
      </ul>
-     <button className="hidden md:flex hover:cursor-pointer font-semibold text-sandbox-navy bg-sandbox-ghost py-1 px-2 rounded-md" onClick={() => {navigate("/login")}}>Login</button>
+     <button className="hidden md:flex hover:cursor-pointer font-semibold text-sandbox-navy bg-sandbox-ghost py-1 px-2 rounded-md" 
+     onClick={() => {navigate(hasLoggedIn ? "/dashboard" : "/onboarding")}}>{hasLoggedIn ? "Continue" : "Get Started"}
+     </button>
      
      {/* mobile view */}
      <div className="md:hidden ">
@@ -64,7 +68,7 @@ function NavBar() {
     </HashLink>
          </li>
       ))}
-       <button className="hover:cursor-pointer font-semibold text-sandbox-navy rounded py-2 my-2 bg-sandbox-ghost text-base hover:bg-sandbox-ghost/85" onClick={() => {navigate("/login")}}>Login</button>
+    {/*    <button className="hover:cursor-pointer font-semibold text-sandbox-navy rounded py-2 my-2 bg-sandbox-ghost text-base hover:bg-sandbox-ghost/85" onClick={() => {navigate(hasLoggedIn ? "/dashboard" :"/onboarding")}}>{hasLoggedIn ? "Continue": "Get Started"}</button> */}
       </ul> 
       
      </div>
