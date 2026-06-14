@@ -1,6 +1,6 @@
-
+import useLocalStorage from "../components/data/useLocalStorage"
 function DashboardHeader() {
-  const user = JSON.parse(localStorage.getItem('user'))
+  const [user] = useLocalStorage("user", null)
   const firstName = user?.name ? user.name.split(' ')[0] : null
   return (
     <div className="pb-2">
