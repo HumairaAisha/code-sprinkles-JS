@@ -15,6 +15,8 @@ import ConfirmModal from "../components/UI/ConfirmModal"
 function LearnTrack() {
   
   const [openModal, setOpenModal] = useState()
+  const [categoryOpen, setCategoryOpen] = useState({})
+  const [technologyOpen, setTechnologyOpen] = useState({})
 
   const [selectedRecord, setSelectedRecord] = useState(null)
   const [openDetailModal, setOpenDetailModal] = useState(false)
@@ -67,6 +69,17 @@ const closeDetailModal = () => {
     setRecords(updatedRecords);
   }
 
+  const toggleCategory = (categoryName) => { 
+    setCategoryOpen((category) => ({
+      ...category, [categoryName] : !category[categoryName]
+    }))
+  }
+
+  const toggleTechnology = (technologyName) => {
+   setTechnologyOpen((tech) => ({
+    ...tech, [technologyName] : !tech[technologyName]
+   }))
+  }
   const handleEdit = (updatedRecord) => {
     setRecords((learn) => learn.map((item) => (
       item.id === isEditing?.id ? {...updatedRecord, id: item.id} : item)
@@ -83,17 +96,8 @@ const closeDetailModal = () => {
 
   }
   const sortedLearnTracker = [...records].sort((a, b) => new Date(a.date) - new Date(b.date))
+  const groupedCategory = Object.groupBy(sortedLearnTracker, (item) => item.category)
   
-  const recordsPerPage = 12 
-  const [currentPage, setCurrentPage] = useState(1)
-
-  const lastIndex = currentPage * recordsPerPage
-  const firstIndex = lastIndex - recordsPerPage
-  const paginatedRecords = sortedLearnTracker.slice(firstIndex, lastIndex)
-  const totalPages = Math.ceil(sortedLearnTracker.length / recordsPerPage)
-
-
-
   return (
     <div className="min-h-screen bg-sandbox-ghost p-4">
       <div>
@@ -113,44 +117,80 @@ const closeDetailModal = () => {
               </Modal>
              )}
         </div>
-        <div className="mt-6 px-2 py-2 rounded-2xl">
-         {paginatedRecords.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-y-6 gap-x-4 py-4 p-2">
-            {paginatedRecords.map((record) => (
+    
+   <div className="mt-4 flex flex-col gap-3">
+    {Object.entries(groupedCategory).map(([categoryName, categoryRecords]) => {
+     const groupedTechnology = Object.groupBy(categoryRecords, (item) => item.technology)
+     const totalEntries = categoryRecords.length
+     return (
+    <div key={categoryName} className="mb-2">
 
-              <ReusableCard key={record.id}>
-                <p className="font-semibold py-0.5">Date: <span className="font-normal">{record.date}</span></p>
-                <p className="font-semibold py-0.5">Hours Spent: <span className="font-normal">{record.hours} Hours</span></p>
-                <p className="font-semibold py-0.5">Concept Mastered: <span className="font-normal">{record.topic}</span></p>
-                <ViewMoreButton onClick={() => handleViewMore(record)}/>
+    {/* Category card */}
+    <div
+       onClick={() => toggleCategory(categoryName)}
+       className="flex items-center justify-between bg-sandbox-navy text-sandbox-ghost p-4 rounded-lg cursor-pointer ml-4">
+       <span className="font-semibold text-lg">{categoryName}</span>
+       <div className="flex items-center gap-3">
+      <span className="text-sm opacity-70">{totalEntries} {totalEntries === 1 ? 'Entry' : 'Entries'}</span>
+      <span className={`transition-transform duration-200 ${categoryOpen[categoryName] ? 'rotate-180' : ''}`}>▼</span>
+      </div>
+      </div>
 
-                  
-              </ReusableCard>
-            ))}
-          </div>
-         ) : ( <p className="text-center text-gray-600 py-4 italic">
-          No progress records yet. Click “Note It” to add one.
-          </p>)}
-         <Pagination
-         currentPage={currentPage}
-         totalPages={totalPages}
-         onPageChange={setCurrentPage}
-         />
+     {/* Technology cards */}
+     {categoryOpen[categoryName] && (
+    <div className="ml-6 mt-2 flex flex-col gap-2">
+    {Object.entries(groupedTechnology).map(([technologyName, technologyRecords]) => {
+    return technologyRecords.length > 0 && (
+      <div key={technologyName}>
+
+    {/* Technology card */}
+    <div
+      onClick={(e) => { e.stopPropagation(); toggleTechnology(technologyName) }}
+      className="flex items-center justify-between bg-white text-sandbox-navy border border-sandbox-navy p-3 rounded-lg cursor-pointer">
+      <span className="font-medium">{technologyName}</span>
+      <div className="flex items-center gap-3">
+        <span className="text-sm text-gray-500">{technologyRecords.length} {technologyRecords.length === 1 ? 'Entry' : 'Entries'}</span>
+        <span className={`transition-transform duration-200 ${technologyOpen[technologyName] ? 'rotate-180' : ''}`}>▼</span>
+      </div>
+  </div>
+
+    {/* Entry cards */}
+    {technologyOpen[technologyName] && (
+      <div className="mt-2 grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {technologyRecords.map((record) => (
+          <ReusableCard key={record.id}>
+     <p className="font-semibold py-0.5">Date: <span className="font-normal">{record.date}</span></p>
+     <p className="font-semibold py-0.5">Hours Spent: <span className="font-normal">{record.hours} Hours</span></p>
+     <p className="font-semibold py-0.5">Concept: <span className="font-normal">{record.concept}</span></p>
+      <ViewMoreButton onClick={(e) => { e.stopPropagation(); handleViewMore(record) }} />
+    </ReusableCard>
+    ))}
+  </div>
+ )}
+</div>
+        )
+       })}
+       </div>
+        )}
+
+     </div>
+        )
+          })}
         </div>
         
-        {openDetailModal && selectedRecord && (
-          <DetailModal className="min-w-md"
-          data={selectedRecord}
-          onClose={closeDetailModal}
-          fields={[
-          { key: "date", label: "Date" },
-          { key: "hours", label: "Hours Spent" },
-          {key: "topic", label: "Concept Mastered"},
-          { key: "category", label: "Category" },
-          { key: "technology", label: "Focus Area" },
-          { key: "concept", label: "Concept" },
-          { key: "outcome", label: "key outcome" },
-          { key: "description", label: "Notes / Description" },
+{openDetailModal && selectedRecord && (
+  <DetailModal className="min-w-md"
+  data={selectedRecord}
+  onClose={closeDetailModal}
+  fields={[
+  { key: "date", label: "Date" },
+  { key: "hours", label: "Hours Spent" },
+  {key: "topic", label: "Concept Mastered"},
+  { key: "category", label: "Category" },
+  { key: "technology", label: "Focus Area" },
+  { key: "concept", label: "Concept" },
+  { key: "outcome", label: "key outcome" },
+  { key: "description", label: "Notes / Description" },
     ]}
     onEdit={() => openEditLearningForm(selectedRecord)}
     onDelete={() => openDeleteConfirmation(selectedRecord)}
@@ -158,13 +198,13 @@ const closeDetailModal = () => {
         )}
       </div>
       <ConfirmModal
-                  isOpen={confirmOpen}
-                  title={`Delete "${itemToDelete?.concept}"`}
-                  message={`Are you sure you want to delete`}
-                  confirmText={"Delete"}
-                  cancelText={"Cancel"}
-                  type="danger"
-                  onConfirm={handleConfrimDelete}
+    isOpen={confirmOpen}
+    title={`Delete "${itemToDelete?.concept}"`}
+    message={`Are you sure you want to delete`}
+    confirmText={"Delete"}
+    cancelText={"Cancel"}
+    type="danger"
+    onConfirm={handleConfrimDelete}
                   onCancel={handleCancelDelete}
         />
      </div>
