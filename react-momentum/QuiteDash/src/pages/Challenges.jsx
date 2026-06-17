@@ -8,15 +8,35 @@ import Heading from "../components/UI/Heading"
 import ReusableCard from "../components/UI/ReusableCard"
 import DetailModal from "../components/UI/DetailModal"
 import ViewMoreButton from "../components/UI/ViewMoreButton"
+import ConfirmModal from "../components/UI/ConfirmModal"
+import toast from "react-hot-toast"
 
 function Challenges() {
   
   const [modalOpen, setModalOpen] = useState(false)
-  const openChanllengeForm = () => setModalOpen(true)
-  const closeChallengeForm = () => setModalOpen(false)
-
+  const [isEditing, setIsEditing] = useState(null)
+  const [itemToDelete, setItemToDelete] = useState(null)
+  const [isConfrimOpen, setIsConfirmOpen] = useState(false)
   const [selectedChallengeRecord, setSelectedChallengeRecord] = useState(null)
   const [openDetailModal, setOpenDetailModal] = useState(false)
+
+
+
+  const openChanllengeForm = () => {
+    setModalOpen(true)
+    setIsEditing(null)
+  }
+  const closeChallengeForm = () => {
+    setModalOpen(false)
+    setIsEditing(null)
+  }
+
+  const handleEditForm = (item) => {
+    setIsEditing(item)
+    setModalOpen(true)
+    closeChallengeForm()
+  }
+
 
   const {challengeRecords: newUpdatedChallengeRecords, setChallengeRecords: setNewUpdatedChallengeRecords} = useContext(DashboardStatsContext)
 
@@ -25,6 +45,7 @@ function Challenges() {
       const updateChallengeRecord = [...newUpdatedChallengeRecords, {...newChallengeRecord, id:Date.now()}]
 
       setNewUpdatedChallengeRecords(updateChallengeRecord)
+      toast.success('New Challenge Fixed. \n Growth Documented!')
 
   }
    const sortedChallengeRecords = [...newUpdatedChallengeRecords].sort((a, b) => new Date(a.date) - new Date(b.date))
@@ -39,6 +60,13 @@ function Challenges() {
     setOpenDetailModal(false)
   }
 
+  const handleEditJournal = (updatedChallengeRecord) => {
+    setNewUpdatedChallengeRecords((challenge) => challenge.map((item) => (
+      item.id === isEditing?.id ? {...updatedChallengeRecord, id: item.id} : item )))
+      toast.success("Chanllenge Journal Updated Successfully")
+  }
+  
+
   return (
     <div className="min-h-screen bg-sandbox-ghost p-4">
       <div className="bg-sandbox-navy rounded-lg text-sandbox-ghost p-2 m-2">
@@ -52,7 +80,9 @@ function Challenges() {
       {modalOpen && (
         <Modal onClose={closeChallengeForm}>
           <ChallengeJournalForm key="challenge-form"
-          onAddChallenge = {handleChallenge} closeForm={closeChallengeForm}/>
+          onAddChallenge = {isEditing ? handleEditJournal : handleChallenge} closeForm={closeChallengeForm}
+          initialChallengeData = {isEditing}/>
+
         </Modal>
       )}
      
@@ -89,6 +119,7 @@ function Challenges() {
           {key: "solution", label: "Solution"},
           
         ]}
+        onEdit={handleEditForm}
         />
       )}
     </div>
