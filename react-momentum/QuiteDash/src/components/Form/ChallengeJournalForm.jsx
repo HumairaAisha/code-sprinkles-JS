@@ -4,22 +4,22 @@ import InputField from "../UI/ReusableForm/InputField"
 import InputFieldNum from "../UI/ReusableForm/InputFieldNum"
 import TextAreaField from "../UI/ReusableForm/TextAreaField"
 import ChallenegCategoryField from "../UI/ReusableForm/ChallenegCategoryField"
+import SecondaryButton from "../UI/SecondaryButton"
 
-import toast from "react-hot-toast"
-function ChallengeJournalForm({onAddChallenge, closeForm}) {
+
+function ChallengeJournalForm({onAddChallenge, closeForm, initialChallengeData}) {
   
    const handleSubmit = (data) => {
-
      onAddChallenge(data) 
-
-      toast.success('New Challenge Fixed. \n Growth Documented!')
       setTimeout(() => {closeForm()}, 1000);
       
 
    }
   return (
     <div>
-      <MyForm  onSubmit={handleSubmit}>
+      <MyForm  onSubmit={handleSubmit}
+      defaultValues={initialChallengeData || {challengeRecords: ""}}
+      >
       <FormText title={"Document What You Fixed"}
       text={"Because every fix carries a story of patience, persistence, and growth."}/>
       <InputFieldNum
@@ -50,6 +50,7 @@ function ChallengeJournalForm({onAddChallenge, closeForm}) {
       name={"solution"}
       label={"Solution"}
       />
+      <SecondaryButton lable={initialChallengeData  ? "Update" : "Record It"} />
       </MyForm>
     </div>
   )
