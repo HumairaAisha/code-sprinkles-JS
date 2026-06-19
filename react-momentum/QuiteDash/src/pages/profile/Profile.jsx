@@ -1,16 +1,14 @@
 import ProfileIdentity from "./components/ProfileIdentity"
 import ProfileInformation from "./components/ProfileInformation"
-import Modal from "../../components/Form/Modal"
-import { useState } from "react"
-import MyJourney from "../../components/MyJourney"
+
 
 function Profile() {
-  const [openSnapshot, setOpenSnapshot] =  useState(false)
+  /* const [openSnapshot, setOpenSnapshot] =  useState(false)
   const openSnapshotModal = () => setOpenSnapshot(true)
-  const closeSnapshotModal = () => setOpenSnapshot(false)
+  const closeSnapshotModal = () => setOpenSnapshot(false) */
   return (
-    <div className="min-h-screen w-full px-6 py-4">
-     <div className="flex justify-end p-4">
+    <div className="min-h-screen w-full px-6 py-8">
+     {/* <div className="flex justify-end p-4">
       <button onClick={openSnapshotModal}
       className="bg-sandbox-navy text-sandbox-ghost px-2 py-1 rounded hover:cursor-pointer">View My Journey</button>
       {openSnapshot && (
@@ -18,7 +16,7 @@ function Profile() {
         <MyJourney />
        </Modal>
       )}
-     </div>
+     </div> */}
       <div className="flex flex-col gap-8">
     
        <ProfileIdentity/>
