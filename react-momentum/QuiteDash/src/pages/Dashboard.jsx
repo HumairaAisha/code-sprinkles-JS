@@ -1,9 +1,6 @@
-
-//import { useEffect, useState } from "react"
 import Card from "../components/Card"
 import StatsCard from "../components/StatsCard"
 import DashboardHeader from "./DashboardHeader"
-//import statData from "../components/data/stats"
 import Chart from "../components/data/Chart"
 import ChartComponent from "../components/data/ChartComponent"
 import { useContext } from "react"
@@ -12,59 +9,7 @@ import { DashboardStatsContext } from "../CustomHook/DashboardStatsContext"
 
   function Dashboard() {
 
-     const {stats} = useContext(DashboardStatsContext)
- /*  const [stats, setStats] = useState(statData)
-  
-    useEffect(() => {
-      const updatesStatsFromStorage = () => {
-        console.log("stats updated event caught");
-        
-        const learningTrack = JSON.parse(localStorage.getItem("learnRecords"))
-        const challenges = JSON.parse(localStorage.getItem("challengeRecords")) || [];
-        
-
-        const hoursSpent = learningTrack.reduce((sum, item) => sum + (Number(item.hours) || 0), 0)
-        const newConcept = learningTrack.length
-        const challengesSolved = challenges.length;
- */
-    /*      console.log("Updated values from localStorage:", {
-    hoursSpent,
-    newConcept,
-    challengesSolved,
-  });
- */
-
-  /* const storedStats = JSON.parse(localStorage.getItem("dashboardStats")) || statData
-  const titlesMatch = storedStats.every((item, index) => item.title === statData[index].title);
-
-if (!storedStats || storedStats.length !== statData.length || !titlesMatch) {
-  localStorage.setItem("dashboardStats", JSON.stringify(statData));
-  setStats(statData);
-} else {
-  setStats(storedStats);
-}
-
-  const updatedStats = storedStats.map((stat) => {
-    if (stat.title === "Hours Spent Coding") return {...stat, value:hoursSpent}
-          if (stat.title === "New Concept Learned") return {...stat, value:newConcept}
-          if (stat.title === "Challenges Solved") return {...stat, value:challengesSolved}
-          return stat
-  })
-        
-          
-        localStorage.setItem("dashboardStats", JSON.stringify(updatedStats))
-        setStats(updatedStats)
-      
-      }
-      updatesStatsFromStorage();
-      
-      window.addEventListener("statsUpdated", updatesStatsFromStorage);
-      window.addEventListener("storage", updatesStatsFromStorage)
-      return () => {
-        window.removeEventListener("statsUpdated", updatesStatsFromStorage)
-        window.removeEventListener("storage", updatesStatsFromStorage)
-      }
-    },[]) */
+  const {stats} = useContext(DashboardStatsContext)
 
    
   return (
@@ -73,10 +18,10 @@ if (!storedStats || storedStats.length !== statData.length || !titlesMatch) {
       {/*  <Card /> */}
         <DashboardHeader />
  
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-y-6 gap-x-4 py-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-4">
          {stats.map((stat) => (
             <div key={stat.id} className="rounded-lg bg-gray-50 shadow hover:shadow-sandbox-card hover:cursor-pointer">
-               <StatsCard id={stat.id} title={stat.title} value={stat.value} notes={stat.notes} auto={stat.auto}/>
+               <StatsCard id={stat.id} title={stat.title} value={stat.value} notes={stat.notes} auto={stat.auto} iconName={stat.iconName}/>
             </div>
          ))}
       </div>
