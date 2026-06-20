@@ -12,11 +12,13 @@ import toast from "react-hot-toast"
 
 
 
+
 function Challenges() {
   
   const [modalOpen, setModalOpen] = useState(false)
   const [openCategory, setOpenCategory] = useState({})
   const [openTechnology, setOpenTechnology] = useState({})
+  const [currentTechPage, setCurrentTechPage] = useState({})
   const [isEditing, setIsEditing] = useState(null)
   const [selectedChallengeRecord, setSelectedChallengeRecord] = useState(null)
   const [openDetailModal, setOpenDetailModal] = useState(false)
@@ -79,8 +81,12 @@ function Challenges() {
     }))
   } 
 
-  
-
+  const handleCurrentPage = (technologyName, page) => {
+    setCurrentTechPage((prev) => ({
+      ...prev, [technologyName] : page
+    }))
+  }
+    const chanllengePerPage = 12 
      const sortedChallengeRecords = [...newUpdatedChallengeRecords].sort((a, b) => new Date(a.date) - new Date(b.date))
      const groupedCategory =  Object.groupBy(sortedChallengeRecords, (item) => item.challengeCategory)
   return (
@@ -104,50 +110,64 @@ function Challenges() {
      
       </div>
 
-      <div>
+      <div className="py-2">
     {Object.entries(groupedCategory).map(([categoryName, catergoryRecords]) => {
       const groupedTechnology = Object.groupBy(catergoryRecords, (item) => item.challengeTechnology)
       const totalEntries = catergoryRecords.length
       return (
-        <div key={categoryName}>
+        <div key={categoryName} className="px-2">
       <div onClick={() => toggleCategory(categoryName)} 
-      className="flex items-center justify-between bg-sandbox-navy text-sandbox-ghost p-4 rounded-lg cursor-pointer mb-2">
+      className="flex items-center justify-between bg-sandbox-navy text-sandbox-ghost p-4 rounded-lg cursor-pointer my-4">
         <span>{categoryName}</span>
-          <div>
+          <div className="flex items-center gap-3">
         <span>{totalEntries} {totalEntries === 1 ? 'Entry' : 'Entries'}</span>
         <span className={`transition-transform duration-200 ${openCategory[categoryName] ? 'rotate-180' : ''}`}>▼</span>
+  </div>
     </div>
-      </div>
-      {openCategory[categoryName] && (
-        <div className="ml-6 mt-2 flex flex-col gap-2">
-          {Object.entries(groupedTechnology).map(([technologyName, technologyRecords]) => {
-            return technologyRecords.length > 0 && (
-              <div key={technologyName}>
-                {/* Tech Card */}
-                <div onClick={(e) => {e.stopPropagation(); toggleTechnology(technologyName) }}
-                  className="flex items-center justify-between bg-white text-sandbox-navy border border-sandbox-navy p-3 rounded-lg cursor-pointer">
-                    <span>{technologyName}</span>
-                    <div className="flex items-center gap-3">
-                      <span className="text-sm text-gray-500">{technologyRecords.length} {technologyRecords.length === 1 ? "Entry" : 'Entries'}</span>
-                      <span className={`transition-transform duration-200 ${openTechnology[technologyName] ? 'rotate-180' : ''}`}>▼</span>
-                    </div>
-                    </div>
-
-                    {/* Entry Cards  */}
+    {openCategory[categoryName] && (
+      <div className="mt-2 flex flex-col gap-4">
+        {Object.entries(groupedTechnology).map(([technologyName, technologyRecords]) => {
+        if (technologyRecords.length === 0) return null
+        const currentPage = currentTechPage[technologyName] || 1
+    const lastIndex = currentPage * chanllengePerPage
+    const firstIndex = lastIndex - chanllengePerPage
+    const paginatedRecords = technologyRecords.slice(firstIndex, lastIndex)
+    const totalPages = Math.ceil(technologyRecords.length / chanllengePerPage)
+    
+    return (
+      <div key={technologyName}>
+        {/* Tech Card */}
+        <div onClick={(e) => {e.stopPropagation(); toggleTechnology(technologyName) }}
+          className="flex items-center justify-between bg-white text-sandbox-navy border border-sandbox-navy p-2 gap-4 rounded-lg cursor-pointer">
+              <span>{technologyName}</span>
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-gray-500">{technologyRecords.length} {technologyRecords.length === 1 ? "Entry" : 'Entries'}</span>
+                <span className={`transition-transform duration-200 ${openTechnology[technologyName] ? 'rotate-180' : ''}`}>▼</span>
+              </div>
+              </div>
+                {/* Entry Cards  */}
                     {openTechnology[technologyName] && (
-                      <div className="mt-2 grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        {technologyRecords.map((challenge) => (
+                      <div>
+                        <div className="mt-2 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        {paginatedRecords.map((challenge) => (
                           <ReusableCard key={challenge.id}>
                            <p className="font-semibold py-0.5">Date: <span className="font-normal">{challenge.date}</span></p>
                            <p className="font-semibold py-0.5">Issue Title <span className="font-normal">{challenge.issueTitle}</span></p>
                <p className="font-semibold py-0.5">Challenge Type: <span className="font-normal">{challenge.challenge}</span></p>
               
               <ViewMoreButton onClick={(e) =>{e.stopPropagation(); handleViewMore(challenge)}}/>
-                          </ReusableCard>
-                        ))}
-                      </div>
+              </ReusableCard>
+            ))}
+          </div>
+          {totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={(page) => handleCurrentPage(technologyName, page)}
+      />
+      )}
+          </div>
                     )}
-
                 </div>
               
             )
@@ -158,26 +178,6 @@ function Challenges() {
           )
         })}
       </div>
-     {/*  <div className="mt-6 p-2 rounded-2xl">
-        {sortedChallengeRecords.length > 0 ? (
-         <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-y-6 gap-x-4 py-4 p-2">
-          {sortedChallengeRecords.map((newUpdatedChallengeRecord) => (
-
-            <ReusableCard key={newUpdatedChallengeRecord.id}>
-              <p className="font-semibold py-0.5">Date: <span className="font-normal">{newUpdatedChallengeRecord.date}</span></p>
-              <p className="font-semibold py-0.5">Issue Title <span className="font-normal">{newUpdatedChallengeRecord.issueTitle}</span></p>
-               <p className="font-semibold py-0.5">Challenge Type: <span className="font-normal">{newUpdatedChallengeRecord.challenge}</span></p>
-              
-              <ViewMoreButton onClick={() => handleViewMore(newUpdatedChallengeRecord)}/>
-            </ReusableCard>
-          ))}
-         </div>
-        ) : (
-        <p className="text-center text-gray-600 py-4 italic">No challenge records yet. Click “Note It” to add one.</p>)}
-      </div> */}
-
-
-
       {openDetailModal && selectedChallengeRecord && (
         <DetailModal
         data={selectedChallengeRecord}

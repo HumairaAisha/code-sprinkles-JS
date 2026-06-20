@@ -7,7 +7,6 @@ import LearnTrack from "./pages/LearnTrack";
 import Milestone from "./pages/Milestone";
 import Resources from "./pages/Resources";
 import Profile from "./pages/profile/Profile";
-import Settings from "./pages/Settings";
 import Challenges from "./pages/Challenges";
 import ProjectHub from "./pages/ProjectHub";
 import ProjectJournal from "./pages/ProjectJournal";
@@ -15,22 +14,25 @@ import LandingPage from "./pages/LandingPage/LandingPage";
 import Login from "./components/Auth/Login";
 import SignUp from "./components/Auth/SignUp";
 import Onboarding from "./components/Onboarding";
+import ProfileEditPage from "./pages/profile/components/ProfileEditPage"
+import RootRedirect from "./components/RootRedirect";
 
 
 function App() {
-  const hasLoggedIn = JSON.parse(localStorage.getItem("sandbox:hasLoggedIn"));
+  
   return (
     <>
     
    
     <Routes>
-      <Route path="/app" element ={
+      {/* <Route path="/app" element ={
         hasLoggedIn === "true"
         ? <Navigate to="/dashboard" replace />
         : <Navigate to="/onboarding" replace />
-      }/>
+      }/> */}
 
-      <Route path="/" element={<LandingPage/>}/>
+      <Route path="/" element={<RootRedirect/>}/>
+      <Route path="/home" element={<LandingPage/>}/>
       <Route path="/login" element={<Login/>}/>
       <Route path="/signup" element={<SignUp/>}/> 
       <Route path="/onboarding" element={<Onboarding />}/>
@@ -46,13 +48,14 @@ function App() {
       <Route path="/projectHub" element={<ProjectHub/>} />
       <Route path="/projectJournal" element={<ProjectJournal/>}/>
       <Route path="/profile"  element={<Profile/>}/>
-      <Route path="/settings"  element={<Settings/>}/>
+      <Route path="/profileEdit" element={<ProfileEditPage/>}/>
+      
       
       </Route>
     </Routes>
     
 
-    <Toaster position="top-center" reverseOrder={false}
+    <Toaster position="top-right" reverseOrder={false}
     toastOptions={{
       success: {
         duration:1500,
