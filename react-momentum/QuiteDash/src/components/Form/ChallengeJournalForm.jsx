@@ -26,29 +26,35 @@ function ChallengeJournalForm({onAddChallenge, closeForm, initialChallengeData})
       name="date"
       label={"Date"}
       type={"date"}
-      requiredMessage={"select date"}
+      requiredMessage={"select a date"}
       />
       <InputField
       name="issueTitle"
       label={"Issue Title"}
+      requiredMessage="Issue title is required"
+      placeholder="e.g. Login button not working"
       />
       <ChallenegCategoryField/>
       
       <TextAreaField 
       name={"issueSummary"}
       label={"Issue Summary"}
-      type={"type"}
-      
+      placeholder="Briefly describe the issue you encountered..."
+      requiredMessage="Describe the issue you faced"
       />
 
       <TextAreaField
       name={"rootCause"}
       label={"Root Cause"}
+      placeholder="What caused the issue? Missing state update? Wrong API endpoint?"
+      requiredMessage="Explain what caused the issue"
       />
 
       <TextAreaField
       name={"solution"}
       label={"Solution"}
+      placeholder="Describe the steps you took to fix the issue..."
+      requiredMessage="Describe how you solved it"
       />
       <SecondaryButton lable={initialChallengeData  ? "Update" : "Record It"} />
       </MyForm>
