@@ -43,9 +43,14 @@ function EducationForm({onAddEduData, initialData }) {
       label={"To"}
       options={toYears}
       requiredMessage={"Please select an end year"}
-     
+      validate={(value, formValues) => {
+        if (value === "Present") return true
+        if (formValues.startYear && value) {
+          return Number(value) > Number(formValues.startYear) || "End year must after start year"
+        }
+      }}
       />
-      <SecondaryButton lable={initialData ? "Save" : "Add"}/>
+      <SecondaryButton lable={initialData ? "Update" : "Add"}/>
     </MyForm>
     </>
   )

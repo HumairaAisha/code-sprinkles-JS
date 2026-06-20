@@ -242,63 +242,6 @@
     ]
   },
 
-  "UI/UX": {
-    "Figma": [
-      "Component Organization",
-      "Auto Layout",
-      "Prototyping",
-      "Design System Setup",
-      "Collaboration",
-      "Plugins",
-      "Frames",
-      "Constraints",
-      "Team Libraries",
-      "Other"
-    ],
-    "Design Systems": [
-      "Component Library",
-      "Token Management",
-      "Documentation",
-      "Consistency",
-      "Implementation",
-      "Maintenance",
-      "Design Tokens",
-      "Accessibility",
-      "Other"
-    ],
-    "Accessibility": [
-      "ARIA Labels",
-      "Keyboard Navigation",
-      "Screen Reader Support",
-      "Color Contrast",
-      "Focus Management",
-      "Testing",
-      "WCAG Guidelines",
-      "Alt Text",
-      "Other"
-    ],
-    "User Research": [
-      "Interview Planning",
-      "Survey Design",
-      "Data Analysis",
-      "Usability Testing",
-      "Personas",
-      "Synthesis",
-      "Journey Maps",
-      "Other"
-    ],
-    "Responsive Design": [
-      "Breakpoint Strategy",
-      "Mobile-First vs Desktop-First",
-      "Touch Interactions",
-      "Image Optimization",
-      "Performance",
-      "Media Queries",
-      "Fluid Typography",
-      "Other"
-    ]
-  },
-
   "General": {
     "Git/Version Control": [
       "Merge Conflicts",

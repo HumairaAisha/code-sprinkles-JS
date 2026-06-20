@@ -6,7 +6,6 @@ import TextAreaField from '../UI/ReusableForm/TextAreaField'
 import CategoryField from '../UI/ReusableForm/CategoryField'
 import SecondaryButton from '../UI/SecondaryButton'
 
-import toast from 'react-hot-toast'
 
 
 function LearnForm({onAddRecord, closeForm, initialData}) {
@@ -15,7 +14,6 @@ function LearnForm({onAddRecord, closeForm, initialData}) {
      
       onAddRecord(data)
 
-       toast.success('New Progress Log!')
       setTimeout(() => {closeForm()}, 1000);
       
    } 
@@ -31,15 +29,19 @@ function LearnForm({onAddRecord, closeForm, initialData}) {
          <FormText
          title={"Document Your Progress"}
          text={"Because every step forward tells a story"} />
-         <div className='flex justify-between'>
+         <div className='flex justify-between gap-4'>
       <InputFieldNum label={"Date"} name={"date"} type={"date"} requiredMessage={"select date"}/>
       <InputFieldNum label={"Hours Spent"} name={"hours"} type={"number"} requiredMessage={"input hours"} />
          </div>
 
-     <InputField label={"Concept Mastered"} name={"topic"} type={"text"}/>
+     <InputField label={"Concept Mastered"} name={"topic"} type={"text"}
+     required={true}
+     placeholder="What concept did you explore today?"
+     />
      <CategoryField />
     
      <TextAreaField label={"Note"} name={"description"} requiredMessage ="concept note is required" 
+     placeholder="What did you understand from this concept?"
      />
      <SecondaryButton lable={initialData? "Update" : "Record It"} />
       </MyForm>

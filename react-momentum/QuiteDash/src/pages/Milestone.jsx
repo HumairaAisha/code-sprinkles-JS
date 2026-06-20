@@ -132,7 +132,7 @@ function Milestone() {
       </div>
 
        {openDetailModal && selectedMilestoneRecord && (
-        <DetailModal className="min-w-sm"
+        <DetailModal className="min-w-2xs"
         data={selectedMilestoneRecord}
         onClose={handleCloseDetailModal}
         fields={[

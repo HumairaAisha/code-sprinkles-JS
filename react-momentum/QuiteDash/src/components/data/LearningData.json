@@ -7,7 +7,8 @@
       "Semantic Tags",
       "Forms & Tables",
       "Media",
-      "Accessibility & SEO Basics"
+      "Accessibility & SEO Basics",
+      "Others"
     ],
     "CSS": [
       "Selectors & Specificity",
@@ -18,7 +19,8 @@
       "Pseudo-classes & Pseudo-elements",
       "Variables & Custom Properties",
       "Responsive Design",
-      "CSS Architecture (BEM / Utility-first)"
+      "CSS Architecture (BEM / Utility-first)",
+      "Others"
     ],
     "Tailwind CSS": [
       "Utility Classes",
@@ -26,7 +28,8 @@
       "Dark Mode",
       "Responsive Design",
       "Reusable Components",
-      "Animations & Plugins"
+      "Animations & Plugins",
+      "Others"
     ],
     "JavaScript": [
       "Variables & Data Types",
@@ -40,7 +43,8 @@
       "Truthy / Falsy Values",
       "JSON",
       "Async JS (Promises, async/await, fetch)",
-      "Modules & ES6+ Features"
+      "Modules & ES6+ Features",
+      "Others"
     ],
     "TypeScript (Frontend)": [
       "Type Annotations",
@@ -49,7 +53,8 @@
       "Generics",
       "Modules",
       "React + TS Integration",
-      "API Types & Response Handling"
+      "API Types & Response Handling",
+      "Others"
     ],
     "React": [
       "Components (Function / Arrow)",
@@ -68,7 +73,8 @@
       "Protected Routes",
       "Chart & Data Visualization",
       "API Integration (fetch / axios)",
-      "React Testing"
+      "React Testing",
+      "Others"
     ],
     "Next.js": [
       "File-based Routing",
@@ -77,13 +83,15 @@
       "Dynamic Routes",
       "getServerSideProps / getStaticProps",
       "Middleware & Authentication",
-      "Environment Variables"
+      "Environment Variables",
+      "Others"
     ],
     "Vite / Build Tools": [
       "Project Setup",
       "Hot Reloading",
       "Aliases",
-      "Bundling & Optimization"
+      "Bundling & Optimization",
+      "Others"
     ],
     "API & Data Handling": [
       "REST API Basics",
@@ -92,7 +100,8 @@
       "Error Handling",
       "Loading States",
       "LocalStorage / SessionStorage",
-      "Context for Data Syncing"
+      "Context for Data Syncing",
+      "Others"
     ],
     "UI / UX Concepts": [
       "Design Systems",
@@ -100,7 +109,8 @@
       "Accessibility",
       "Responsive Layouts",
       "Component Reusability",
-      "Microinteractions"
+      "Microinteractions",
+      "Others"
     ]
   },
   "Backend": {
@@ -109,7 +119,8 @@
       "NPM Packages",
       "HTTP Server",
       "Async Operations",
-      "Environment Variables"
+      "Environment Variables",
+      "Others"
     ],
     "Express.js": [
       "Routing",
@@ -117,7 +128,8 @@
       "Request & Response",
       "Controllers",
       "Error Handling",
-      "REST API Structure"
+      "REST API Structure",
+      "Others"
     ],
     "Fastify": [
       "Routes & Schemas",
@@ -125,32 +137,37 @@
       "Hooks & Plugins",
       "Error Handling",
       "Decorators",
-      "Performance Optimization"
+      "Performance Optimization",
+      "Others"
     ],
     "Prisma": [
       "Schema Definition (Models, Enums, Relations)",
       "Migrations & Seeding",
       "CRUD Operations",
       "Query Filtering & Pagination",
-      "Integrating with Fastify / Express"
+      "Integrating with Fastify / Express",
+      "Others"
     ],
     "Authentication (JWT + bcrypt)": [
       "Token Creation & Verification",
       "Middleware & Protected Routes",
-      "Role-based Access"
+      "Role-based Access",
+      "Others"
     ],
     "Databases (PostgreSQL / MySQL / MongoDB)": [
       "CRUD Operations",
       "Relationships / Joins",
       "Indexing",
       "Transactions",
-      "Query Optimization"
+      "Query Optimization",
+      "Others"
     ],
     "TypeScript (Backend)": [
       "Types & Interfaces",
       "Generics",
       "Modules",
-      "Working with Express / Fastify"
+      "Working with Express / Fastify",
+      "Others"
     ],
     "Python": [
       "Syntax & Data Types",
@@ -159,14 +176,16 @@
       "File Handling",
       "Virtual Environments & Packages",
       "Frameworks (Flask / Django / FastAPI)",
-      "API Building & Database Integration"
+      "API Building & Database Integration",
+      "Others"
     ]
   },
   "GitHub": {
     "Git": [
       "init / clone / add / commit / push / pull",
       "Branching, Merging, Rebase",
-      "Stash, Log, Diff, Tags"
+      "Stash, Log, Diff, Tags",
+      "Others"
     ],
     "GitHub": [
       "Repositories & Forks",
@@ -174,7 +193,8 @@
       "Collaboration",
       "GitHub Actions",
       "Branch Protection",
-      "README & Documentation"
+      "README & Documentation",
+      "Others"
     ]
   }
 }

@@ -10,6 +10,7 @@ function CategoryField() {
 
    const selectedCategory = watch("category");
    const selectedTechnology = watch("technology")
+  
 
    //category option
    const categoryOption = Object.keys(LearningData).map((category) => (
@@ -31,6 +32,8 @@ function CategoryField() {
          label: concept,
       }
    )) : []
+
+   
 
   return (
     <div className="flex flex-col gap-4">
@@ -57,6 +60,8 @@ function CategoryField() {
       disabled={!selectedTechnology}
 
       />
+
+
 
     </div>
   )

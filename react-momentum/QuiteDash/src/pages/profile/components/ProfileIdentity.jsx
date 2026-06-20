@@ -61,7 +61,7 @@ function ProfileIdentity() {
             <p className="text-sm">{projectsCounts.length}</p>
          </div>
          <div className="flex gap-8 justify-between items-center">
-            <p className="text-sm">View Project</p>
+            <p className="text-sm">View Projects</p>
             <button type="button"  onClick={() => navigate("/projectHub")}
             className="bg-sandbox-navy text-sandbox-ghost rounded-md px-2 hover:cursor-pointer text-sm"   
             >View</button>
@@ -69,7 +69,8 @@ function ProfileIdentity() {
          {user.resume && (
             <div className="flex justify-between items-center py-0.5">
                <p className="text-sm">Resume</p>
-               <a href={user.resume} className="text-sm bg-sandbox-navy text-sandbox-ghost rounded-md px-2">View</a>
+               <a href={user.resume} target="_blank" rel="noopener noreferrer"
+               className="text-sm bg-sandbox-navy text-sandbox-ghost rounded-md px-2">View</a>
             </div>
          )}
       </div>

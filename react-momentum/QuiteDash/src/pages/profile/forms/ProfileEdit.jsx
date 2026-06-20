@@ -66,7 +66,7 @@ function ProfileEdit({onAddProfile, initialProfileData}) {
       label={"level of Experince"}
       placeholder="Mid-Level, Senior Engineer"/>
       <InputFieldUrl
-      name={"Resume"}
+      name={"resume"}
       label={"Insert Resume Link"}
       type={"url"}
       />

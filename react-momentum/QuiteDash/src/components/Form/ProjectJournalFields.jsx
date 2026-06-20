@@ -94,6 +94,7 @@ function ProjectJournalFields({initialProjectJournalData}) {
       <TextAreaField
       name={"projectDescription"}
       label={"Project Description"}
+      placeholder="What did you build and what problem were you solving?"
       disabled={!selectedProject}
       required={true}
       />

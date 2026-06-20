@@ -5,7 +5,7 @@ import Heading from "../components/UI/Heading"
 import PrimaryButton from "../components/UI/PrimaryButton"
 import ReusableCard from "../components/UI/ReusableCard"
 import Modal from "../components/Form/Modal"
-import SandboxLogo from "..//assets/Sandbox1.png"
+import SandboxLogo from "..//assets/SandboxLo.png"
 import ProjectForm from "../components/Form/ProjectForm"
 import Pagination from "../components/UI/Pagination"
 import ActionsButton from "../components/UI/ActionsButton"
@@ -140,17 +140,16 @@ console.log("sample projectId:", matchedProject[0]?.projectId, typeof matchedPro
               <a href={projectRecord.demoUrl} 
             target="_blank"
             rel="noopener noreferrer"
-            > 
-            <button className="bg-sandbox-ghost text-sandbox-navy font-medium rounded py-0.5 px-1.5 cursor-pointer hover:bg-sandbox-card/20">Demo</button>
+            className="bg-sandbox-ghost text-sandbox-navy font-medium rounded py-0.5 px-1.5 cursor-pointer hover:bg-sandbox-card/20"> 
+           Demo
             </a>
             )}
             {projectRecord.repoUrl && (
             <a href={projectRecord.repoUrl} 
             target="_blank"
-            rel="noopener noreferrer"> 
-            <button className="bg-sandbox-ghost text-sandbox-navy font-medium rounded py-0.5 px-1.5 cursor-pointer hover:bg-sandbox-card/20">
+            rel="noopener noreferrer"
+            className="bg-sandbox-ghost text-sandbox-navy font-medium rounded py-0.5 px-1.5 cursor-pointer hover:bg-sandbox-card/20"> 
               Repo
-              </button> 
               </a>
             )}
             </div>

@@ -11,7 +11,7 @@ function MyForm({onAddRecord,closeForm}) {
       tech: '',
       concept: '',
       description: '',
-      featureBuilt: '',
+      
    }
    const [formValue, setFormValue] = useState(formData)
    //const [error, setError] = useState ('')
@@ -20,17 +20,23 @@ function MyForm({onAddRecord,closeForm}) {
    const [selectedConcept, setSelectConcept] = useState('')
    
    const handleCategoryChange = (event) => {
-      setSelectedCategory(event.target.value)
+      const value = event.target.value;
+      setSelectedCategory(value)
       setSelectedTech('')
       setSelectConcept('')
+      setFormValue({ ...formValue, category: value });
    }
 
    const handleTechChange = (event) => {
-      setSelectedTech(event.target.value)
+      const value = event.target.value;
+      setSelectedTech(value)
       setSelectConcept('')
+      setFormValue({ ...formValue, tech: value });
    }
    const handleConceptChange = (event) => {
-      setSelectConcept(event.target.value)
+      const value = event.target.value;
+      setSelectConcept(value)
+      setFormValue({ ...formValue, concept: value });
    }
 
    const handleChange = (event) => {
@@ -39,8 +45,8 @@ function MyForm({onAddRecord,closeForm}) {
    }
    const handleSubmit= (event) => {
       event.preventDefault();
-      const {date, hours, topic, category, description, featureBuilt} = formValue
-      if (!date || !hours || !topic|| !category || !description || !featureBuilt ) {
+      const {date, hours, topic, category,tech, concept, description} = formValue
+      if (!date || !hours || !topic|| !category || !tech || !concept|| !description) {
          toast.error('All fields are required!')
          //setError('All fields are required')
          return
@@ -120,10 +126,10 @@ function MyForm({onAddRecord,closeForm}) {
             <textarea type="text" name="description"  value={formValue.description} rows={3} onChange={handleChange}  className="px-2 py-1.5 h-[100px] border border-gray-400 bg-gray-200 text-sm rounded">
             </textarea>
            </div>
-           <div className="flex flex-col">
+           {/* <div className="flex flex-col">
             <label htmlFor="featureBuilt" className="font-semibold">Feature Built</label>
             <textarea type='text' name="featureBuilt" value={formValue.featureBuilt} onChange={handleChange} className="px-2 py-1.5 h-[100px] border border-gray-400 bg-gray-200 text-sm rounded"></textarea>
-           </div>
+           </div> */}
             <div className="flex justify-end">
                 <button type="submit" className="bg-[#0F172A] text-white font-semibold px-2 py-1.5 my-2 rounded hover:cursor-pointer">Record It</button>
             </div>

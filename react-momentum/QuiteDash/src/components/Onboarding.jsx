@@ -3,6 +3,7 @@ import InputField from "./UI/ReusableForm/InputField"
 import MyForm from "./UI/ReusableForm/MyForm"
 import { useNavigate } from "react-router-dom";
 import useLocalStorage from "./data/useLocalStorage";
+import { useEffect } from "react";
 
 
 function Onboarding() {
@@ -11,16 +12,25 @@ function Onboarding() {
    const [hasLoggedIn, setHasLoggedIn] = useLocalStorage('hasLoggedIn', null)
   
    
+   useEffect(() => {
+      if (hasLoggedIn ===  true && user) {
+         navigate('/dashboard', {replace: true})
+      }
+   }, [hasLoggedIn, user, navigate])
    const handleSumbit = (data) => {
-      setUser(data)
+      setUser({ ...data, joinedDate: new Date().toISOString() })
       setHasLoggedIn(true)
       navigate('/dashboard')
       
    }
+
+   if (hasLoggedIn === true && user) {
+      return null
+   }
   return (
     <div className="min-h-screen px-8 py-4">
        <div className="flex flex-col justify-between">
-         <button onClick={() => navigate("/")} className="md:flex text-2xl font-semibold cursor-pointer md:mt-4">SandBox</button>
+         <button onClick={() => navigate("/home")} className="md:flex text-2xl font-semibold cursor-pointer md:mt-4">Sandbox</button>
 
       <div className="max-w-7xl mx-auto">
          <div className="py-20 md:py-4 px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-[80vh]">

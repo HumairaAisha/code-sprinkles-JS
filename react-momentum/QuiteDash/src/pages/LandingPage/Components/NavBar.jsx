@@ -22,7 +22,7 @@ function NavBar() {
   return (
     <div className="flex justify-between py-4 px-6 fixed top-0 left-0 right-0 bg-sandbox-navy z-10">
      
-      <button onClick={() => {navigate("/")}} className="font-semibold text-2xl hover:cursor-pointer text-sandbox-ghost">Sandbox</button>
+      <button className="font-bold text-2xl hover:cursor-pointer text-sandbox-ghost">Sandbox</button>
      
      <ul className='hidden md:flex items-center gap-6'>
        {navItems.map((menu) => (

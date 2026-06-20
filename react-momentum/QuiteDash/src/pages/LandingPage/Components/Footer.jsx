@@ -12,7 +12,7 @@ function Footer() {
    ]
   return (
     <div className="bg-sandbox-navy border-y border-sandbox-ghost/10 text-sandbox-ghost">
-       <div className="md:flex gap-10 justify-between py-20 px-8">
+       <div className="md:flex gap-10 justify-between py-10 px-8">
          <div className="">
             <h1 className="text-sandbox-ghost text-2xl font-bold py-4 hover:cursor-pointer">Sandbox</h1>
             <h4 className="max-w-xl mx-auto text-sandbox-ghost">Sandbox is a developer-centric system designed to bridge the gap between learning and mastery — turning your quiet daily effort into a visible progress, ensuring your evolution as a developer is never left undocumented, and providing the structure for a lasting engineering identity.</h4>
@@ -33,22 +33,26 @@ function Footer() {
          </div>
 
          <div className="flex flex-col">
-            <div>
-            <h4 className="font-medium text-lg pt-8 md:pt-4">Contact</h4>
-            <p>sandbox@mail</p>
-            <p>(+234) 8023456</p>
-         </div>
+           {/*  */}
          <div>
             <p className="my-2 text-sandbox-ghost/70">Follows Us</p>
             <div className="flex gap-4">
-            <a href="#" className="hover:cursor-pointer">
-               <FaGithub />
+            <a href="https://github.com/HumairaAisha" target="_blank" rel="noopener noreferrer"
+             className="hover:cursor-pointer">
+               <FaGithub size={20}/>
             </a>
-           <a href="#" className="hover:cursor-pointer"><FaLinkedin /></a>
-           <a href="#" className="hover:cursor-pointer"><FaXTwitter /></a>
-           <a href="#" className="hover:cursor-pointer"><FaFacebook /></a>
+           <a href="https://www.linkedin.com/in/aisha-muhyiddeen01/" target="_blank" rel="noopener noreferrer"
+           className="hover:cursor-pointer"><FaLinkedin size={20}/></a>
+           
+           <a href="https://facebook.com/aishamuhyiddeen.ahmad" target="_blank" rel="noopener noreferrer"
+           className="hover:cursor-pointer"><FaFacebook size={20}/></a>
             </div>
-         </div>
+         </div> 
+        {/*  <div>
+            <h4 className="font-medium text-lg pt-8 md:pt-4">Contact</h4>
+            <p>sandbox@mail</p>
+            <p>(+234) 8023456</p>
+         </div> */}
          </div>
       </div>
 

@@ -56,7 +56,7 @@ function Chart() {
     y: {
       title: {
           display: true, 
-          text: 'Confidence Level (0-1)',
+          text: 'Confidence Level (0-10)',
           color: '#0F172A', 
          font: { 
         size: 15,

@@ -12,8 +12,9 @@ import Sandbox from "../../../assets/Sandbox Glance.png"
 import { useNavigate } from 'react-router-dom';
 
 function HeroSection() {
-  const user = localStorage.getItem('sandbox:user')
- const navigate = useNavigate()
+  const hasLoggedIn =
+  JSON.parse(localStorage.getItem("sandbox:hasLoggedIn")) || false;
+  const navigate = useNavigate()
   return (
    /*  #141B24 */
       <section id='home' className='py-24 md:py-10 px-6 md:pt-36 bg-sandbox-navy'>
@@ -50,7 +51,7 @@ function HeroSection() {
       whileInView="whileInView"
           className="mt-4 max-w-2xl mx-auto text-sm md:text-lg text-gray-500 leading-relaxed animate-section-reveal">Sandbox is a personal space for developers to track progress, log challenges, and capture milestones, turning effort into visible growth.</motion.p>
          
-            <button  className="md:hidden bg-sandbox-ghost text-sandbox-navy px-6 py-2 rounded-2xl hover:cursor-pointer my-8" onClick={() => {navigate(user ? "/dashboard" : "/onboarding")}}>{user ? "Continue" : "Get Started"}</button>
+            <button  className="md:hidden bg-sandbox-ghost text-sandbox-navy px-6 py-2 rounded-2xl hover:cursor-pointer my-8" onClick={() => {navigate(hasLoggedIn ? "/dashboard" : "/onboarding")}}>{hasLoggedIn ? "Continue" : "Get Started"}</button>
          
         </div>
         

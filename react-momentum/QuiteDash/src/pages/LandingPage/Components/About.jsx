@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 
-import { fadeIn, popIn, slideLeft, slideUp } from "../../../animations/motion"
+import { fadeIn, popIn, slideLeft } from "../../../animations/motion"
 
 
 import ValueCard from '../../../components/UI/ValueCard';
@@ -41,8 +41,8 @@ function About() {
     description: 'That structure made the invisible, visible. \n The hours. The challenges. The concepts that finally clicked. Documentation turned the daily struggle into a measurable map of growth.',
     number: "02"
     },
-    {title: "State 01: The System",
-    description: 'But over time, it became more than structure. It became a system. \n A way to understand how everything connects—data, logic, and decisions working together. \n As Sandbox evolved, it stopped being a tracker. It became a space to think in systems.',
+    {title: "State 03: The System",
+    description: 'But over time, it became more than structure. It became a system. \n A way to understand how everything connects data, logic, and decisions working together. \n As Sandbox evolved, it stopped being a tracker. It became a space to think in systems.',
     number: "03"
     },
    ]
@@ -79,7 +79,7 @@ function About() {
             </p>
             <p>
               While building complex systems, the hours spent, the bugs triaged, and the concepts mastered frequently vanish into the daily grind. 
-              What started as a personal tracker—<span className="text-slate-300 italic">"How do I quantify and track my learning progress?"</span>—evolved into a dedicated dashboard for intentional documentation.
+              What started as a personal tracker <span className="text-slate-300 italic">"How do I quantify and track my learning progress?" </span>evolved into a dedicated dashboard for intentional documentation.
             </p>
             <p>
               Sandbox was born to turn the <code className="text-sandbox-ghost">"black box"</code> of the development process into a transparent map of growth.
@@ -126,7 +126,7 @@ function About() {
           className='space-y-6 text-sandbox-ghost'>
             <p className='text-lg md:text-xl font-medium max-w-4xl'>I didn’t build Sandbox to prove I could code; I built it because I needed a place to see who I was becoming.</p>
             <div className='space-y-3'>
-              <p>I was learning quietly, consistently—solving bugs, logging hours, pushing through confusion—but none of it felt visible. And when growth isn’t visible, doubt gets louder.</p>
+              <p>I was learning quietly, consistently, solving bugs, pushing through confusion — but none of it felt visible. And when growth isn’t visible, doubt gets louder.</p>
               <p className='italic text-sandbox-ghost/80'>You start to question if the effort is enough.</p>
               <p>I had no system to show me the hours I had invested. The bugs I had solved. The concepts that once confused me but now made sense.</p>
             </div>
@@ -145,7 +145,7 @@ function About() {
             </div>
             <div className='flex gap-2 items-start pt-2'>
               <div className="h-18 md:h-8 w-0.5 bg-sandbox-ghost/80 mt-2 rounded-full"></div>
-            <p className='text-lg md:text-xl font-semibold italic leading-snug mt-2'>From the first line of code to the final deployment, it’s built from lived experience—not assumptions.</p>
+            <p className='text-lg md:text-xl font-semibold italic leading-snug mt-2'>From the first line of code to the final deployment, it’s built from lived experience — not assumptions.</p>
             </div>
             <div className='space-y-2'>
               <p>If you’re using Sandbox, I hope it helps you see what you’ve already built.</p>
@@ -153,17 +153,17 @@ function About() {
               <p>Sometimes, it’s quiet. Subtle. Easy to miss.</p>
               <p className='font-medium'>But it deserves to be seen.</p>
             </div>
-            <p className='italic font-semibold text-lg pt-2'>—Built by a developer, for the journey.</p>
+            <p className='italic font-semibold text-lg pt-2'> — Built by a developer, for the journey.</p>
           </motion.div>
           <motion.div
-          variants={slideUp}
+          variants={fadeIn}
          initial="initial"
          whileInView="whileInView"
          transition={{duration: 0.5}}
          viewport={{once: false, amount: 0.2}}
            className='flex flex-col items-end mt-10 text-sandbox-ghost/90'>
             <h4 className='font-semibold text-lg'>Aisha Muhyiddeen Ahmad</h4>
-            <p className=''>Founder, Sandbox</p>
+            {/* <p className=''>Founder, Sandbox</p> */}
           </motion.div>
         </div>
         </div>

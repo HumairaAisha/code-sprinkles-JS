@@ -1,11 +1,16 @@
 import { useForm, FormProvider } from "react-hook-form"
 import SecondaryButton from "../SecondaryButton"
 
-function MyForm({ children, onSubmit}) {
+
+function MyForm({ children, onSubmit, defaultValues = {}}) {
    
-   const  methods  = useForm()
+   const  methods  = useForm({
+      defaultValues: defaultValues
+   })
+   
 
    const { handleSubmit } = methods
+ 
 
    const handleFormSubmit = (data) => {
       onSubmit(data)
@@ -17,7 +22,7 @@ function MyForm({ children, onSubmit}) {
       <FormProvider {...methods}>
          <form onSubmit={handleSubmit(handleFormSubmit)}>
             {children}
-         <SecondaryButton />
+         
          </form>
       </FormProvider>
     </div>

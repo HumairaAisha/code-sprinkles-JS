@@ -15,7 +15,6 @@ function MyJourney() {
   return (
     <div className="px-4 py-4 bg-sandbox-ghost">
       <h2 className="font-semibold text-xl my-2">The Journey</h2>
-
       <div className="flex gap-3">
         {stats.filter(stat => stat.auto === true)
         .map((stat) => (

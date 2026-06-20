@@ -1,7 +1,9 @@
 
 function ThemeToggle() {
   return (
-    <div>ThemeToggle</div>
+    <div>
+      <p>Theme</p>
+      </div>
   )
 }
 

@@ -12,13 +12,13 @@ function ConfirmModal({isOpen, onCancel, onConfirm,
 
 
   return (
-   <div className="fixed inset-0 z-20 flex items-center bg-sandbox-navy/50 justify-center">
+   <div className="fixed inset-0 z-20 flex items-center bg-sandbox-navy/35 justify-center">
       <div className="bg-sandbox-ghost rounded flex flex-col p-6">
          <h3 className='text-center font-semibold text-xl py-2'>{title}</h3>
          <p>{message}</p>
-         <div className='flex gap-4 py-4 items-center justify-center'>
-              <button onClick={onCancel} className= {`bg-gray-400 text-sandbox-ghost rounded px-2  hover:cursor-pointer transition`}>{cancelText}</button>
-            <button onClick={onConfirm} className={`rounded px-2 hover:cursor-pointer ${confirmStyle[type]}`}>{confirmText}</button>
+         <div className='flex gap-6 py-4 items-center justify-center'>
+              <button onClick={onCancel} className= {`bg-gray-400 text-sandbox-ghost rounded px-2 py-1 hover:bg-gray-500 hover:cursor-pointer transition`}>{cancelText}</button>
+            <button onClick={onConfirm} className={`rounded px-2 hover:cursor-pointer transition py-1 ${confirmStyle[type]}`}>{confirmText}</button>
           
          </div>
        

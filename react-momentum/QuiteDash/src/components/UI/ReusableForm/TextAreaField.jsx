@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form"
 
-function TextAreaField({name, label, type, required,requiredMessage, ...rest}) {
+function TextAreaField({name, label, type, required,requiredMessage, className, ...rest}) {
   const {register, formState:{errors}} = useFormContext()
   return (
     <div className="flex flex-col">
@@ -12,12 +12,12 @@ function TextAreaField({name, label, type, required,requiredMessage, ...rest}) {
       },
     maxLength: {
       value:500,
-      message:"Content has reached maximum limit of 200 characters"
+      message:"Content has reached maximum limit of 500 characters"
     }
     }: {})} type={type || "text"} 
       
       {...rest} 
-      className="px-2 py-1.5 h-[100px] border border-gray-400 bg-gray-200 text-sm rounded"
+      className={`w-full px-2 py-1.5 h-[100px] border border-gray-400 bg-gray-200 text-sm rounded ${className || ''}`}
       />
       </div>
       {errors[name] && (<p className="text-red-600 text-sm -mt-2">{errors[name].message}</p>)}

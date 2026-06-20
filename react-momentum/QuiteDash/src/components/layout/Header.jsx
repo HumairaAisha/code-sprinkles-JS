@@ -1,12 +1,13 @@
-import { Settings,Bell, Menu } from 'lucide-react';
-import { FaUser } from "react-icons/fa"
-import { useLocation } from 'react-router-dom';
+import { Settings,Bell, Menu, UserRound } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
+
 
 
 function Header({isOpen, onMenuClick}) {
   const location = useLocation()
+  const navigate = useNavigate()
 
-  const pageTitle = {"/dashboard": "Dashboard", "/progress": "Progress Tracker", "/challenge" : "Challenge Journal", "/milestone": "Milestone","/projectHub": "Project Hub", "/projectJournal": "Project Journal", "/resources": "Resources", "/settings": "Settings", "/profile": "Profile"}
+  const pageTitle = {"/dashboard": "Dashboard", "/progress": "Progress Tracker", "/challenge" : "Challenge Journal", "/milestone": "Milestone","/projectHub": "Project Hub", "/projectJournal": "Project Journal", "/resources": "Resources", "/profile": "Profile"}
   const {pathname} = location
   const title = pageTitle[pathname] || "SandBox"
  
@@ -19,9 +20,12 @@ function Header({isOpen, onMenuClick}) {
           </button>
       <h1 className='font-bold text-lg md:text-xl text-sandbox-navy px-2'>{title}</h1>
       </div>
-       <div className='hidden md:flex gap-2'>
-        <Bell/> <Settings/> <FaUser/>
+      {pathname !== '/profile' && (
+        <div className='flex bg-sandbox-navy rounded-full text-sandbox-ghost p-1'>
+        <UserRound size={20} onClick={() => navigate('/profile')} className='hover:cursor-pointer'/>
       </div>
+      )}
+       
      </div>
     
     </header>

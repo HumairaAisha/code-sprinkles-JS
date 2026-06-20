@@ -7,8 +7,10 @@ function ImageInput() {
 
    const file = watch('imageFile')
    useEffect(() => {
-    if (file && file[0]) {
-      setPreview(URL.createObjectURL(file[0]))
+    if (file && file[0] instanceof File) {
+       const url = URL.createObjectURL(file[0])
+    setPreview(url)
+    return () => URL.revokeObjectURL(url)
     } else {
       setPreview('')
     }
