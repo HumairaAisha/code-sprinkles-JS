@@ -57,6 +57,7 @@ function ProjectForm({onAddProject, initialProjectData}) {
          name={"projectName"}
          label={"Project Name"}
          type={"text"}
+         required={true}
          />
          <InputFieldUrl 
          name={"demoUrl"}
